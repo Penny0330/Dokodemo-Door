@@ -1,0 +1,67 @@
+$light-green: #728d81;
+$deep-green: #587367;
+$natural: #ECE9DF;
+$translucent-black: rgba(0, 0, 0, 0.5);
+
+main{
+    max-width: 900px;
+    margin: auto;
+    margin-bottom: 70px;
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    align-items: center;
+    gap: 50px;
+
+    .left{
+        margin-left: 65px;
+        display: grid;
+        gap: 15px;
+
+        .slogan{
+            font-size: 40px;
+            font-weight: bold;
+            line-height: 70px;
+            letter-spacing: 3px;
+
+            // .slogan_point{
+            //     // color: #fff;
+            //     border: 1px solid #587367;
+            // }
+        }
+
+        .start_button{
+            width: 150px;
+            height: 50px;
+            padding: 5px 0;
+            font-size: 26px;
+            border: 2px solid #587367;
+            background-color: #587367;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            border: 2px solid $translucent-black;
+            box-shadow: 2px 3px 1px 0px $translucent-black;
+            transition: .2s all ease-in;
+
+            text-align: center;
+
+            &:hover{
+                // border: 2px solid #587367;
+                // background-color: #ECE9DF;
+                // color: #587367; 
+                box-shadow: none;
+                transform: translateY(3px);
+            }
+        }
+    }
+
+    .right{
+
+        .iphone{
+            width: 230px;
+            height: 350px;
+            background-color: $natural;
+            border-radius: 15px;
+        }
+    }
+}

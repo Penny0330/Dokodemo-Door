@@ -9,6 +9,9 @@ module.exports = {
         clean: true,
     },
     devtool: "eval-cheap-module-source-map",
+    devServer: {
+        historyApiFallback: true,
+    },
     module: {
         rules: [
             {

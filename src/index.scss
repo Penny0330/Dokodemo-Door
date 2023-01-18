@@ -1,6 +1,21 @@
-h1{
-    color: aquamarine;
-    &:hover{
-        color: black;
-    }
+// @import url('https://fonts.googleapis.com/css2?family=Jim+Nightshade&family=Kanit:wght@300&family=Moon+Dance&family=Noto+Sans+TC&family=Rowdies:wght@300;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Jim+Nightshade&family=Kanit:wght@300&family=Kaushan+Script&family=Moon+Dance&family=Noto+Sans+TC&family=Rowdies:wght@300;700&display=swap');
+
+$light-green: #728d81;
+$deep-green: #587367;
+$natural: #ECE9DF;
+$translucent-black: rgba(0, 0, 0, 0.5);
+
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+body{
+    background-color: $light-green;
+    color: $natural;
 }
