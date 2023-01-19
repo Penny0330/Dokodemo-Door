@@ -1,8 +1,8 @@
-$natural: #ECE9DF;
+@value natural: #ECE9DF;
 
-footer{
+.footer{
     display: grid;
     justify-content: center;
     padding-bottom: 10px;
-    color: $natural;
+    color: natural;
 }

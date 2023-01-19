@@ -5,17 +5,17 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 
 // Style
-import "./Login.scss";
+import styles from "./Login.module.css";
 
 function Login() {
     return(
         <div className="wrapper">
             <Navbar />
 
-            <main className="login_main">
-                <form className="login_form">
-                    <div className="login_title">登入</div>
-                    <div className="login_box">
+            <main className={styles.main}>
+                <form className={styles.form}>
+                    <div className={styles.title}>登入</div>
+                    <div className={styles.login}>
                         <label>
                             <p>帳號</p>
                             <input type="text" placeholder="Email" />
@@ -25,8 +25,8 @@ function Login() {
                             <input type="password" placeholder="Password" />
                         </label>
                     </div>
-                    <button className="login_button">登入</button>
-                    <div className="new_account">
+                    <button className={styles.loginButton}>登入</button>
+                    <div className={styles.toSignup}>
                         <Link to="/Signup">
                             還沒有帳號? 立即註冊!
                         </Link>

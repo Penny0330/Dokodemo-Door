@@ -5,28 +5,30 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 
 // Style
-import "./Home.scss";
+// import "./Home.scss";
+import styles from "./Home.module.css";
 
 function Home() {
     return(
+        
         <div className="wrapper">
             <Navbar />
-
-            <main className="home_main">
-                <div className="left">
-                    <div className="slogan">
+            
+            <main className={styles.main}>
+                <div className={styles.left}>
+                    <div className={styles.slogan}>
                         <div>隨時隨地</div>
                         <div>分享屬於自己的</div>
                         <div className="slogan_point">微型網站</div>
                     </div>
-                    <div className="start_button">
-                        <Link to="/Login">
+                    <div className={styles.button}>
+                        <Link to="/Signup">
                             立即加入
                         </Link>
                     </div>
                 </div>
-                <div className="right">
-                    <div className="iphone"></div>
+                <div>
+                    <div className={styles.iphone}></div>
                 </div>
             </main>
 
