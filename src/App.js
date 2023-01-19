@@ -7,14 +7,14 @@ import Signup from "./pages/Signup/Signup";
 
 function App(){
     return(
-        <div>
-            <Routes>
-                <Route path="/" element={ <Home /> } />
-                <Route path="/Login" element={ <Login /> } />
-                <Route path="/Signup" element={ <Signup /> } />
-                {/* <Route path="/ListPage" element={user ? <ListPage /> : <Navigate to="/" replace />} /> */}
-            </Routes>
-        </div>
+
+        <Routes>
+            <Route path="/" element={ <Home /> } />
+            <Route path="/Login" element={ <Login /> } />
+            <Route path="/Signup" element={ <Signup /> } />
+            {/* <Route path="/ListPage" element={user ? <ListPage /> : <Navigate to="/" replace />} /> */}
+        </Routes>
+
     )
 }
 

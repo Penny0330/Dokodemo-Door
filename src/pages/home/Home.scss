@@ -3,10 +3,9 @@ $deep-green: #587367;
 $natural: #ECE9DF;
 $translucent-black: rgba(0, 0, 0, 0.5);
 
-main{
+.home_main{
     max-width: 900px;
-    margin: auto;
-    margin-bottom: 70px;
+    margin: 70px auto;
     display: grid;
     grid-template-columns: 3fr 2fr;
     align-items: center;
@@ -16,17 +15,13 @@ main{
         margin-left: 65px;
         display: grid;
         gap: 15px;
+        color: $natural;
 
         .slogan{
             font-size: 40px;
             font-weight: bold;
             line-height: 70px;
             letter-spacing: 3px;
-
-            // .slogan_point{
-            //     // color: #fff;
-            //     border: 1px solid #587367;
-            // }
         }
 
         .start_button{
@@ -34,21 +29,21 @@ main{
             height: 50px;
             padding: 5px 0;
             font-size: 26px;
-            border: 2px solid #587367;
+            text-align: center;
             background-color: #587367;
-            border-radius: 20px;
-            font-weight: bold;
             cursor: pointer;
+            border-radius: 20px;
             border: 2px solid $translucent-black;
             box-shadow: 2px 3px 1px 0px $translucent-black;
             transition: .2s all ease-in;
 
-            text-align: center;
+            a{
+                text-decoration: none;
+                color: $natural;
+                font-weight: bold;
+            }
 
             &:hover{
-                // border: 2px solid #587367;
-                // background-color: #ECE9DF;
-                // color: #587367; 
                 box-shadow: none;
                 transform: translateY(3px);
             }

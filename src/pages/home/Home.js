@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 //Component
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
@@ -17,7 +19,11 @@ function Home() {
                         <div>分享屬於自己的</div>
                         <div className="slogan_point">微型網站</div>
                     </div>
-                    <div className="start_button">立即加入</div>
+                    <div className="start_button">
+                        <Link to="/Login">
+                            立即加入
+                        </Link>
+                    </div>
                 </div>
                 <div className="right">
                     <div className="iphone"></div>
