@@ -22,7 +22,7 @@ function Home() {
                         <div className="slogan_point">微型網站</div>
                     </div>
                     <div className={styles.button}>
-                        <Link to="/Signup">
+                        <Link to="/signup">
                             立即加入
                         </Link>
                     </div>

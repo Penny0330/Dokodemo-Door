@@ -39,10 +39,12 @@
 .login label{
     display: grid;
     gap: 3px;
+    font-size: 18px;
 }
 
 .login p{
     font-size: 16px;
+    font-size: 18px;
 }
 
 .login input{
@@ -52,10 +54,12 @@
     border: none;
     border-bottom: 1px solid gray;
     letter-spacing: 1.5px;
+    font-size: 18px;
+    color: translucent-black;
 }
 
 .loginButton{
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
     letter-spacing: 5px;
     width: 200px;
@@ -75,6 +79,11 @@
 .loginButton:hover{
     box-shadow: none;
     transform: translateY(3px);
+}
+
+.error{
+    color: rgb(225, 99, 155);
+    font-size: 18px;
 }
 
 .toSignup a{

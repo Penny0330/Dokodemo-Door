@@ -3,7 +3,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 
 // Style
-import "./Admin.scss"
+import "./Admin.module.css"
 
 function Admin() {
     return(
