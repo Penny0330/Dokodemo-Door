@@ -44,6 +44,11 @@ function Navbar() {
 
             { user && (
                 <div className={styles.loginComputer}>
+                    <div className={styles.member}>
+                        <Link to={`/${user}`}>
+                            會員中心
+                        </Link>
+                    </div>
                     <div className={styles.logout} onClick={logout}>登出</div>
                 </div>
             )}
@@ -74,7 +79,7 @@ function Navbar() {
                     { user &&
                         <>
                             <div className={styles.memberSide} onClick={() => setToggled(false)}>
-                                <Link to="/admin">
+                                <Link to={`/${user}`}>
                                     會員中心
                                 </Link>
                             </div>

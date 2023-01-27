@@ -4,12 +4,16 @@
 @value translucent-black: rgba(0, 0, 0, 0.5);
 
 nav{
-    max-width: 900px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     padding-bottom: 10px;
-    margin: 10px auto 0;
+    margin: auto;
+    padding-top: 10px;
     border-bottom: 5px solid natural;
+    background-color: light-green;
+    position: sticky;
+    top: 0;
+    z-index: 5;
 }
 
 .title{
@@ -33,7 +37,6 @@ nav{
     margin-right: 15px;
     font-size: 20px;
     font-weight: bold;
-    cursor: pointer;
 }
 
 .login{
@@ -73,11 +76,22 @@ nav{
     color: natural;
 }
 
+.member a:hover{
+    border-bottom: 5px solid deep-green;
+}
+
+.member a{
+    padding-bottom: 10px;
+    text-decoration: none;
+    color: natural;
+}
+
 .logout{
     padding: 5px 12px 5px 15px;
     color: natural;
     border-radius: 5px;
     border: 2px solid natural;
+    cursor: pointer;
 }
 
 .logout:hover{
@@ -168,6 +182,7 @@ nav{
     padding:15px 0 15px 15px;
     color: natural;
     text-decoration: none;
+    border-bottom: 1px solid #ece9df6f;
 }
 
 .logoutSide{
@@ -197,6 +212,8 @@ nav{
     }
 
     .link{
-        display: block;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
     }
 }

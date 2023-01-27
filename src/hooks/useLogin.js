@@ -8,7 +8,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 export const useLogin = () => {
     const [ error , setError ] = useState(null)
     const [ pending, setPending] = useState(false);
-    const { dispatch } = useAuthContext()
+    const { dispatch } = useAuthContext();
 
     const login = (email , password) => {
         setError(null);

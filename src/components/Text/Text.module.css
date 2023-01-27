@@ -1,0 +1,142 @@
+.allText{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.textBox{
+    width: 80%;
+    height: 102px;
+    padding: 20px 0;
+    background-color: white;
+    box-shadow: 0px 4px 10px #AAAAAA;
+    border-radius: 10px;
+    display: flex;
+    gap: 10px;
+    justify-content:space-evenly;
+    align-items: center;
+    margin-bottom: 15px;
+
+    animation: appear .4s ease-in-out;
+}
+
+@keyframes appear{
+    0%{
+        opacity: 0;
+    }
+    50%{
+        opacity: 0.5;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+.textValueAndEditPen{
+    align-items: center;
+    width: 80%;
+    height: 62px;
+    padding: 5px 10px;
+    font-size: 18px;
+    letter-spacing: 1px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.textValueAndEditPen:hover{
+    background-color: #ECE9DF;
+}
+
+.textValue{
+    width: 50vw;
+    margin-left: 5px;
+    overflow:hidden;
+    text-overflow: ellipsis;
+}
+
+.editPen{
+    width: 30px;
+    margin-left: 20px;
+    padding-right: 5px;
+}
+
+.edit{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    background-color: #ECE9DF;
+    position: relative;
+    padding-left: 10px;
+}
+
+.edit input {
+    width: 90%;
+    height: 62px;
+    padding: 0 15px 0 5px;
+    background-color: #ECE9DF;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    font-size: 18px;
+    letter-spacing: 1px;
+    overflow:hidden;
+}
+
+.editButton{
+    position: absolute;
+    right: 0;
+}
+
+.saveButton{
+    padding: 5px 8px;
+    font-weight: bold;
+    border-radius: 5px;
+    color: #587367;
+    color: gray;
+    cursor: pointer;
+}
+
+.saveButton:hover{
+    color: black;
+}
+
+.cancelButton{
+    padding: 5px 8px;
+    cursor: pointer;
+    color: gray;
+}
+
+.cancelButton:hover{
+    color: black;
+}
+
+.displayToggleAndTrash{
+    display: flex;
+    flex-direction: column;
+}
+
+.displayToggleButton{
+    width: 30px;
+    cursor: pointer;
+    color: green;
+}
+
+.trashButton{
+    width: 30px;
+    cursor: pointer;
+}
+
+.trashButton:hover{
+    background-color: #ECE9DF;
+    border-radius: 5px;
+}
+
+@media (max-width: 700px) {
+    .edit{
+        margin-left: 5px;
+    }
+
+    .edit input {
+        width: 80%;
+    }
+}

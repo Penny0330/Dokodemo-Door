@@ -1,0 +1,55 @@
+.box{
+    overflow:auto;
+    width: 183.5px;
+    height: 360px;
+    margin-top: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.box::-webkit-scrollbar {
+    width: 8px;
+    border-radius: 50px;
+    background-color: #aaa; 
+}
+
+.box::-webkit-scrollbar-thumb {
+    background: rgb(140, 138, 138);
+    border-radius: 50px;
+}
+
+.userInfo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pic{
+    padding: 20px 31px;
+    font-size: 26px;
+    background-color: gray;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.username{
+    margin-bottom: 20px;
+}
+
+.text{
+    text-align: center;
+    background-color: antiquewhite;
+    padding: 10px;
+    margin: 12px 15px;
+    border-radius: 5px;
+    word-wrap:break-word;
+    box-shadow: 0px 2px 6px #AAAAAA;
+}
+
+.footer{
+    text-align: center;
+    font-weight: bold;
+    color: #728d81; 
+    margin-top: 20px;
+}

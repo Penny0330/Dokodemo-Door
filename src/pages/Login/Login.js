@@ -12,8 +12,8 @@ import Footer from "../../components/Footer/Footer";
 import styles from "./Login.module.css";
 
 function Login() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("test@test.com");
+    const [password, setPassword] = useState("testtest");
     const { login, error, pending } = useLogin();
   
     const handleSubmit = (e) => {
@@ -34,6 +34,7 @@ function Login() {
                             <input 
                                 type="text" 
                                 placeholder="Email"
+                                value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 required />
                         </label>
@@ -42,6 +43,7 @@ function Login() {
                             <input 
                                 type="password" 
                                 placeholder="Password" 
+                                value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 required />
                         </label>
