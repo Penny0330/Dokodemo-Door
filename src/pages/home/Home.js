@@ -17,9 +17,9 @@ function Home() {
             <main className={styles.main}>
                 <div className={styles.left}>
                     <div className={styles.slogan}>
-                        <div>隨時隨地</div>
-                        <div>分享屬於自己的</div>
-                        <div className="slogan_point">微型網站</div>
+                        <div>創造專屬任意門</div>
+                        <div>簡單、快速、分享</div>
+                        <div className="slogan_point">一鍵前往您的所有網站</div>
                     </div>
                     <div className={styles.button}>
                         <Link to="/signup">

@@ -9,7 +9,7 @@
     display: grid;
     grid-template-columns: 3fr 2fr;
     align-items: center;
-    gap: 50px;   
+    gap: 45px;   
 }
 
 .left{
@@ -20,9 +20,9 @@
 
 .slogan{
     color: natural;
-    font-size: 40px;
+    font-size: 37px;
     font-weight: bold;
-    line-height: 70px;
+    line-height: 75px;
     letter-spacing: 3px;
 }
 
@@ -49,6 +49,10 @@
 .button:hover{
     box-shadow: none;
     transform: translateY(3px);
+}
+
+.right{
+    justify-self: center;
 }
 
 .iphone{

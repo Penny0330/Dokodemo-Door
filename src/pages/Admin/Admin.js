@@ -17,6 +17,7 @@ function Admin() {
     const [value, setValue] = useState([]);
     const [newValue, setNewValue] = useState("");
     const [ isEdit, setIsEdit] = useState(null);
+    const [newUrl, setNewUrl] = useState("");
 
 
     useEffect(() => {
@@ -42,9 +43,20 @@ function Admin() {
         });
     }
 
+    const addLinkBox = async () => {
+
+        await addDoc(collection(db, "url"), {
+            type: "link",
+            value: "",
+            url: "",
+            user: auth.currentUser.uid,
+            time: Date.now(),
+        });
+    }
 
     const edit = (index, box) => {
         setNewValue(box.value);
+        setNewUrl(box.url);
         setIsEdit((prev) => {
             return prev === index ? null : index
         });
@@ -56,9 +68,17 @@ function Admin() {
         setNewValue("");
     }
 
+    const storageLinkEdit = async (box) => {
+        await updateDoc(doc(db, "url", box.id), {value: newValue, url: newUrl});
+        setIsEdit(null);
+        setNewValue("");
+        setNewUrl("");
+    }
+
     const cancelEdit = () => {
         setIsEdit(null);
         setNewValue("");
+        setNewUrl("");
     }
 
     const deleteButton = async (box) => {
@@ -74,10 +94,10 @@ function Admin() {
                         <div className={styles.left}>
                             <div className={styles.addButton}>
                                 <button className={styles.addTextButton} onClick={addBox}>+ 新增文字</button>
-                                <button className={styles.addTextButton}>+ 新增連結</button>
+                                <button className={styles.addTextButton} onClick={addLinkBox}>+ 新增連結</button>
                             </div>
 
-                            <Text edit={edit} storageEdit={storageEdit} cancelEdit={cancelEdit} deleteButton={deleteButton} value={value} isEdit={isEdit} newValue={newValue} setNewValue={setNewValue} />
+                            <Text edit={edit} storageEdit={storageEdit} cancelEdit={cancelEdit} deleteButton={deleteButton} value={value} isEdit={isEdit} newValue={newValue} setNewValue={setNewValue} newUrl={newUrl} setNewUrl={setNewUrl} storageLinkEdit={storageLinkEdit} />
 
                         </div>
                         <div className={styles.right}>

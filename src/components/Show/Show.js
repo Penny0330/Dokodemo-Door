@@ -16,10 +16,17 @@ function Show(value) {
                 {
                     value.value.map((box, index) => {
                         return( 
+ 
                             <>
                                 {
-                                    box.value !== "" ? <div className={styles.text}>{box.value}</div> : null
-                                    
+                                    box.type !== "link" && (
+                                        box.value !== "" ? <div className={styles.text}>{box.value}</div> : null
+                                    )
+                                }
+                                {
+                                    box.type === "link" && (
+                                        box.value !== "" ? <div className={styles.link}><a href={box.url} target="_blank">{box.value}</a></div> : null
+                                    )
                                 }
                             </>  
                         )
