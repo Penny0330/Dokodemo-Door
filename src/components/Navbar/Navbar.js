@@ -84,8 +84,11 @@ function Navbar() {
                     )}
                     { user &&
                         <>
+                            <div className={styles.memberSide}>
+                                <a href={path + user} target="_blank">任意門</a>
+                            </div>
                             <div className={styles.memberSide} onClick={() => setToggled(false)}>
-                                <Link to={`/${user}`}>
+                                <Link to={`/admin`}>
                                     會員中心
                                 </Link>
                             </div>

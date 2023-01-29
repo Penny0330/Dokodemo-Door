@@ -29,7 +29,7 @@
 }
 
 .addTextButton, .addLinkButton{
-    width: 50%;
+    width: 22vw;
     padding: 10px 15px;
     font-size: 26px; 
     font-weight: bold;
@@ -70,7 +70,7 @@
     text-align: center;
     border-radius: 10px;
     box-shadow: 0px 2px 4px #AAAAAA;
-
+    
     position: fixed;
     bottom: 10px;
     right: 15px;
@@ -103,15 +103,11 @@
     }
 
     .addTextButton, .addLinkButton{
-        width: 50vw;
+        width: 80vw;
     }
     
     .edit{
         margin-left: 5px;
-    }
-
-    .edit input {
-        width: 80%;
     }
 
     .left{

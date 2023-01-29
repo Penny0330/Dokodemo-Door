@@ -72,11 +72,11 @@ function Text ({edit,
                                             <img className={styles.editPen} src={pen} alt="pen"/>
                                         </div>
 
-                                        <div className={styles.edit} style={{display: isEdit === index ? "flex" : "none"}}>
-                                            <div className={styles.titleAndLinkInput}>
+                                        <div className={styles.linkEdit} style={{display: isEdit === index ? "flex" : "none"}}>
+                                            {/* <div className={styles.titleAndLinkInput}> */}
                                                 <input className={styles.titleInput} type="text" placeholder="按鈕文字" value={newValue} onChange={e => setNewValue(e.target.value)} />
                                                 <input className={styles.linkInput} type="text" placeholder="連結網址" value={newUrl} onChange={e => setNewUrl(e.target.value)} />
-                                            </div>
+                                            {/* </div> */}
                                             
                                             <div className={styles.editButton}>
                                                 <div className={styles.saveButton}  onClick={() => storageLinkEdit(box)}>儲存</div>

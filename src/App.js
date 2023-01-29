@@ -8,7 +8,7 @@ import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
 import Admin from "./pages/Admin/Admin";
-import Publish from "./pages/Profile/Publish";
+import Publish from "./pages/Publish/Publish";
 
 function App(){
     const { alreadyLogin, user } = useAuthContext();
