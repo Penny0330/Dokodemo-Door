@@ -15,7 +15,7 @@ export const useLogin = () => {
         setPending(true);
         signInWithEmailAndPassword(auth, email, password)
             .then((currentUser) => {
-                dispatch({type:'LOGIN' , payload: currentUser.user})
+                dispatch({type:'LOGIN' , payload: currentUser.user.uid})
             })
             .catch((error) => {
                 switch(error.code){

@@ -70,11 +70,11 @@
 
     .left{
         justify-items: center;
-        margin-left: 0;
+        margin: 0 15px;
         text-align: center;
     }
 
     .slogan{
-        font-size: 34px;
+        font-size: 30px;
     }
 }

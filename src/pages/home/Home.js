@@ -19,7 +19,7 @@ function Home() {
                     <div className={styles.slogan}>
                         <div>創造專屬任意門</div>
                         <div>簡單、快速、分享</div>
-                        <div className="slogan_point">一鍵前往您的所有網站</div>
+                        <div>一鍵前往您的所有網站</div>
                     </div>
                     <div className={styles.button}>
                         <Link to="/signup">

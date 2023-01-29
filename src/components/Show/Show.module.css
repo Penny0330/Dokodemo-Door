@@ -43,28 +43,34 @@
 
 .text{
     text-align: center;
-    background-color: antiquewhite;
-    padding: 10px;
     margin: 12px 15px;
     border-radius: 5px;
     word-wrap:break-word;
-    box-shadow: 0px 2px 6px #AAAAAA;
 }
 
 .link{
     text-align: center;
     background-color: antiquewhite;
-    padding: 10px 0px;
     margin: 12px 15px;
     border-radius: 5px;
     word-wrap:break-word;
+    text-overflow: ellipsis;
     box-shadow: 0px 2px 6px #AAAAAA;
+
+    overflow: hidden;
 }
 
 .link a{
     text-decoration: none;
     color: black;
-    padding: 8px 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+}
+
+.link:hover{
+    transform: scale(1.02);
 }
 
 .footer{

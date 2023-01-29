@@ -35,7 +35,7 @@ export const AuthContextProvider = ({ children }) => {
     onAuthStateChanged(auth, (user) => {
       if(user){
         
-        dispatch({ type: 'CHECK_LOGIN', payload: user })
+        dispatch({ type: 'CHECK_LOGIN', payload: user.uid })
       }else{
         dispatch({ type: 'CHECK_LOGIN', payload: user })
       }

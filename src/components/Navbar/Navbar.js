@@ -12,11 +12,14 @@ import close from "../../images/close.png";
 // Style
 import styles from "./Navbar.module.css";
 
+import {auth, db} from "../../utils/firebase.config";
+
 function Navbar() {
     const { logout } = useLogout();
     const { user } = useAuthContext();
     const [ toggled, setToggled ] = useState(false);
     const toggleTrueFalse = () => setToggled(!toggled);
+    const path = window.location.href.split("admin")[0]
 
     return(
     
@@ -45,7 +48,10 @@ function Navbar() {
             { user && (
                 <div className={styles.loginComputer}>
                     <div className={styles.member}>
-                        <Link to={`/${user}`}>
+                        <a href={path + user} target="_blank">任意門</a>
+                    </div>
+                    <div className={styles.member}>
+                        <Link to="/admin">
                             會員中心
                         </Link>
                     </div>
