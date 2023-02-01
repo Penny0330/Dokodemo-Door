@@ -19,13 +19,13 @@ function Show(value) {
  
                             <>
                                 {
-                                    box.type !== "link" && (
-                                        box.value !== "" ? <div className={styles.text}>{box.value}</div> : null
+                                    box.type === "text" && (
+                                        box.title !== "" ? <div className={styles.text}>{box.title}</div> : null
                                     )
                                 }
                                 {
                                     box.type === "link" && (
-                                        box.value !== "" ? <div className={styles.link}><a href={box.url} target="_blank">{box.value}</a></div> : null
+                                        box.title !== "" && box.url !== ""  ? <div className={styles.link}><a href={box.url} target="_blank">{box.title}</a></div> : null
                                     )
                                 }
                             </>  

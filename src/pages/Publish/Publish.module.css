@@ -3,9 +3,9 @@
 }
 
 .main{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: grid;
+    grid-auto-rows: 260px minmax(300px, auto) 100px;
+    justify-items: center;
     min-height: 100vh;
 }
 
@@ -14,7 +14,9 @@
     text-align: center;
     margin: 50px 0 30px;
     padding-bottom: 30px;
-    border-bottom: 3px solid rgba(255, 255, 255, 0.609);
+    border-bottom: 5px dashed rgba(255, 255, 255, 0.609);
+    border-bottom: 3px dotted rgb(163, 159, 159);
+    /* border-bottom: 3px solid #728d81; */
 
     display: flex;
     flex-direction: column;
@@ -46,6 +48,7 @@
     text-align: center;
 
     display: flex;
+    flex-direction: column;
 }
 
 .list{
@@ -63,6 +66,7 @@
     border-radius: 5px;
     box-shadow: 0px 4px 10px #AAAAAA;
     cursor: pointer;
+    margin-bottom: 15px;
 
     transition: all 0.2s ease-in;
 }
@@ -83,8 +87,6 @@
 }
 
 .logo{
-    position: absolute;
-    bottom: 0;
     text-align: center;
     padding: 20px 0;
 }

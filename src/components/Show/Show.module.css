@@ -4,8 +4,10 @@
     height: 360px;
     margin-top: 10px;
     text-align: center;
-    display: flex;
-    flex-direction: column;
+    /* display: flex;
+    flex-direction: column; */
+    display: grid;
+    grid-auto-rows: 130px auto 20px;
 }
 
 .box::-webkit-scrollbar {
@@ -35,10 +37,6 @@
 
 .username{
     margin-bottom: 20px;
-}
-
-.textBox{
-    height: 300px;
 }
 
 .text{
@@ -77,5 +75,5 @@
     text-align: center;
     font-weight: bold;
     color: #728d81; 
-    margin-top: 20px;
+    /* margin-top: 120px; */
 }

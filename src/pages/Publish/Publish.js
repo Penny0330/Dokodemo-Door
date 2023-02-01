@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import styles from "./Publish.module.css";
 
 import { db } from "../../utils/firebase.config";
-import { collection, query, onSnapshot, where, orderBy} from "firebase/firestore";
+import { collection, query, onSnapshot, where, orderBy, doc} from "firebase/firestore";
 
 function Publish(){
     const [value, setValue] = useState([]);
@@ -12,15 +12,31 @@ function Publish(){
     const uid = window.location.href.split("/")[3];
 
     useEffect(() => {
-        const ref = collection(db, "url");
-        const q = query(ref, where("user", "==", uid), orderBy("time", "desc"));
-        const unsub = onSnapshot(q, (querySnapshot) => {
-            let textArr = [];
-            querySnapshot.forEach((doc) => {
-                textArr.push({ ...doc.data(), id: doc.id});
-            });
-            setValue(textArr)
+        // const ref = collection(db, "url");
+        // const q = query(ref, where("user", "==", uid), orderBy("time", "desc"));
+        // const unsub = onSnapshot(q, (querySnapshot) => {
+        //     let textArr = [];
+        //     querySnapshot.forEach((doc) => {
+        //         textArr.push({ ...doc.data(), id: doc.id});
+        //     });
+        //     setValue(textArr)
+        // })
+
+        const ref = doc(db, "itemList", uid)
+        const unsub = onSnapshot((ref), (doc) => {
+
+            if(doc.data() === undefined){
+                setValue([]);
+            }else{
+                let itemArr = [];
+                doc.data().item.map((item) => {
+                    itemArr.push(item)
+                })
+                setValue(itemArr)
+            }
+            
         })
+
         return () => unsub();
     }, [])
 
@@ -35,31 +51,34 @@ function Publish(){
                     <div className={styles.pic}>T</div>
                     <div className={styles.userName}>@Test</div>
                 </div>
+                <div className={styles.allList}>
                 {
                     value.map((box, index) => {
                         return(
-                            <div className={styles.allList} key={index}>
+                            <>
                                 {
-                                    box.type !== "link" && (
-                                        box.value !== "" ? <div className={`${styles.list} ${styles.text}`}>{box.value}</div> : null
+                                    box.type === "text" && (
+                                        box.title == "" ? null : <div className={`${styles.list} ${styles.text}`}>{box.title}</div>
                                     )
                                 }
 
                                 {
                                     box.type === "link" && (
-                                        box.value !== "" ? 
+                                        box.title !== "" && box.url !== "" ? 
                                         <div  className={`${styles.list} ${styles.link}`}>
                                             <a href={box.url} target="_blank">
-                                                {box.value}
+                                                {box.title}
                                             </a>
                                         </div> : null
                                     )
                                 }
-                            </div>
                             
+                            </>
                         ) 
                     })
+                    
                 }
+                </div>
 
 
                 <div className={styles.logo}>
