@@ -1,7 +1,8 @@
 import { useRef } from "react";
 
 //Component
-import toggle from "../../images/toggle.svg";
+import toggleOpen from "../../images/toggle-open.png";
+import toggleClose from "../../images/toggle-close.png";
 import trash from "../../images/trash.svg";
 import pen from "../../images/pen.png";
 import drag from "../../images/drag.png";
@@ -9,7 +10,7 @@ import drag from "../../images/drag.png";
 // Style
 import styles from "./Text.module.css";
 
-import { where, updateDoc, doc, collection, query, getDocs} from "firebase/firestore";
+import { updateDoc, doc } from "firebase/firestore";
 import { db, auth } from "../../utils/firebase.config";
 
 function Text ({edit, 
@@ -23,51 +24,29 @@ function Text ({edit,
                 setNewValue, 
                 newUrl, 
                 setNewUrl,
-                storageLinkEdit}){
-
-    // value.map(item => {
-    //     console.log(item)
-    // })
+                storageLinkEdit,
+                handleDisplay,
+            }){
 
 
     const dragItem = useRef(null);
     const dragOverItem = useRef(null);
 
-    // const onDragStart = (e, index) => {
-    //     console.log("drag started", index)
-    // }
-
-    // const onDragEnter = (e, index) => {
-    //     console.log(e, index)
-    // }
+    const onDragStart = (e, index) => {
+        dragItem.current=index;
+        e.target.parentElement.style.border = "3px dashed gray";
+    }
 
 
-    const handleSort = async (box) => {
-        let _value = [...value];
-
+    const handleSort = async (e) => {
+        let _value = [...value]
         const draggedItemContent = _value.splice(dragItem.current, 1)[0]
-
         _value.splice(dragOverItem.current, 0, draggedItemContent)
-
-        // let changItemId = null;
-
         setValue(_value)
-
-        // const ref = collection(db, "url");
-        // const q = query(ref, where("index", "==", dragOverItem.current));
-        // const querySnapshot = await getDocs(q);
-        // querySnapshot.forEach((doc) => {
-        //     changItemId = doc.id
-        // });
-
-        // await updateDoc(doc(db, "url", box.id), {index: dragOverItem.current});
-        // await updateDoc(doc(db, "url", changItemId), {index: dragItem.current});
-
         await updateDoc(doc(db, "itemList", auth.currentUser.uid), {"item": _value})
-
         dragItem.current = null
         dragOverItem.current =null
-     
+        e.target.parentElement.style.border = "none";
     }
 
 
@@ -76,30 +55,29 @@ function Text ({edit,
 
             { value.map((box, index) => {
                     return(
-                        <>
+                        <div key={index}>
                             {
                                 box.type === "text" && (
-                                    <div className={styles.textBox} >
-                                        <img className={styles.drag} src={drag} alt="drag" 
-                                            draggable  
-                                            onDragStart={(e)=> dragItem.current=index}
+                                    <div className={styles.textBox}>
+                                        <img className={styles.drag} src={drag} alt="drag" draggable
+                                            onDragStart={(e)=> onDragStart(e, index)}
                                             onDragEnter={(e)=> dragOverItem.current=index}
-                                            onDragEnd={handleSort}
-                                            onDragOver={(e) => e.preventDefault()}
+                                            onDragEnd={(e) => handleSort(e)}
+                                            onDragOver={(e) => e.stopPropagation()}
                                             />
 
                                         <div className={styles.textValueAndEditPen} 
-                                                onClick={() => edit(index, box)} 
+                                                onClick={(e) => edit(e,index, box)} 
                                                 style={{display: isEdit === index ? "none" : "flex"}}>
                                             { box.title == "" ?
-                                                <div className={styles.textValue}>編輯文字</div>:
+                                                <div className={styles.textNoValue}>編輯文字</div>:
                                                 <div className={styles.textValue}>{box.title}</div>
                                             }
 
                                             <img className={styles.editPen} src={pen} alt="pen"/>
                                         </div>
 
-                                        <div className={styles.edit} style={{display: isEdit === index ? "flex" : "none"}}>
+                                        <div className={styles.edit} style={{display: isEdit === index ? "flex" : "none"}} onClick={(e) => e.stopPropagation()}>
                                             <input className={styles.textInput} type="text" value={newValue} onChange={e => setNewValue(e.target.value)} />
                                             <div className={styles.editButton}>
                                                 <div className={styles.saveButton}  onClick={() => storageEdit(box, index)}>儲存</div>
@@ -109,10 +87,24 @@ function Text ({edit,
                                             </div>
                                         </div>
 
-                                        <div className={styles.displayToggleAndTrash}>
-                                            <img className={styles.displayToggleButton} src={toggle} alt="toggle" />
-                                            <img className={styles.trashButton} src={trash} alt="trash" onClick={() => deleteButton(index)} />
-                                        </div>
+                                        {
+                                            box.display && (
+                                                <div className={styles.displayToggleAndTrash}>
+                                                    <img className={styles.displayToggleButton} src={toggleOpen} alt="toggle" onClick={(e) => handleDisplay(box)} />
+                                                    <img className={styles.trashButton} src={trash} alt="trash" onClick={() => deleteButton(index)} />
+                                                </div>
+                                            )
+                                        }
+
+                                        {
+                                            !box.display && (
+                                                <div className={styles.displayToggleAndTrash}>
+                                                    <img className={styles.displayToggleButton} src={toggleClose} alt="toggle" onClick={(e) => handleDisplay(box)} />
+                                                    <img className={styles.trashButton} src={trash} alt="trash" onClick={() => deleteButton(index)} />
+                                                </div>
+                                            )
+                                        }
+
                                     </div>
                                 )
                             }
@@ -121,26 +113,25 @@ function Text ({edit,
                                 box.type === "link" && (
                                     <div className={styles.linkBox}>
 
-                                        <img className={styles.drag} src={drag} alt="drag" 
-                                            draggable  
-                                            onDragStart={(e)=> dragItem.current=index}
+                                        <img className={styles.drag} src={drag} alt="drag" draggable
+                                            onDragStart={(e)=> onDragStart(e, index)}
                                             onDragEnter={(e)=> dragOverItem.current=index}
-                                            onDragEnd={handleSort}
-                                            onDragOver={(e) => e.preventDefault()}
+                                            onDragEnd={(e) => handleSort(e)}
+                                            onDragOver={(e) => e.stopPropagation()}
                                             />
 
                                         <div className={styles.textValueAndEditPen} 
-                                            onClick={() => edit(index, box)} 
+                                            onClick={(e) => edit(e, index, box)} 
                                             style={{display: isEdit === index ? "none" : "flex"}}>
                                             { box.title == "" ?
-                                                <div className={styles.textValue}>編輯連結</div>:
+                                                <div className={styles.textNoValue}>編輯連結</div>:
                                                 <div className={styles.textValue}>{box.title}</div>
                                             }
 
                                             <img className={styles.editPen} src={pen} alt="pen"/>
                                         </div>
 
-                                        <div className={styles.linkEdit} style={{display: isEdit === index ? "flex" : "none"}}>
+                                        <div className={styles.linkEdit} style={{display: isEdit === index ? "flex" : "none"}} onClick={(e) => e.stopPropagation()}>
 
                                                 <input className={styles.titleInput} type="text" placeholder="按鈕文字" value={newValue} onChange={e => setNewValue(e.target.value)} />
                                                 <input className={styles.linkInput} type="text" placeholder="連結網址" value={newUrl} onChange={e => setNewUrl(e.target.value)} />
@@ -154,14 +145,29 @@ function Text ({edit,
                                             </div>
                                         </div>
 
-                                        <div className={styles.displayToggleAndTrash}>
-                                            <img className={styles.displayToggleButton} src={toggle} alt="toggle" />
-                                            <img className={styles.trashButton} src={trash} alt="trash" onClick={() => deleteButton(index)} />
-                                        </div>
+                                        {
+                                            box.display && (
+                                                <div className={styles.displayToggleAndTrash}>
+                                                    <img className={styles.displayToggleButton} src={toggleOpen} alt="toggle" onClick={(e) => handleDisplay(box)} />
+                                                    <img className={styles.trashButton} src={trash} alt="trash" onClick={() => deleteButton(index)} />
+                                                </div>
+                                            )
+                                        
+                                        }
+                                        {
+                                            !box.display && (
+                                                <div className={styles.displayToggleAndTrash}>
+                                                    <img className={styles.displayToggleButton} src={toggleClose} alt="toggle" onClick={(e) => handleDisplay(box)} />
+                                                    <img className={styles.trashButton} src={trash} alt="trash" onClick={() => deleteButton(index)} />
+                                                </div>
+                                            )
+                                        
+                                        }
+
                                     </div>
                                 )
                             }
-                        </>
+                        </div>
 
                     )
                     

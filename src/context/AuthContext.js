@@ -34,12 +34,10 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if(user){
-        
         dispatch({ type: 'CHECK_LOGIN', payload: user.uid })
       }else{
         dispatch({ type: 'CHECK_LOGIN', payload: user })
       }
-
     })
   }, [])
 

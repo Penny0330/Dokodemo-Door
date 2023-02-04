@@ -1,18 +1,19 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 
 //Component
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import Text from "../../components/Text/Text";
 import Show from "../../components/Show/Show";
+import ShowMobile from "../../components/ShowMobile/ShowMobile";
 import smartphone from "../../images/smartphone.png";
-import close_phone from "../../images/close_phone.png";
 
 // Style
 import styles from "./Admin.module.css";
 
-import {auth, db} from "../../utils/firebase.config";
-import { collection, addDoc, deleteDoc, doc, query, onSnapshot, where, updateDoc, orderBy} from "firebase/firestore";
+import {auth, db, storage} from "../../utils/firebase.config";
+import {  doc, onSnapshot, updateDoc } from "firebase/firestore";
+
 
 
 function Admin() {
@@ -22,19 +23,7 @@ function Admin() {
     const [isEdit, setIsEdit] = useState("");
     const [openShow, setOpenShow] = useState(false);
 
-
-
     useEffect(() => {
-        // const ref = collection(db, "url");
-        // const q = query(ref, where("user", "==", auth.currentUser.uid), orderBy("time", "desc"));
-        // const unsub = onSnapshot(q, (querySnapshot) => {
-        //     let textArr = [];
-        //     querySnapshot.forEach((doc) => {
-        //         textArr.push({ ...doc.data(), id: doc.id});
-        //     });
-        //     setValue(textArr)
-        // })
-
         const ref = doc(db, "itemList", auth.currentUser.uid)
         const unsub = onSnapshot((ref), (doc) => {
 
@@ -50,58 +39,50 @@ function Admin() {
             
         })
 
-        return () => unsub();
+        document.addEventListener('click', handle)
+
+        return () =>{
+            unsub()
+            document.removeEventListener('click', handle)
+        } 
     }, [])
-    
+
+    const handle = (e) =>{
+        setIsEdit("")
+    };
+
     // Add Data
     const addBox = async () => {
-
-        // await addDoc(collection(db, "url"), {
-        //     value: "",
-        //     user: auth.currentUser.uid,
-        //     time: Date.now(),
-        // });
- 
         const newText = {
             type: "text",
             title: "",
+            display: true
         }
 
         if(value){
-            console.log("hey")
             let _items = [...value]
-            _items.push(newText)
+            _items.unshift(newText)
             setValue(_items)
             await updateDoc(doc(db, "itemList", auth.currentUser.uid), {"item": _items})
 
         }else{
-            console.log("on data")
             setItems([newText])
             await setDoc(doc(db, "itemList", auth.currentUser.uid), {"item": [newText]})
         }
-
-    }
+    };
 
     const addLinkBox = async () => {
-
-        // await addDoc(collection(db, "url"), {
-        //     type: "link",
-        //     value: "",
-        //     url: "",
-        //     user: auth.currentUser.uid,
-        //     time: Date.now(),
-        // });
-
         const newText = {
             type: "link",
             title: "",
-            url: ""
+            url: "",
+            display: true
         }
 
         if(value){
             console.log("hey")
             let _items = [...value]
-            _items.push(newText)
+            _items.unshift(newText)
             setValue(_items)
             await updateDoc(doc(db, "itemList", auth.currentUser.uid), {"item": _items})
 
@@ -110,58 +91,48 @@ function Admin() {
             setItems([newText])
             await setDoc(doc(db, "itemList", auth.currentUser.uid), {"item": [newText]})
         }
-
-    }
+    };
 
     // Edit Data
-    const edit = (index, box) => {
-        setNewValue(box.title);
-        setNewUrl(box.url);
+    const edit = (e, index, box) => {
+        e.stopPropagation()
+        setNewValue(box.title)
+        setNewUrl(box.url)
         setIsEdit((prev) => {
             return prev === index ? "" : index
-        });
+        })
     }
 
-    const storageEdit = async (box, index) => {
-        // await updateDoc(doc(db, "url", box.id), {value: newValue});
-        // setIsEdit("");
-        // setNewValue("");
- 
+    const storageEdit = async (box) => {
         box.title = newValue
         const _items = [...value]
         setValue(_items)
 
         await updateDoc(doc(db, "itemList", auth.currentUser.uid), {"item": _items})
-        setIsEdit("");
-        setNewValue("");
+        setIsEdit("")
+        setNewValue("")
     }
 
-    const storageLinkEdit = async (box, index) => {
-        // await updateDoc(doc(db, "url", box.id), {value: newValue, url: newUrl});
-        // setIsEdit("");
-        // setNewValue("");
-        // setNewUrl("");
-        
-        box.title = newValue;
-        box.url = newUrl;
+    const storageLinkEdit = async (box) => {
+        box.title = newValue
+        box.url = newUrl
         const _items = [...value]
         setValue(_items)
 
         await updateDoc(doc(db, "itemList", auth.currentUser.uid), {"item": _items})
-        setIsEdit("");
-        setNewValue("");
-        setNewUrl("");
+        setIsEdit("")
+        setNewValue("")
+        setNewUrl("")
     }
 
     const cancelEdit = () => {
-        setIsEdit("");
-        setNewValue("");
-        setNewUrl("");
+        setIsEdit("")
+        setNewValue("")
+        setNewUrl("")
     }
 
     // Delete Data
     const deleteButton = async (index) => {
-        // await deleteDoc(doc(db, "url", box.id))
 
         const _items = [...value]
         _items.splice(index, 1)
@@ -173,17 +144,33 @@ function Admin() {
     
     // max-width: 700 : click showing
     const handleOpenShow = () => {
-        setOpenShow(!openShow);
+        setOpenShow(!openShow)
     }
 
-    return(
-        <div className={styles.wrapper}>
+    const handleDisplay = async (box) => {
 
-            <div className={ openShow ? styles.layout : undefined}></div>
+        if(box.display){
+            box.display = false
+
+        }else{
+            box.display = true
+        }
+
+        const _items = [...value]
+        setValue(_items)
+
+        await updateDoc(doc(db, "itemList", auth.currentUser.uid), {"item": _items})
+    }
+
+
+
+    return(
+        <div className="wrapper">
 
             <Navbar />
 
                 <main className={styles.main}>
+
                     <div className={styles.container}>
 
                         <div className={styles.left}>
@@ -192,44 +179,22 @@ function Admin() {
                                 <button className={styles.addTextButton} onClick={addLinkBox}>+ 連結按鈕</button>
                             </div>
 
-                            <Text edit={edit} storageEdit={storageEdit} cancelEdit={cancelEdit} deleteButton={deleteButton} value={value} setValue={setValue} isEdit={isEdit} newValue={newValue} setNewValue={setNewValue} newUrl={newUrl} setNewUrl={setNewUrl} storageLinkEdit={storageLinkEdit} />
+                            <Text edit={edit} storageEdit={storageEdit} cancelEdit={cancelEdit} deleteButton={deleteButton} value={value} setValue={setValue} isEdit={isEdit} newValue={newValue} setNewValue={setNewValue} newUrl={newUrl} setNewUrl={setNewUrl} storageLinkEdit={storageLinkEdit} handleDisplay={handleDisplay} />
 
                         </div>
 
                         <div className={styles.right}>
-                            <div className={styles.showing}>
 
                                 <Show value={value} />
-                                
-                            </div>
+
                         </div>
 
                         {
-                            !openShow && (
-                                <div className={styles.preview} onClick={handleOpenShow}>
-                                    <img className={styles.smartphone} src={smartphone} alt="smartphone"/>
-                                </div>
-                                
-                            )
-                        }
-
-
-                        {
-                            openShow && (
-                                <div className={styles.open}>
-                                    <div className={styles.openMobileRight} style={{display: openShow ? "block" : "none"}}>
-                                        <div className={styles.openShowing}>
-            
-                                            <Show value={value} />
-
-                                            <img className={styles.close_phone} src={close1} alt="close1"  
-                                                onClick={handleOpenShow} />
-                                            
-                                        </div>
-                                    
-                                    </div>
-                                </div>
-                            )
+                            openShow ? 
+                            <ShowMobile value={value} openShow={openShow} handleOpenShow={handleOpenShow} /> : 
+                            <div className={styles.preview} onClick={handleOpenShow}>
+                                <img className={styles.smartphone} src={smartphone} alt="smartphone"/>
+                            </div>
                         }
 
                     </div>

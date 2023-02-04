@@ -6,9 +6,8 @@
 nav{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    padding-bottom: 10px;
     margin: auto;
-    padding-top: 10px;
+    padding: 10px 3vw;
     border-bottom: 5px solid natural;
     background-color: light-green;
     position: sticky;
