@@ -156,7 +156,7 @@ nav{
 }
 
 .loginSide a{
-    padding:15px 0 15px 15px;
+    padding:15px 0 15px 28px;
     color: natural;
     text-decoration: none;
 }
@@ -167,7 +167,7 @@ nav{
 }
 
 .signupSide a{
-    padding:15px 0 15px 15px;
+    padding:15px 0 15px 28px;
     color: natural;
     text-decoration: none;
 }
@@ -178,14 +178,14 @@ nav{
 }
 
 .memberSide a{
-    padding:15px 0 15px 15px;
+    padding:15px 0 15px 28px;
     color: natural;
     text-decoration: none;
     border-bottom: 1px solid #ece9df6f;
 }
 
 .logoutSide{
-    padding:15px 0 15px 15px;
+    padding:15px 0 15px 28px;
     cursor: pointer;
 }
 

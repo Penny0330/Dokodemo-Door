@@ -85,6 +85,7 @@
     align-items: center;
     height: 35px;
     font-size: 13px;
+    font-weight: 500;
 }
 
 .link:hover{
@@ -115,7 +116,7 @@
 .colorGreen{
     width: 30px;
     height: 30px;
-    background-color: #395347;
+    background-color: #4a7b64;
     border-radius: 50%;
     border: 2px solid white;
     outline: 2px solid rgb(218, 216, 216);
@@ -126,7 +127,7 @@
 .colorBlue{
     width: 30px;
     height: 30px;
-    background-color: rgb(28 56 111);
+    background-color: rgb(52 105 208);
     border-radius: 50%;
     border: 2px solid white;
     outline: 2px solid rgb(218, 216, 216);
@@ -158,6 +159,12 @@
 
 .colorPri:hover::after, .colorBlue:hover::after, .colorGreen:hover::after, .colorBlack:hover::after{
     border: 2px solid rgb(154, 153, 153);
+}
+
+.img{
+    width: 142px;
+    margin: 10px 0;
+    border-radius: 10px;
 }
 
 .footer{

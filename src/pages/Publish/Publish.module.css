@@ -10,6 +10,62 @@
     padding-top: 50px;
 }
 
+.errorMain{
+    display: grid;
+    grid-auto-rows: auto 100px;
+    justify-items: center;
+    min-height: 100vh;
+    padding-top: 50px;
+}
+
+.error{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.error h1{
+    font-size: 80px;
+    color: #5a5858;
+}
+
+.error h4{
+    font-size: 20px;
+    color: #5a5858;
+}
+
+.error ul{
+    list-style: none;
+    text-align: center;
+    color: #5a5858;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.error ul li{
+    margin-bottom: 10px;
+}
+
+.backToHomeLink{
+    padding: 15px 0;
+    cursor: pointer;
+}
+
+.backToHomeButton{
+    font-weight: bold;
+    padding: 15px 25px;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #728d81;
+    color: #ECE9DF;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+
+
 .userInfo{
     width: 90%;
     text-align: center;
@@ -71,7 +127,7 @@
 .link a{
     text-decoration: none;
     color: black;
-    /* min-height: 70px; */
+    font-weight: 500;
     min-height: 50px;
     display: flex;
     justify-content: center;
@@ -82,6 +138,12 @@
 
 .link:hover{
     transform: scale(1.02);
+}
+
+.img{
+    width: 40vw;
+    margin: 10px 0;
+    border-radius: 10px;
 }
 
 .logo{
@@ -99,7 +161,7 @@
 }
 
 @media (max-width: 700px) {
-    .allList{
+    .allList, .img{
         width: 90vw;
     }
 }

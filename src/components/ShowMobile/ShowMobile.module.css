@@ -63,7 +63,7 @@
 .colorGreen{
     width: 30px;
     height: 30px;
-    background-color: #395347;
+    background-color: #4a7b64;
     border-radius: 50%;
     border: 2px solid white;
     cursor: pointer;
@@ -73,7 +73,7 @@
 .colorBlue{
     width: 30px;
     height: 30px;
-    background-color: rgb(28 56 111);
+    background-color: rgb(52 105 208);
     border-radius: 50%;
     border: 2px solid white;
     cursor: pointer;
@@ -196,10 +196,17 @@
     justify-content: center;
     align-items: center;
     height: 50px;
+    font-weight: 500;
 }
 
 .link:hover{
     transform: scale(1.02);
+}
+
+.img{
+    width: 90vw;
+    margin: 10px 0;
+    border-radius: 10px;
 }
 
 .footer{

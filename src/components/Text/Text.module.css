@@ -6,6 +6,17 @@
     width: 100%;
 }
 
+.noData{
+    color: gray;
+    font-size: 24px;
+    padding-top: 50px;
+    font-weight: bold;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+}
+
 .textBox{
     width: 80%;
     width: 47vw;
@@ -44,7 +55,6 @@
 }
 
 .textValue{
-    /* width: 50vw; */
     width: 100%;
     margin-left: 5px;
     overflow:hidden;
@@ -96,24 +106,20 @@
 .saveButton{
     padding: 5px 8px;
     font-weight: bold;
-    border-radius: 5px;
-    color: #587367;
-    color: gray;
     cursor: pointer;
+    background-color: #587367;
+    color: white;
 }
 
 .saveButton:hover{
-    color: black;
+    background-color: #395347;
 }
 
 .cancelButton{
     padding: 5px 8px;
     cursor: pointer;
-    color: gray;
-}
-
-.cancelButton:hover{
-    color: black;
+    color: white;
+    background-color: #8080808f;
 }
 
 .displayToggleAndTrash{
@@ -208,13 +214,131 @@
     overflow:hidden;
 }
 
+.picBox{
+    width: 47vw;
+    height: auto;
+    padding: 20px 0;
+    background-color: white;
+    box-shadow: 0px 4px 10px #AAAAAA;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.imgValueAndEditPen:hover{
+    background-color: #ECE9DF;
+}
+
+.imgValueAndEditPen{
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    padding: 0px 10px;
+    font-size: 18px;
+    letter-spacing: 1px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.imgValue{
+    height: 20vw;
+}
+
+.imgNoValue{
+    height: 20vw;
+    color: gray;
+    display: flex;
+    align-items: center;
+}
+
+.img{
+    width: 100%;
+    height: 20vw;
+    /* aspect-ratio: 4/3; */
+    padding: 10px 0;
+}
+
+.picEdit{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80%;
+    background-color: #ECE9DF;
+    padding-left: 10px;
+}
+
+.imgValueEdit{
+    height: 20vw;
+}
+
+.noImgValueEdit{
+    height: 20vw;
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.noImage{
+    color: gray;
+    font-size: 18px;
+}
+
+.imgEdit{
+    width: 100%;
+    height: 20vw;
+    /* aspect-ratio: 4/3; */
+    padding: 10px 0;
+}
+
+.picEditButton{
+    display: flex;
+    flex-direction: column;
+    width: 65px;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.uploadButton{
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #587367;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.uploadButton:hover{
+    background-color: #395347;
+}
+
+.fileInput {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+  
+.fileLabel {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 8px;
+}
+
 @media (max-width: 700px) {
     .allText{
         width: 90%;
     }
 
-    .textBox, .linkBox{
+    .textBox, .linkBox, .picBox{
         width: 90vw;
         gap: 0;
+    }
+
+    .imgValue, .img, .imgValueEdit, .imgEdit, .imgNoValue, .noImgValueEdit{
+        height: 40vw;
     }
 }

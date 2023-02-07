@@ -1,39 +1,13 @@
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 // Style
 import styles from "./ShowMobile.module.css";
 import close_phone from "../../images/close_phone.png";
 
-import { updateDoc, doc, onSnapshot } from "firebase/firestore";
+import { updateDoc, doc } from "firebase/firestore";
 import { db, auth } from "../../utils/firebase.config";
 
-function ShowMobile({value, openShow, handleOpenShow}) {
-
-    const [titleColor, setTitleColor] = useState("");
-    const [linkTextColor, setTextColor] = useState("");
-    const [linkColor, setLinkColor] = useState("");
-    const [logeColor, setLogeColor] = useState("");
-
-    useEffect(() => {
-        const ref = doc(db, "itemList", auth.currentUser.uid)
-        const unsub = onSnapshot((ref), (doc) => {
-
-            if(doc.data() === undefined){
-                setTitleColor("");
-            }else{
-                setTitleColor(doc.data().showColor.titleColor)
-                setTextColor(doc.data().showColor.linkTextColor)
-                setLinkColor(doc.data().showColor.linkColor)
-                setLogeColor(doc.data().showColor.logeColor)
-            }
-            
-        })
-
-        return () =>{
-            unsub()
-        } 
-    }, [])
+function ShowMobile({value, color,  openShow, handleOpenShow }) {
 
 
     const changeColorPri = async(e) => {
@@ -65,8 +39,6 @@ function ShowMobile({value, openShow, handleOpenShow}) {
             linkColor: "rgb(28 56 111)",
             logeColor: "rgb(28 56 111)",
 
-            //rgb(118 73 51)
-
         }
 
         await updateDoc(doc(db, "itemList", auth.currentUser.uid), {"showColor": showColor})
@@ -74,6 +46,7 @@ function ShowMobile({value, openShow, handleOpenShow}) {
 
     const changeColorBlack = async(e) => {
         const showColor = {
+
             titleColor: "#333333",
             linkTextColor: "#ECE9DF",
             linkColor: "#333333",
@@ -98,7 +71,7 @@ function ShowMobile({value, openShow, handleOpenShow}) {
                     <div className={styles.box}>
                         <div className={styles.userInfo}>
                             <div className={styles.pic}>T</div>
-                            <div className={styles.username} style={{color: titleColor}}>@Test</div>
+                            <div className={styles.username} style={{color: color.titleColor}}>@Test</div>
                         </div>
 
 
@@ -110,12 +83,23 @@ function ShowMobile({value, openShow, handleOpenShow}) {
                                         <div key={index}>
                                             {
                                                 box.type === "text" && (
-                                                    box.title !== "" && box.display ? <div className={styles.text} style={{color: titleColor}} >{box.title}</div> : null
+                                                    box.title !== "" && box.display && (
+                                                        <div className={styles.text} style={{color: color.titleColor}} >{box.title}</div>
+                                                    )
                                                 )
                                             }
                                             {
                                                 box.type === "link" && (
-                                                    box.title !== "" && box.url !== "" && box.display ? <div className={styles.link} style={{backgroundColor: linkColor}}><a href={box.url} target="_blank" style={{color: linkTextColor}}>{box.title}</a></div> : null
+                                                    box.title !== "" && box.url !== "" && box.display && (
+                                                        <div className={styles.link} style={{backgroundColor: color.linkColor}}><a href={box.url} target="_blank" style={{color: color.linkTextColor}}>{box.title}</a></div>
+                                                    )
+                                                )
+                                            }
+                                            {
+                                                box.type === "pic" && (
+                                                    box.imgUrl !== "" && box.display && (
+                                                        <img className={styles.img} src={box.imgUrl} alt="img" />
+                                                    ) 
                                                 )
                                             }
                                         </div> 
@@ -126,22 +110,19 @@ function ShowMobile({value, openShow, handleOpenShow}) {
                         </div>
 
                         <div className={styles.footer}>
-                            <Link to="/"  style={{color: logeColor}} >
+                            <Link to="/"  style={{color: color.logeColor}} >
                                 Dokodemo Door
                             </Link>
                         </div>
                         
-        
                     </div>
 
                     <img className={styles.close_phone} src={close_phone} alt="close_phone"  
                         onClick={handleOpenShow} />
                     
                 </div>
-            
             </div>
         </div>
-        
     )
 }
 
