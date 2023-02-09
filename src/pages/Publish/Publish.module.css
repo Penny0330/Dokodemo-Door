@@ -2,6 +2,16 @@
     background-color:  #ECE9DF;
 }
 
+.loadingDiv{
+    height: 100vh;
+    text-align: center;
+    padding-top: 50px;
+}
+
+.loading{
+    width: 10vw;
+}
+
 .main{
     display: grid;
     grid-auto-rows: auto minmax(300px, auto) 100px;

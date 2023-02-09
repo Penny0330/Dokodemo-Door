@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+// component
+import loading from "../../images/admin-loading.gif"
+
+
+// style
 import styles from "./Publish.module.css";
 
 import { db } from "../../utils/firebase.config";
@@ -11,17 +16,19 @@ function Publish(){
     const [noPhotoText, setNoPhotoText] = useState("");
     const [value, setValue] = useState([]);
     const [showColor, setShowColor] = useState("");
-    const [error, setError] = useState(false)
+    const [pending, setPending] = useState(false)
+    const [error, setError] = useState(false);
 
     const uid = window.location.href.split("/")[3];
 
     useEffect(() => {
-
+        setPending(true)
         const ref = doc(db, "itemList", uid)
         const unsub = onSnapshot((ref), (doc) => {
             console.log(doc.data())
             if(doc.data() === undefined){
                 setError(true)
+                setPending(false)
                 return
             }else{
                 let itemArr = [];
@@ -32,6 +39,7 @@ function Publish(){
                 setShowColor(doc.data().showColor)
                 setProfile(doc.data().profile)
                 setNoPhotoText(doc.data().profile.account.slice(0, 1).toUpperCase())
+                setPending(false)
             }
             
         })
@@ -41,9 +49,18 @@ function Publish(){
 
     return(
         <div className={styles.wrapper}>
+                        
+                {
+                    pending && (
+                        <div className={styles.loadingDiv}>
+                            <img src={loading} alt="" className={styles.loading} />
+                        </div>
+                        
+                    )
+                }
 
                 {
-                    error &&(
+                    error && !pending &&(
                         <div className={styles.errorMain}>
                             <div className={styles.error}>
                                 <h1>Oops!</h1>
@@ -69,7 +86,7 @@ function Publish(){
                 }
 
                 {
-                    !error && (
+                    !error && !pending &&(
                         <div className={styles.main}>
                             <div className={styles.userInfo}>
                                 

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom"
 
 //Component
 import Navbar from "../../components/Navbar/Navbar";
@@ -50,8 +51,10 @@ function Member () {
 
             <main className={styles.main}>
                 <div className={styles.container}>
-                    <div className={styles.storeAndCancelButton}>
-                        <button className={styles.cancelButton}>取消</button>
+                    <div className={styles.storeAndGoHomeButton}>
+                        <button className={styles.goHomeButton}>
+                            <Link to={"/admin"}>返回主頁</Link>
+                        </button>
 
                         {
                             !pending && (
@@ -96,9 +99,9 @@ function Member () {
                                 </div>
                         </div>
                         <form className={styles.profileAccount_Introduction}>
-                            <label htmlFor="account">帳號</label>
+                            <label htmlFor="account" className={styles.memberLabel}>帳號</label>
                             <input type="text" id="account" className={styles.accountInput} value={newAccount} onChange={(e) => setNewAccount(e.target.value)} />
-                            <label htmlFor="introduction">個人簡介</label>
+                            <label htmlFor="introduction" className={styles.memberLabel} >個人簡介</label>
                             <textarea cols="30" rows="5" id="introduction" className={styles.introductionTextarea} value={newIntro} onChange={(e) => setNewIntro(e.target.value)}></textarea>
                         </form>
                     </div>

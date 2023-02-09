@@ -7,7 +7,8 @@ import Text from "../../components/Text/Text";
 import Show from "../../components/Show/Show";
 import ShowMobile from "../../components/ShowMobile/ShowMobile";
 import smartphone from "../../images/smartphone.png";
-import loading from "../../images/admin-loading.gif"
+import loading from "../../images/admin-loading.gif";
+import leaf from "../../images/leaf.png"
 
 // Style
 import styles from "./Admin.module.css";
@@ -35,6 +36,8 @@ function Admin() {
         setOpenShow(!openShow)
     }
 
+    const [openSelect, setOpenSelect] = useState(false)
+
     return (
         <div className="wrapper">
 
@@ -45,12 +48,16 @@ function Admin() {
                 <div className={styles.container}>
 
                     <div className={styles.left}>
-                    
+                        <img src={leaf} alt="leaf" />
                         <div className={styles.addButton}>
-                            <button className={styles.addTextButton} onClick={()=>dispatch(handleAddTextBox(value))}>+ 標題文字</button>
-                            <button className={styles.addTextButton} onClick={()=>dispatch(handleAddLinkBox(value))}>+ 連結按鈕</button>
-                            <button className={styles.addTextButton} onClick={()=>dispatch(handleAddImgBox(value))}>+ 圖片看板</button>
-                            <button className={styles.addTextButton}>+ 分隔線</button>
+                            <button className={styles.openAllButton} onClick={() => setOpenSelect(true)}>+ 新增區塊</button>
+
+                            <div className={styles.allButton}>
+                                <button className={styles.addTextButton} onClick={()=>dispatch(handleAddTextBox(value))}>標題文字</button>
+                                <button className={styles.addTextButton} onClick={()=>dispatch(handleAddLinkBox(value))}>連結按鈕</button>
+                                <button className={styles.addTextButton} onClick={()=>dispatch(handleAddImgBox(value))}>圖片看板</button>
+                                <button className={styles.addTextButton}>分隔線</button>
+                            </div>
                         </div>
 
                             {
