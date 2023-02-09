@@ -77,12 +77,12 @@ function Text ({ value, setValue }){
     // Drag and Down
     const dragItem = useRef(null);
     const dragOverItem = useRef(null);
+    const [target, setTarget] = useState(null)
 
     const handleOnDragStart = (e, index) => {
         dragItem.current=index;
         e.target.parentElement.style.border = "3px dashed gray";
     }
-
 
     const handleBoxSort = async (e) => {
         let _value = [...value]
@@ -93,6 +93,16 @@ function Text ({ value, setValue }){
         dragItem.current = null
         dragOverItem.current =null
         e.target.parentElement.style.border = "none";
+    }
+
+    const handleOnDragOver = (e, index) => {
+        e.stopPropagation()
+        dragItem.current == index ?  setTarget(null) : setTarget(index)
+    }
+
+    const handleOnDragLeave = (e) => {
+        e.stopPropagation()
+        setTarget(null) 
     }
     
     return(
@@ -106,12 +116,14 @@ function Text ({ value, setValue }){
                             <div key={index}>
                                 {
                                     box.type === "text" && (
-                                        <div className={styles.textBox}>
+
+                                        <div className={`${styles.textBox}`} style={{border: target === index ? "3px dashed rgb(219 178 85)" : "none"}}> 
                                             <img className={styles.drag} src={drag} alt="drag" draggable
                                                 onDragStart={(e)=> handleOnDragStart(e, index)}
                                                 onDragEnter={(e)=> dragOverItem.current=index}
                                                 onDragEnd={(e) => handleBoxSort(e, value)}
-                                                onDragOver={(e) => e.stopPropagation()}
+                                                onDragOver={(e) => handleOnDragOver(e, index)}
+                                                onDragLeave={(e) => handleOnDragLeave(e, index)}
                                                 />
 
                                             <div className={styles.textValueAndEditPen} 
@@ -156,13 +168,14 @@ function Text ({ value, setValue }){
 
                                 {
                                     box.type === "link" && (
-                                        <div className={styles.linkBox}>
+                                        <div className={styles.linkBox} style={{border: target === index ? "3px dashed rgb(219 178 85)" : "none"}}>
 
                                             <img className={styles.drag} src={drag} alt="drag" draggable
                                                 onDragStart={(e)=> handleOnDragStart(e, index)}
                                                 onDragEnter={(e)=> dragOverItem.current=index}
                                                 onDragEnd={(e) => handleBoxSort(e, value)}
-                                                onDragOver={(e) => e.stopPropagation()}
+                                                onDragOver={(e) => handleOnDragOver(e, index)}
+                                                onDragLeave={(e) => handleOnDragLeave(e, index)}
                                                 />
 
                                             <div className={styles.textValueAndEditPen} 
@@ -211,13 +224,14 @@ function Text ({ value, setValue }){
 
                                 {
                                     box.type === "pic" && (
-                                        <div className={styles.picBox}>
+                                        <div className={styles.picBox} style={{border: target === index ? "3px dashed rgb(219 178 85)" : "none"}}>
 
                                             <img className={styles.drag} src={drag} alt="drag" draggable
                                                 onDragStart={(e)=> handleOnDragStart(e, index)}
                                                 onDragEnter={(e)=> dragOverItem.current=index}
                                                 onDragEnd={(e) => handleBoxSort(e, value)}
-                                                onDragOver={(e) => e.stopPropagation()}
+                                                onDragOver={(e) => handleOnDragOver(e, index)}
+                                                onDragLeave={(e) => handleOnDragLeave(e, index)}
                                                 />
 
                                             <div className={styles.imgValueAndEditPen} 
