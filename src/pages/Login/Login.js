@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
-import {useState} from "react";
+import { useState } from "react";
 
 // Hook
-import { useLogin} from "../../hooks/useLogin";
+import { useLogin } from "../../hooks/useLogin";
 
 // Component
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
+import loading from "../../images/loading.gif";
 
 // Style
 import styles from "./Login.module.css";
@@ -30,7 +31,7 @@ function Login() {
                     <div className={styles.title}>登入</div>
                     <div className={styles.login}>
                         <label>
-                            <p>帳號</p>
+                            <p>信箱</p>
                             <input 
                                 type="text" 
                                 placeholder="Email"
@@ -48,7 +49,11 @@ function Login() {
                                 required />
                         </label>
                     </div>
-                    <button className={styles.loginButton}>登入</button>
+                    {
+                        !pending ? <button className={styles.loginButton}><p>登入</p></button>:
+                        <button className={styles.loginButton}><img className={styles.loading} src={loading} alt="" /></button>
+                    }
+                    
                     <div className={styles.error}> {error} </div>
                     <div className={styles.toSignup}>
                         <Link to="/signup">

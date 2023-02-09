@@ -8,6 +8,11 @@
     top: 150px;
 }
 
+.loading{
+    width: 30px;
+    margin: 20px 0 0 20px;
+}
+
 .box{
     overflow:auto;
     height: 94%;
@@ -15,6 +20,8 @@
     text-align: center;
     display: grid;
     justify-content: center;
+
+    align-items: center;
 }
 
 .box::-webkit-scrollbar {
@@ -32,12 +39,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 10px;
-    width: 90%;
+    width: 100%;
     justify-self: center;
+    border-bottom: 2px dotted gray;
+    padding-bottom: 10px;
 }
 
-.pic{
+.noPic{
     padding: 20px 31px;
     font-size: 26px;
     background-color: gray;
@@ -45,9 +53,22 @@
     margin-bottom: 10px;
 }
 
+.pic{
+    border-radius: 50%;
+    margin-bottom: 10px;
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+}
+
 .username{
     font-size: 20px;
     color: #333333;
+}
+
+.introduction{
+    font-size: 14px;
+    margin-top: 5px;
 }
 
 .text{
@@ -85,7 +106,7 @@
     align-items: center;
     height: 35px;
     font-size: 13px;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .link:hover{
@@ -171,7 +192,7 @@
     text-align: center;
     font-weight: bold;
     color: #728d81; 
-    padding: 20px 0;
+    padding-top: 20px;
     font-family: 'Kaushan Script', cursive;
 }
 

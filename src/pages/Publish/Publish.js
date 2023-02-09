@@ -7,6 +7,8 @@ import { db } from "../../utils/firebase.config";
 import { onSnapshot,  doc} from "firebase/firestore";
 
 function Publish(){
+    const [profile, setProfile] = useState("");
+    const [noPhotoText, setNoPhotoText] = useState("");
     const [value, setValue] = useState([]);
     const [showColor, setShowColor] = useState("");
     const [error, setError] = useState(false)
@@ -28,7 +30,8 @@ function Publish(){
                 })
                 setValue(itemArr)
                 setShowColor(doc.data().showColor)
-
+                setProfile(doc.data().profile)
+                setNoPhotoText(doc.data().profile.account.slice(0, 1).toUpperCase())
             }
             
         })
@@ -69,8 +72,20 @@ function Publish(){
                     !error && (
                         <div className={styles.main}>
                             <div className={styles.userInfo}>
-                                <div className={styles.pic}>T</div>
-                                <div className={styles.userName}>@Test</div>
+                                
+                                {
+                                    !profile.photo && (
+                                        <div className={styles.noPic}>{noPhotoText}</div>
+                                    )
+                                }
+                                {
+                                    profile.photo &&(
+                                        <img src={profile.photo} alt="profile-photo" className={styles.pic} />
+                                    )
+                                }
+ 
+                                <div className={styles.userName}>{`@${profile.account}`}</div>
+                                <div className={styles.introduction}>{profile.introduction}</div>
                             </div>
                             <div className={styles.allList}> 
                                 {value.map((box, index) => {

@@ -1,7 +1,6 @@
 .open{
     width: 100vw;
     background-color: #ECE9DF;
-    cursor: pointer;
     box-shadow: 2px 4px 8px #AAAAAA;
 
     position: fixed;
@@ -124,6 +123,7 @@
     text-align: center;
 
     display: grid;
+    align-content: space-between;
 }
 
 .box::-webkit-scrollbar {
@@ -141,14 +141,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 20px 0 10px;
+    margin-top: 20px;
     width: 90%;
 
     justify-self: center;
-    justify-content: space-evenly;
+    border-bottom: 4px dotted gray;
+    padding-bottom: 20px;
 }
 
-.pic{
+.noPic{
     padding: 20px 31px;
     font-size: 26px;
     background-color: gray;
@@ -156,10 +157,22 @@
     margin-bottom: 10px;
 }
 
+.pic{
+    border-radius: 50%;
+    margin-bottom: 10px;
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+}
+
 .username{
     margin-bottom: 20px;
     color: #333333;
     font-size: 20px;
+}
+
+.introduction{
+    margin-top: 5px;
 }
 
 .text{
@@ -211,7 +224,7 @@
 
 .footer{
     text-align: center;
-    padding: 20px 0;
+    padding: 50px 0;
 }
 
 .footer a{

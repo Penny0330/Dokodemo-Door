@@ -7,7 +7,7 @@ import close_phone from "../../images/close_phone.png";
 import { updateDoc, doc } from "firebase/firestore";
 import { db, auth } from "../../utils/firebase.config";
 
-function ShowMobile({value, color,  openShow, handleOpenShow }) {
+function ShowMobile({profile, noPhotoText, value, color,  openShow, handleOpenShow }) {
 
 
     const changeColorPri = async(e) => {
@@ -70,8 +70,18 @@ function ShowMobile({value, color,  openShow, handleOpenShow }) {
 
                     <div className={styles.box}>
                         <div className={styles.userInfo}>
-                            <div className={styles.pic}>T</div>
-                            <div className={styles.username} style={{color: color.titleColor}}>@Test</div>
+                            {
+                                !profile.photo && (
+                                    <div className={styles.noPic}>{noPhotoText}</div>
+                                )
+                            }
+                            {
+                                profile.photo &&(
+                                    <img src={profile.photo} alt="profile-photo" className={styles.pic} />
+                                )
+                            }
+                            <div className={styles.username} style={{color: color.titleColor}}>{`@${profile.account}`}</div>
+                            <div className={styles.introduction}>{profile.introduction}</div>
                         </div>
 
 

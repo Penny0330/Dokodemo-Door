@@ -10,7 +10,7 @@
     padding: 60px 0;
     margin-bottom: 25px;
     background-color: natural;
-    color: rgba(0, 0, 0, 0.7);
+    color: #333333;
 }
 
 .form{
@@ -23,6 +23,7 @@
     border-radius: 10px;
     gap: 20px;
     padding: 20px 0;
+    box-shadow: 0px 4px 10px #aaaaaa;
 }
 
 .title{
@@ -77,6 +78,11 @@
 .signupButton:hover{
     box-shadow: none;
     transform: translateY(3px);
+}
+
+.loading{
+    width: 20px;
+    vertical-align: middle;
 }
 
 .error{

@@ -1,0 +1,179 @@
+.main{
+    margin: auto;
+    padding: 60px 0;
+    margin-bottom: 25px;
+    background-color: #ECE9DF;
+    color: #333333;
+}
+
+.container{
+    width: 40vw;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    border-radius: 10px;
+    gap: 20px;
+    padding: 20px;
+    box-shadow: 0px 4px 10px #aaaaaa;
+}
+
+.storeAndCancelButton{
+    display: flex;
+    justify-content: space-between;
+}
+
+.cancelButton{
+    padding: 5px 8px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    color: #b2a7a7;
+    background: none;
+    cursor: pointer;
+}
+
+.cancelButton:hover{
+    color: white;
+    background-color: #D9D9D9;
+}
+
+.storeButton{
+    padding: 5px 8px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    background-color: #728D81;
+    color: #ECE9DF;
+    cursor: pointer;
+}
+
+.storeButton:hover{
+    background-color: #587367;
+}
+
+.loadingButton{
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    background-color: #728D81;
+    color: #ECE9DF;
+    cursor: pointer;
+}
+
+.loading{
+    width: 18px;
+    margin: 2px 17px;
+    vertical-align: middle;
+}
+
+.profile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    margin-bottom: 50px;
+}
+
+.profilePhoto{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.photo{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #D9D9D9;
+    object-fit: cover;
+}
+
+.noPhoto{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #D9D9D9;
+    object-fit: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px
+}
+
+.photoEditButton{
+    font-size: 15px;
+    padding: 5px 10px;
+    border: none;
+    background-color: #ECE9DF;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.fileInput {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+  
+.fileLabel {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 8px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+    width: 25vw;
+}
+
+label{
+    font-weight: bold;
+    color: gray;
+}
+
+.accountInput{
+    outline: none;
+    border: none;
+    border-bottom: 1px solid gray;
+    padding: 0 0 5px 0px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+
+.introductionTextarea{
+    outline: none;
+    max-width: 100%;
+    border: 1px solid gray;
+    padding: 5px;
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 700px) {
+    .container{
+        width: 93vw;
+    }
+
+    .photo {
+        width: 25vw;
+        height: 25vw;
+    }
+
+    form{
+        width: 50vw;
+    }
+}
+
+
+

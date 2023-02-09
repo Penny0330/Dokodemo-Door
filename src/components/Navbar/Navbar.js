@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 // Hook
 import { useAuthContext } from "../../hooks/useAuthContext";
@@ -12,14 +12,17 @@ import close from "../../images/close.png";
 // Style
 import styles from "./Navbar.module.css";
 
-import {auth, db} from "../../utils/firebase.config";
-
 function Navbar() {
     const { logout } = useLogout();
     const { user } = useAuthContext();
     const [ toggled, setToggled ] = useState(false);
     const toggleTrueFalse = () => setToggled(!toggled);
-    const path = window.location.href.split("admin")[0]
+    let path = window.location.href.split("admin")[0]
+
+    if(window.location.href.includes("member")){
+        path = window.location.href.split("member")[0]
+    }
+
 
     return(
     
@@ -48,12 +51,13 @@ function Navbar() {
             { user && (
                 <div className={styles.loginComputer}>
                     <div className={styles.member}>
+                        <NavLink to="/admin">主頁</NavLink>
+                    </div>
+                    <div className={styles.member}>
                         <a href={path + user} target="_blank">任意門</a>
                     </div>
                     <div className={styles.member}>
-                        <Link to="/admin">
-                            會員中心
-                        </Link>
+                        <NavLink to={"/member"}>會員中心</NavLink> 
                     </div>
                     <div className={styles.logout} onClick={logout}>登出</div>
                 </div>
@@ -84,13 +88,14 @@ function Navbar() {
                     )}
                     { user &&
                         <>
-                            <div className={styles.memberSide}>
+                            <div className={styles.memberSide} onClick={() => setToggled(false)}>
+                                <Link to={"/admin"}>主頁</Link>
+                            </div>
+                            <div className={styles.memberSide} onClick={() => setToggled(false)}>
                                 <a href={path + user} target="_blank">任意門</a>
                             </div>
                             <div className={styles.memberSide} onClick={() => setToggled(false)}>
-                                <Link to={`/admin`}>
-                                    會員中心
-                                </Link>
+                                <Link to={"/member"}>會員中心</Link>
                             </div>
                             <div className={styles.logoutSide}  onClick={logout}>登出</div>
                         </>

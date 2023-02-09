@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 
 //Component
 import toggleOpen from "../../images/toggle-open.png";
@@ -13,34 +13,78 @@ import styles from "./Text.module.css";
 import { updateDoc, doc } from "firebase/firestore";
 import { db, auth } from "../../utils/firebase.config";
 
-function Text ({edit, 
-                storageEdit, 
-                cancelEdit, 
-                deleteButton, 
-                value, 
-                setValue,
-                isEdit, 
-                newValue, 
-                setNewValue, 
-                newUrl, 
-                setNewUrl,
-                storageLinkEdit,
-                handleDisplay,
-                uploadImgEdit,
-                storageImgEdit,
-                newImgUrl,
-            }){
+import { useEditBox } from "../../hooks/useEditBox";
 
+function Text ({ value, setValue }){
+
+    const {edit, newValue, setNewValue,  newLinkUrl, setNewLinkUrl, newImgUrl, setNewImgUrl, storageEdit, storageLinkEdit, uploadImgEdit, storageImgEdit, displayToggle, deleteButton} = useEditBox();
+    const [isEdit, setIsEdit] = useState("");
+
+    useEffect(() => {
+        document.addEventListener('click', handleClose)
+
+        return () => {
+            document.removeEventListener('click', handleClose)
+        }
+    }, [])
+
+    const handleClose = (e) => {
+        setIsEdit("")
+    };
+
+    const handleEdit = (e, box, index) => {
+        
+        edit(e, box)
+        setIsEdit((prev) => {
+            return prev === index ? "" : index
+        })
+    }
+
+    const handleStorageEdit = (box, value) => {
+        storageEdit(box, value)
+        setIsEdit("")
+    }
+
+    const handleStorageLinkEdit = (box, value) => {
+        storageLinkEdit(box, value)
+        setIsEdit("")
+    }
+
+    const handleUploadImgEdit = (e) => {
+        uploadImgEdit(e)
+    }
+
+    const handleStorageImgEdit = (box, value) => {
+        storageImgEdit(box, value)
+        setIsEdit("") 
+    }
+
+    const cancelEdit = () => {
+        setIsEdit("")
+        setNewValue("")
+        setNewLinkUrl("")
+        setNewImgUrl("")
+    }
+
+    const handleDisplayToggle = (box, value) => {
+        displayToggle(box, value)
+    }
+
+    const handleDeleteButton = (box,  index, value) => {
+        deleteButton( box, index, value)
+    }
+
+    // Drag and Down
     const dragItem = useRef(null);
     const dragOverItem = useRef(null);
 
-    const onDragStart = (e, index) => {
+    const handleOnDragStart = (e, index) => {
         dragItem.current=index;
         e.target.parentElement.style.border = "3px dashed gray";
     }
 
 
-    const handleSort = async (e) => {
+    const handleBoxSort = async (e) => {
         let _value = [...value]
         const draggedItemContent = _value.splice(dragItem.current, 1)[0]
         _value.splice(dragOverItem.current, 0, draggedItemContent)
@@ -54,7 +98,7 @@ function Text ({edit,
     return(
         <div className={styles.allText}>
 
-
+            
             {
                 value.length !== 0 && (
                     value.map((box, index) => {
@@ -64,14 +108,14 @@ function Text ({edit,
                                     box.type === "text" && (
                                         <div className={styles.textBox}>
                                             <img className={styles.drag} src={drag} alt="drag" draggable
-                                                onDragStart={(e)=> onDragStart(e, index)}
+                                                onDragStart={(e)=> handleOnDragStart(e, index)}
                                                 onDragEnter={(e)=> dragOverItem.current=index}
-                                                onDragEnd={(e) => handleSort(e)}
+                                                onDragEnd={(e) => handleBoxSort(e, value)}
                                                 onDragOver={(e) => e.stopPropagation()}
                                                 />
 
                                             <div className={styles.textValueAndEditPen} 
-                                                    onClick={(e) => edit(e,index, box)} 
+                                                    onClick={(e) => handleEdit(e, box, index)} 
                                                     style={{display: isEdit === index ? "none" : "flex"}}>
                                                 { box.title == "" ?
                                                     <div className={styles.textNoValue}>編輯文字</div>:
@@ -82,9 +126,9 @@ function Text ({edit,
                                             </div>
 
                                             <div className={styles.edit} style={{display: isEdit === index ? "flex" : "none"}} onClick={(e) => e.stopPropagation()}>
-                                                <input className={styles.textInput} type="text" value={newValue} onChange={e => setNewValue(e.target.value)}/>
+                                                <input className={styles.textInput} type="text" value={newValue} onChange={e => setNewValue(e.target.value)}/> 
                                                 <div className={styles.editButton}>
-                                                    <div className={styles.saveButton}  onClick={() => storageEdit(box, index)}>儲存</div>
+                                                    <div className={styles.saveButton}  onClick={() => handleStorageEdit(box, value)}>儲存</div>
                                                     <div className={styles.cancelButton}  onClick={() => cancelEdit(box)}>
                                                         取消
                                                     </div>
@@ -94,16 +138,16 @@ function Text ({edit,
                                             <div className={styles.displayToggleAndTrash}>
                                                 {
                                                     box.display && (
-                                                        <img className={styles.displayToggleButton} src={toggleOpen} alt="toggle" onClick={(e) => handleDisplay(box)} />
+                                                        <img className={styles.displayToggleButton} src={toggleOpen} alt="toggle" onClick={(e) => handleDisplayToggle(box, value)} />
                                                     )
                                                 }
                                                 {
                                                     !box.display && (
-                                                        <img className={styles.displayToggleButton} src={toggleClose} alt="toggle" onClick={(e) => handleDisplay(box)} />
+                                                        <img className={styles.displayToggleButton} src={toggleClose} alt="toggle" onClick={(e) => handleDisplayToggle(box, value)} />
                                                     )
                                                 }
                                                 
-                                                <img className={styles.trashButton} src={trash} alt="trash" onClick={() => deleteButton(box,index)} />
+                                                <img className={styles.trashButton} src={trash} alt="trash" onClick={() => handleDeleteButton(box, index, value)} />
                                             </div>
 
                                         </div>
@@ -115,14 +159,14 @@ function Text ({edit,
                                         <div className={styles.linkBox}>
 
                                             <img className={styles.drag} src={drag} alt="drag" draggable
-                                                onDragStart={(e)=> onDragStart(e, index)}
+                                                onDragStart={(e)=> handleOnDragStart(e, index)}
                                                 onDragEnter={(e)=> dragOverItem.current=index}
-                                                onDragEnd={(e) => handleSort(e)}
+                                                onDragEnd={(e) => handleBoxSort(e, value)}
                                                 onDragOver={(e) => e.stopPropagation()}
                                                 />
 
                                             <div className={styles.textValueAndEditPen} 
-                                                onClick={(e) => edit(e, index, box)} 
+                                                onClick={(e) => handleEdit(e, box, index)} 
                                                 style={{display: isEdit === index ? "none" : "flex"}}>
                                                 { box.title == "" ?
                                                     <div className={styles.textNoValue}>編輯連結</div>:
@@ -135,11 +179,11 @@ function Text ({edit,
                                             <div className={styles.linkEdit} style={{display: isEdit === index ? "flex" : "none"}} onClick={(e) => e.stopPropagation()}>
 
                                                     <input className={styles.titleInput} type="text" placeholder="按鈕文字" value={newValue} onChange={e => setNewValue(e.target.value)} />
-                                                    <input className={styles.linkInput} type="text" placeholder="連結網址" value={newUrl} onChange={e => setNewUrl(e.target.value)} />
+                                                    <input className={styles.linkInput} type="text" placeholder="連結網址" value={newLinkUrl} onChange={e => setNewLinkUrl(e.target.value)} />
 
                                                 
                                                 <div className={styles.editButton}>
-                                                    <div className={styles.saveButton}  onClick={() => storageLinkEdit(box, index)}>儲存</div>
+                                                    <div className={styles.saveButton}  onClick={() => handleStorageLinkEdit(box, value)}>儲存</div>
                                                     <div className={styles.cancelButton}  onClick={() => cancelEdit(box)}>
                                                         取消
                                                     </div>
@@ -149,16 +193,16 @@ function Text ({edit,
                                             <div className={styles.displayToggleAndTrash}>
                                                 {
                                                     box.display && (
-                                                        <img className={styles.displayToggleButton} src={toggleOpen} alt="toggle" onClick={(e) => handleDisplay(box)} />
+                                                        <img className={styles.displayToggleButton} src={toggleOpen} alt="toggle" onClick={(e) => handleDisplayToggle(box, value)} />
                                                     )
                                                 }
                                                 {
                                                     !box.display && (
-                                                        <img className={styles.displayToggleButton} src={toggleClose} alt="toggle" onClick={(e) => handleDisplay(box)} />
+                                                        <img className={styles.displayToggleButton} src={toggleClose} alt="toggle" onClick={(e) => handleDisplayToggle(box, value)} />
                                                     )
                                                 }
                                                 
-                                                <img className={styles.trashButton} src={trash} alt="trash" onClick={() => deleteButton(box,index)} />
+                                                <img className={styles.trashButton} src={trash} alt="trash" onClick={() => handleDeleteButton(box, index, value)} />
                                             </div>
 
                                         </div>
@@ -170,14 +214,14 @@ function Text ({edit,
                                         <div className={styles.picBox}>
 
                                             <img className={styles.drag} src={drag} alt="drag" draggable
-                                                onDragStart={(e)=> onDragStart(e, index)}
+                                                onDragStart={(e)=> handleOnDragStart(e, index)}
                                                 onDragEnter={(e)=> dragOverItem.current=index}
-                                                onDragEnd={(e) => handleSort(e)}
+                                                onDragEnd={(e) => handleBoxSort(e, value)}
                                                 onDragOver={(e) => e.stopPropagation()}
                                                 />
 
                                             <div className={styles.imgValueAndEditPen} 
-                                                onClick={(e) => edit(e, index, box)} 
+                                                onClick={(e) => handleEdit(e, box ,index)} 
                                                 style={{display: isEdit === index ? "none" : "flex"}}>
                                                 { box.imgUrl == "" ?
                                                     <div className={styles.imgNoValue}>上傳圖片</div>:
@@ -212,7 +256,8 @@ function Text ({edit,
                                                     <div className={styles.uploadButton}>
                                                         <input type="file"
                                                                 id="file-input"
-                                                                className={styles.fileInput} onChange={(e) => uploadImgEdit(e)}
+                                                                accept="image/*"
+                                                                className={styles.fileInput} onChange={(e) => handleUploadImgEdit(e)}
                                                             />
                                                             <label className={styles.fileLabel} htmlFor="file-input">
                                                                 
@@ -220,7 +265,7 @@ function Text ({edit,
                                                                 
                                                             </label>
                                                     </div>
-                                                    <div className={styles.saveButton}  onClick={() => storageImgEdit(box)}>儲存</div>
+                                                    <div className={styles.saveButton}  onClick={() => handleStorageImgEdit(box, value)}>儲存</div>
                                                     <div className={styles.cancelButton}  onClick={() => cancelEdit(box)}>
                                                         取消
                                                     </div>
@@ -230,16 +275,16 @@ function Text ({edit,
                                             <div className={styles.displayToggleAndTrash}>
                                                 {
                                                     box.display && (
-                                                        <img className={styles.displayToggleButton} src={toggleOpen} alt="toggle" onClick={(e) => handleDisplay(box)} />
+                                                        <img className={styles.displayToggleButton} src={toggleOpen} alt="toggle" onClick={(e) => handleDisplayToggle(box, value)} />
                                                     )
                                                 }
                                                 {
                                                     !box.display && (
-                                                        <img className={styles.displayToggleButton} src={toggleClose} alt="toggle" onClick={(e) => handleDisplay(box)} />
+                                                        <img className={styles.displayToggleButton} src={toggleClose} alt="toggle" onClick={(e) => handleDisplayToggle(box, value)} />
                                                     )
                                                 }
                                                 
-                                                <img className={styles.trashButton} src={trash} alt="trash" onClick={() => deleteButton(box,index)} />
+                                                <img className={styles.trashButton} src={trash} alt="trash" onClick={() => handleDeleteButton(box, index, value)} />
                                             </div>
 
                                         </div>
@@ -263,6 +308,8 @@ function Text ({edit,
                                     
                 )
             }
+
+
         </div> 
     )
         

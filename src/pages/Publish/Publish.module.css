@@ -4,7 +4,7 @@
 
 .main{
     display: grid;
-    grid-auto-rows: 230px minmax(300px, auto) 100px;
+    grid-auto-rows: auto minmax(300px, auto) 100px;
     justify-items: center;
     min-height: 100vh;
     padding-top: 50px;
@@ -64,15 +64,15 @@
     cursor: pointer;
 }
 
-
-
 .userInfo{
-    width: 90%;
+    width: 25vw;
     text-align: center;
 
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 4px dotted gray;
 }
 
 .pic{
@@ -87,6 +87,19 @@
     font-weight: bold;
     font-size: 24px;
     margin-bottom: 20px;
+    object-fit: cover;
+}
+
+.noPic{
+    width: 100px;
+    height: 100px;
+    font-size: 26px;
+    background-color: gray;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .userName{
@@ -94,8 +107,13 @@
     color: #333333;
 }
 
+.introduction{
+    margin-top: 5px;
+}
+
+
 .allList{
-    width: 40vw;
+    width: 25vw;
     margin-bottom: 15px;
     text-align: center;
 
@@ -127,7 +145,7 @@
 .link a{
     text-decoration: none;
     color: black;
-    font-weight: 500;
+    font-weight: 600;
     min-height: 50px;
     display: flex;
     justify-content: center;
@@ -141,14 +159,14 @@
 }
 
 .img{
-    width: 40vw;
+    width: 25vw;
     margin: 10px 0;
     border-radius: 10px;
 }
 
 .logo{
     text-align: center;
-    padding: 20px 0;
+    margin-top: 50px;
 }
 
 .logo a{
@@ -161,7 +179,7 @@
 }
 
 @media (max-width: 700px) {
-    .allList, .img{
-        width: 90vw;
+    .userInfo, .allList, .img{
+        width: 80vw;
     }
 }
