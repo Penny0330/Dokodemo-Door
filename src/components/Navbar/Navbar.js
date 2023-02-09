@@ -54,10 +54,10 @@ function Navbar() {
                         <NavLink to="/admin">主頁</NavLink>
                     </div>
                     <div className={styles.member}>
-                        <a href={path + user} target="_blank">任意門</a>
+                        <NavLink to={"/member"}>會員中心</NavLink> 
                     </div>
                     <div className={styles.member}>
-                        <NavLink to={"/member"}>會員中心</NavLink> 
+                        <a href={path + user} target="_blank">任意門</a>
                     </div>
                     <div className={styles.logout} onClick={logout}>登出</div>
                 </div>
@@ -92,10 +92,10 @@ function Navbar() {
                                 <Link to={"/admin"}>主頁</Link>
                             </div>
                             <div className={styles.memberSide} onClick={() => setToggled(false)}>
-                                <a href={path + user} target="_blank">任意門</a>
+                                <Link to={"/member"}>會員中心</Link>
                             </div>
                             <div className={styles.memberSide} onClick={() => setToggled(false)}>
-                                <Link to={"/member"}>會員中心</Link>
+                                <a href={path + user} target="_blank">任意門</a>
                             </div>
                             <div className={styles.logoutSide}  onClick={logout}>登出</div>
                         </>

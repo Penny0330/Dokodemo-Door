@@ -197,8 +197,8 @@
     overflow: hidden;
 
     margin: 12px auto;
-    width: 60vw;
-    width: 90vw;
+    width: 80vw;
+    /* width: 90vw; */
     background-color: rgb(248, 247, 245);
 }
 
@@ -209,7 +209,7 @@
     justify-content: center;
     align-items: center;
     height: 50px;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .link:hover{
@@ -217,7 +217,7 @@
 }
 
 .img{
-    width: 90vw;
+    width: 80vw;
     margin: 10px 0;
     border-radius: 10px;
 }

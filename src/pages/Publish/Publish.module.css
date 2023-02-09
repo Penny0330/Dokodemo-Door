@@ -150,8 +150,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
     overflow: hidden;
+    font-size: 16px;
 }
 
 .link:hover{
