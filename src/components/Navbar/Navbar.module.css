@@ -75,14 +75,73 @@ nav{
     color: natural;
 }
 
+.member a{
+    text-decoration: none;
+    color: natural;
+}
+
 .member a:hover{
     padding-bottom: 10px;
     border-bottom: 5px solid deep-green;
 } 
 
-.member a{
-    text-decoration: none;
+.openDoor{
     color: natural;
+    cursor: pointer;
+}
+
+.openDoor a:hover{
+    padding-bottom: 10px;
+    border-bottom: 5px solid deep-green;
+}
+
+.copy{
+    position: absolute;
+    background-color: #587367;
+    top: 76px;
+    width: 150px;
+    height: 90px;
+    right: -120px;
+    right: 62px;
+    overflow: hidden;
+    padding: 10px 10px 10px 15px;
+    border-radius: 0 0 10px 10px;
+    animation: appear 0.2s ease-in;
+}
+
+@keyframes appear {
+    0%{
+        opacity: 0;
+    }
+    50%{
+        opacity: 0.5;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+.goToDoor{
+    color: #ECE9DF;
+    margin-bottom: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+.copyButton{
+    border: none;
+    color: #ECE9DF;
+    background: none;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    margin-top: 12px;
+}
+
+.goToDoor:hover, .copyButton:hover{
+    color: white;
 }
 
 .logout{
@@ -183,10 +242,71 @@ nav{
     border-bottom: 1px solid #ece9df6f;
 }
 
+.doorSide{
+    border-bottom: 1px solid #ece9df6f;
+    padding: 15px 0 15px 28px;
+    cursor: pointer;
+    position: relative;
+}
+
+.plus{
+    position: absolute;
+    top: 6px;
+    right: 32px;
+    font-size: 26px;
+}
+
+.closeDoor{
+    width: 20px;
+    position: absolute;
+    right: 30px;
+    cursor: pointer;
+}
+
+.doorMobile{
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+.goToDoorMobile{
+    text-decoration: none;
+    color: #ECE9DF;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+
+.copyButtonMobile{
+    border: none;
+    color: #ECE9DF;
+    background: none;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    text-align: inherit;
+}
+
 .logoutSide{
     padding:15px 0 15px 28px;
     cursor: pointer;
 }
+
+.popupCopy{
+    position: absolute;
+    top: 15px;
+    left: 50vw;
+    background-color: #433b3b;
+    color: #ECE9DF;
+    padding: 5px;
+    border-radius: 5px;
+    animation: appear 0.2s ease-in;
+    z-index: 10;
+}
+
 
 @media (max-width: 700px) {
     nav{

@@ -11,22 +11,66 @@ import close from "../../images/close.png";
 
 // Style
 import styles from "./Navbar.module.css";
+import { async } from "@firebase/util";
 
 function Navbar() {
     const { logout } = useLogout();
     const { user } = useAuthContext();
     const [ toggled, setToggled ] = useState(false);
+    const [ open, setOpen ] = useState(false);
+    const [ popupCopy, setPopupCopy ] = useState(false);
+
+
     const toggleTrueFalse = () => setToggled(!toggled);
-    let path = window.location.href.split("admin")[0]
+    let path = window.location.href.split("admin")[0];
 
     if(window.location.href.includes("member")){
         path = window.location.href.split("member")[0]
     }
 
+    const openDoorNav = (e) => {
+        e.stopPropagation()
+        setOpen(!open)
+    }
+
+    document.addEventListener("click", ()=>{
+        setOpen(false)
+    })
+
+    const copy = () => {
+        navigator.clipboard.writeText(path + user)
+        setToggled(false)
+        setPopupCopy(true)
+        
+        setTimeout(()=>{
+            setPopupCopy(false)
+        }, 3000)
+    }
+
+    // const copyIOS = () => {
+    //     const text = new ClipboardItem({
+    //         "text/plain": fetch("123")
+    //           .then(response => response.text())
+    //           .then(text => new Blob([text], { type: "text/plain" }))
+    //       })
+    //       navigator.clipboard.write([text])
+    //       setToggled(false)
+    //       setPopupCopy(true)
+    // }
+
 
     return(
     
         <nav>
+            {
+                popupCopy && (
+                    <div className={styles.popupCopy}>
+                        <p>已複製</p>
+                    </div>
+                )
+            }
+
+
             <div className={styles.title}>
                 <Link to="/" >
                     Dokodemo Door
@@ -56,8 +100,18 @@ function Navbar() {
                     <div className={styles.member}>
                         <NavLink to={"/member"}>會員中心</NavLink> 
                     </div>
-                    <div className={styles.member}>
-                        <a href={path + user} target="_blank">任意門</a>
+                    <div className={styles.openDoor} onClick={(e) => openDoorNav(e)}>
+
+                        <a>任意門</a>
+                        {
+                            open && (
+                                <div className={styles.copy} >
+                                    <a className={styles.goToDoor} href={path + user} target="_blank">⇀  前往任意門</a>
+                                    <button className={styles.copyButton} onClick={copy}>⇀  Copy網址</button>
+                                </div>
+                            )
+                        }
+
                     </div>
                     <div className={styles.logout} onClick={logout}>登出</div>
                 </div>
@@ -94,8 +148,29 @@ function Navbar() {
                             <div className={styles.memberSide} onClick={() => setToggled(false)}>
                                 <Link to={"/member"}>會員中心</Link>
                             </div>
-                            <div className={styles.memberSide} onClick={() => setToggled(false)}>
-                                <a href={path + user} target="_blank">任意門</a>
+                            <div className={styles.doorSide}  onClick={(e) => openDoorNav(e)}>
+                                
+                                {
+                                    !open && (
+                                        <div className={styles.doorOpen}>
+                                            <div>任意門</div>
+                                            <div className={styles.plus}>+</div>
+                                        </div>
+                                    )
+                                }
+                                {/* <a href={path + user} target="_blank">任意門</a> */}
+                                {
+                                    open &&(
+                                        <>
+                                            <a>任意門</a>
+                                            <img className={styles.closeDoor} src={close}  alt="close" />
+                                            <div className={styles.doorMobile} >
+                                                <a className={styles.goToDoorMobile} href={path + user} target="_blank"  onClick={() => setToggled(false)}>⇀  前往任意門</a>
+                                                <button className={styles.copyButtonMobile} onPointerUp={copy}>⇀  Copy網址</button>
+                                            </div>
+                                        </>
+                                    )
+                                }
                             </div>
                             <div className={styles.logoutSide}  onClick={logout}>登出</div>
                         </>
