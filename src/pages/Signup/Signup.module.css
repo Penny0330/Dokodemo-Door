@@ -62,7 +62,7 @@
     font-weight: bold;
     letter-spacing: 5px;
     width: 200px;
-    padding: 8px;
+    /* padding: 8px; */
     margin-top: 15px;
 
     background-color: light-green;
@@ -75,6 +75,10 @@
     border-radius: 20px;
 }
 
+.signupButton p{
+    padding: 8px 0px;
+}
+
 .signupButton:hover{
     box-shadow: none;
     transform: translateY(3px);
@@ -83,6 +87,7 @@
 .loading{
     width: 20px;
     vertical-align: middle;
+    padding: 8px 0px;
 }
 
 .error{

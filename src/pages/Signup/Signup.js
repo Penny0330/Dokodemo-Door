@@ -60,9 +60,17 @@ function Signup() {
                         </label>
                     </div>
                     {
-                        !pending ? <button className={styles.signupButton}>註冊</button> :
+                        !pending ? 
+                        <button className={styles.signupButton}>
+                            <p>註冊</p>
+                        </button> :
                         <button className={styles.signupButton}><img className={styles.loading} src={loading} alt="" /></button>
                     }
+                    {/* <button className={styles.signupButton}>
+                        <p>註冊</p>
+                    </button>
+                    <button className={styles.signupButton}><img className={styles.loading} src={loading} alt="" /></button> */}
+
                     <div className={styles.error}> {error} </div>
                     <div className={styles.toLogin}>
                         <Link to="/login">
