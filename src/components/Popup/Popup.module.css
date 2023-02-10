@@ -1,0 +1,34 @@
+.popup{
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 100%;
+    z-index: 5;
+    background-color: #80808066;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popupBox{
+    background-color: white;
+    padding: 35px 60px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.popupTitle{
+    font-weight: bold;
+    color: #665d5d;
+    margin-bottom: 30px;
+}
+
+.popupButton{
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #665d5d;
+    font-weight: bold;
+}

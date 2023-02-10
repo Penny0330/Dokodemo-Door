@@ -112,6 +112,15 @@ function ShowMobile({profile, noPhotoText, value, color,  openShow, handleOpenSh
                                                     ) 
                                                 )
                                             }
+                                            {
+                                                box.type === "line" && (
+                                                    box.display && (
+                                                        <div className={styles.lineBoxInner}>
+                                                            <div className={styles.line} style={{color: color.logeColor}}></div>
+                                                        </div>
+                                                    )
+                                                )
+                                            }
                                         </div> 
                                     )
                                     

@@ -115,6 +115,7 @@
 .userName{
     font-size: 24px;
     color: #333333;
+    font-weight: bold;
 }
 
 .introduction{
@@ -172,6 +173,18 @@
     width: 25vw;
     margin: 10px 0;
     border-radius: 10px;
+}
+
+.lineBoxInner{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.line{
+    width: 100%;
+    border: 1px solid;
 }
 
 .logo{

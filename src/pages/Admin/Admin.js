@@ -16,9 +16,9 @@ import styles from "./Admin.module.css";
 import { useGetBox } from "../../hooks/useGetBox";
 
 // redux
-import { useSelector } from "react-redux"
+// import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux";
-import { handleAddTextBox, handleAddLinkBox, handleAddImgBox } from "../../actions/AddBox";
+import { handleAddTextBox, handleAddLinkBox, handleAddImgBox, handleAddLineBox } from "../../actions/AddBox";
 
 
 function Admin() {
@@ -28,15 +28,12 @@ function Admin() {
     const [openShow, setOpenShow] = useState(false);
 
     // redux
-    const counter = useSelector(state=>state.AddBox);
     const dispatch = useDispatch();
 
     // max-width: 700 : click showing
     const handleOpenShow = () => {
         setOpenShow(!openShow)
     }
-
-    const [openSelect, setOpenSelect] = useState(false)
 
     return (
         <div className="wrapper">
@@ -56,7 +53,7 @@ function Admin() {
                                 <button className={styles.addTextButton} onClick={()=>dispatch(handleAddTextBox(value))}>標題文字</button>
                                 <button className={styles.addTextButton} onClick={()=>dispatch(handleAddLinkBox(value))}>連結按鈕</button>
                                 <button className={styles.addTextButton} onClick={()=>dispatch(handleAddImgBox(value))}>圖片看板</button>
-                                <button className={styles.addTextButton}>分隔線</button>
+                                <button className={styles.addTextButton} onClick={()=>dispatch(handleAddLineBox(value))} >分隔線</button>
                             </div>
                         </div>
 
@@ -67,7 +64,7 @@ function Admin() {
                             }
                             {
                                 !pending && (
-                                    <Text value={value} setValue={setValue}/>
+                                    <Text value={value} setValue={setValue} color={color}/>
                                 )
                             }
                             

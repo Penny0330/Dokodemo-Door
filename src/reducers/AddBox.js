@@ -38,6 +38,15 @@ const AddBox = (allBox = [], action) => {
             updateDoc(doc(db, "itemList", auth.currentUser.uid), { "item": newImg.concat(action.allBox) })
             return newImg.concat(action.allBox);
 
+        case 'AddLineBox':
+            const newLine = [{
+                type: "line",
+                display: true
+            }]
+
+            updateDoc(doc(db, "itemList", auth.currentUser.uid), { "item": newLine.concat(action.allBox) })
+            return newLine.concat(action.allBox);
+
 
         default:
             return allBox

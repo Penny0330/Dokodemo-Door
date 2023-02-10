@@ -104,6 +104,15 @@ function Show({profile, noPhotoText, value, color, pending}) {
                                                 ) 
                                             )
                                         }
+                                        {
+                                            box.type === "line" && (
+                                                box.display && (
+                                                    <div className={styles.lineBoxInner}>
+                                                        <div className={styles.line} style={{color: color.logeColor}}></div>
+                                                    </div>
+                                                )
+                                            )
+                                        }
                                     </div>  
                                 )
                                 

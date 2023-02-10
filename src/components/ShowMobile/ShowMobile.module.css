@@ -169,6 +169,7 @@
     margin-bottom: 20px;
     color: #333333;
     font-size: 20px;
+    font-weight: bold;
 }
 
 .introduction{
@@ -198,7 +199,6 @@
 
     margin: 12px auto;
     width: 80vw;
-    /* width: 90vw; */
     background-color: rgb(248, 247, 245);
 }
 
@@ -220,6 +220,18 @@
     width: 80vw;
     margin: 10px 0;
     border-radius: 10px;
+}
+
+.lineBoxInner{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.line{
+    width: 80%;
+    border: 1px solid;
 }
 
 .footer{

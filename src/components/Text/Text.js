@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 
 //Component
+import Popup from "../Popup/Popup";
 import toggleOpen from "../../images/toggle-open.png";
 import toggleClose from "../../images/toggle-close.png";
 import trash from "../../images/trash.svg";
@@ -15,9 +16,9 @@ import { db, auth } from "../../utils/firebase.config";
 
 import { useEditBox } from "../../hooks/useEditBox";
 
-function Text ({ value, setValue }){
+function Text ({ value, setValue, color }){
 
-    const {edit, newValue, setNewValue,  newLinkUrl, setNewLinkUrl, newImgUrl, setNewImgUrl, storageEdit, storageLinkEdit, uploadImgEdit, storageImgEdit, displayToggle, deleteButton} = useEditBox();
+    const {edit, newValue, setNewValue,  newLinkUrl, setNewLinkUrl, newImgUrl, setNewImgUrl, storageEdit, storageLinkEdit, uploadImgEdit, storageImgEdit, displayToggle, deleteButton, popup, setPopup} = useEditBox();
     const [isEdit, setIsEdit] = useState("");
 
     useEffect(() => {
@@ -108,7 +109,12 @@ function Text ({ value, setValue }){
     return(
         <div className={styles.allText}>
 
-            
+            {
+                popup && (
+                    < Popup setPopup={setPopup} />
+                )
+            }  
+
             {
                 value.length !== 0 && (
                     value.map((box, index) => {
@@ -246,6 +252,7 @@ function Text ({ value, setValue }){
 
                                                 <img className={styles.editPen} src={pen} alt="pen"/>
                                             </div>
+                                            
 
                                             <div className={styles.picEdit} style={{display: isEdit === index ? "flex" : "none"}} onClick={(e) => e.stopPropagation()}>
                                                     
@@ -301,8 +308,47 @@ function Text ({ value, setValue }){
                                                 <img className={styles.trashButton} src={trash} alt="trash" onClick={() => handleDeleteButton(box, index, value)} />
                                             </div>
 
+                                            <div className={styles.picInfo}>
+                                                <div>檔案須小於1MB</div>
+                                            </div>
+
                                         </div>
                                     )
+                                }
+
+                                {
+                                    box.type === "line" && (
+                                        <div className={`${styles.lineBox}`} style={{border: target === index ? "3px dashed rgb(219 178 85)" : "none"}}> 
+                                            <img className={styles.drag} src={drag} alt="drag" draggable
+                                                onDragStart={(e)=> handleOnDragStart(e, index)}
+                                                onDragEnter={(e)=> dragOverItem.current=index}
+                                                onDragEnd={(e) => handleBoxSort(e, value)}
+                                                onDragOver={(e) => handleOnDragOver(e, index)}
+                                                onDragLeave={(e) => handleOnDragLeave(e, index)}
+                                                />
+
+                                            <div className={styles.lineBoxInner}>
+                                                <div className={styles.line} style={{color: color.logeColor}}></div>
+                                            </div>
+
+                                            <div className={styles.displayToggleAndTrash}>
+                                                {
+                                                    box.display && (
+                                                        <img className={styles.displayToggleButton} src={toggleOpen} alt="toggle" onClick={(e) => handleDisplayToggle(box, value)} />
+                                                    )
+                                                }
+                                                {
+                                                    !box.display && (
+                                                        <img className={styles.displayToggleButton} src={toggleClose} alt="toggle" onClick={(e) => handleDisplayToggle(box, value)} />
+                                                    )
+                                                }
+                                                
+                                                <img className={styles.trashButton} src={trash} alt="trash" onClick={() => handleDeleteButton(box, index, value)} />
+                                            </div>
+
+                                        </div>
+                                    )
+
                                 }
                             </div>
 

@@ -18,3 +18,10 @@ export const handleAddImgBox = (allBox) =>{
         allBox: allBox
     };
 }
+
+export const handleAddLineBox = (allBox) =>{
+    return{
+        type: 'AddLineBox',
+        allBox: allBox
+    };
+}

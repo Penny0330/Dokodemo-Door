@@ -10,6 +10,7 @@ export const useEditBox = () => {
     const [newLinkUrl, setNewLinkUrl] = useState("");
     const [newImgUrl, setNewImgUrl] = useState("");
     const [imgFile, setImgFile] = useState("");
+    const [popup, setPopup] = useState(false);
 
     const edit = (e, box) => {
         e.stopPropagation()
@@ -52,6 +53,10 @@ export const useEditBox = () => {
 
         // imgFile 為空就停止動作
         if (!imgFile) return;
+        if(imgFile.size > 1000000){
+            setPopup(true)
+            return
+        }
 
         // 第1個參數 storage service，第2個參數 檔案儲存資料夾名稱 / 檔案名稱
         const randomNum = Math.random().toString(36).substring(7)
@@ -103,5 +108,5 @@ export const useEditBox = () => {
         await updateDoc(doc(db, "itemList", auth.currentUser.uid), { "item": _items })
     }
 
-    return {edit, newValue, setNewValue,  newLinkUrl, setNewLinkUrl, newImgUrl, setNewImgUrl, storageEdit, storageLinkEdit, uploadImgEdit, storageImgEdit, storageImgEdit, displayToggle, deleteButton}
+    return {edit, newValue, setNewValue,  newLinkUrl, setNewLinkUrl, newImgUrl, setNewImgUrl, storageEdit, storageLinkEdit, uploadImgEdit, storageImgEdit, storageImgEdit, displayToggle, deleteButton, popup, setPopup}
 }

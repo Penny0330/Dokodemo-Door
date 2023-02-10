@@ -132,6 +132,16 @@ function Publish(){
                                                     ) 
                                                 )
                                             }
+
+                                            {
+                                                box.type === "line" && (
+                                                    box.display && (
+                                                        <div className={styles.lineBoxInner}>
+                                                            <div className={styles.line} style={{color: showColor.logeColor}}></div>
+                                                        </div>
+                                                    )
+                                                )
+                                            }
                                         
                                         </div>
                                     ) 
