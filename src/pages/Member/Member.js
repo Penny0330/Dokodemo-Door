@@ -59,7 +59,7 @@ function Member () {
                         {
                             !pending && (
                                 <button className={styles.storeButton} onClick={() => handleStore(newAccount, newIntro)}>儲存</button>
-                            )
+                           )
                         }
                         {
                             pending && (
