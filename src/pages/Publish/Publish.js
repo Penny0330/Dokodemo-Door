@@ -1,51 +1,18 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 // component
 import loading from "../../images/admin-loading.gif"
 
+// hooks
+import { useGetBox } from "../../hooks/useGetBox";
 
 // style
 import styles from "./Publish.module.css";
 
-import { db } from "../../utils/firebase.config";
-import { onSnapshot,  doc} from "firebase/firestore";
-
 function Publish(){
-    const [profile, setProfile] = useState("");
-    const [noPhotoText, setNoPhotoText] = useState("");
-    const [value, setValue] = useState([]);
-    const [showColor, setShowColor] = useState("");
-    const [pending, setPending] = useState(false)
-    const [error, setError] = useState(false);
 
-    const uid = window.location.href.split("/")[3];
-
-    useEffect(() => {
-        setPending(true)
-        const ref = doc(db, "itemList", uid)
-        const unsub = onSnapshot((ref), (doc) => {
-            console.log(doc.data())
-            if(doc.data() === undefined){
-                setError(true)
-                setPending(false)
-                return
-            }else{
-                let itemArr = [];
-                doc.data().item.map((item) => {
-                    itemArr.push(item)
-                })
-                setValue(itemArr)
-                setShowColor(doc.data().showColor)
-                setProfile(doc.data().profile)
-                setNoPhotoText(doc.data().profile.account.slice(0, 1).toUpperCase())
-                setPending(false)
-            }
-            
-        })
-
-        return () => unsub();
-    }, [])
+    const params = useParams();
+    const {profile, noPhotoText, value, color, error, pending } = useGetBox(params.user);
 
     return(
         <div className={styles.wrapper}>
@@ -77,7 +44,7 @@ function Publish(){
                             </div>
 
                             <div className={styles.logo}>
-                                <Link to="/"  style={{color: showColor.logeColor}} >
+                                <Link to="/"  style={{color: color.logeColor}} >
                                     Dokodemo Door
                                 </Link>
                             </div>
@@ -110,15 +77,15 @@ function Publish(){
                                         <div key={index}>
                                             {
                                                 box.type === "text" && (
-                                                    box.title !== "" && box.display ? <div className={`${styles.list} ${styles.text}`}style={{color: showColor.titleColor}} >{box.title}</div> : null  
+                                                    box.title !== "" && box.display ? <div className={`${styles.list} ${styles.text}`}style={{color: color.titleColor}} >{box.title}</div> : null  
                                                 )
                                             }
 
                                             {
                                                 box.type === "link" && (
                                                     box.title !== "" && box.url !== "" && box.display ? 
-                                                    <div  className={`${styles.list} ${styles.link}`} style={{backgroundColor: showColor.linkColor}}>
-                                                        <a href={box.url} target="_blank" style={{color: showColor.linkTextColor}} >
+                                                    <div  className={`${styles.list} ${styles.link}`} style={{backgroundColor: color.linkColor}}>
+                                                        <a href={box.url} target="_blank" style={{color: color.linkTextColor}} >
                                                             {box.title}
                                                         </a>
                                                     </div> : null
@@ -137,7 +104,7 @@ function Publish(){
                                                 box.type === "line" && (
                                                     box.display && (
                                                         <div className={styles.lineBoxInner}>
-                                                            <div className={styles.line} style={{color: showColor.logeColor}}></div>
+                                                            <div className={styles.line} style={{color: color.logeColor}}></div>
                                                         </div>
                                                     )
                                                 )
@@ -149,7 +116,7 @@ function Publish(){
                             </div>
 
                             <div className={styles.logo}>
-                                <Link to="/"  style={{color: showColor.logeColor}} >
+                                <Link to="/"  style={{color: color.logeColor}} >
                                     Dokodemo Door
                                 </Link>
                             </div>

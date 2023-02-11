@@ -15,8 +15,8 @@ export const useSignup = () => {
         setError(null);
         setPending(true);
 
-        const ref = collection(db, "itemList")
-        const q = query(ref, where("account", "==", account))
+        const ref = collection(db, "itemList");
+        const q = query(ref, where("account", "==", account));
         
         const unsub = onSnapshot(q, (querySnapshot) => {
             let accountArr = [];
@@ -24,25 +24,25 @@ export const useSignup = () => {
                 accountArr.push({ ...doc.data()});
             });
             if(accountArr[0]){
-                setError("此帳號已註冊")
+                setError("此帳號已註冊");
             }else{
                 const showColor = {
                     titleColor: "#333333",
                     linkTextColor: "#333333",
                     linkColor: "rgba(255, 255, 255, 0.645)",
                     logeColor: "#333333",
-                }
+                };
 
                 const profile = {
                     account: account,
                     photo: "",
                     introduction: ""
-                }
+                };
 
                 createUserWithEmailAndPassword(auth, email, password)
                 .then((currentUser) => {
-                    dispatch({type:'LOGIN', payload: currentUser.user.uid})
-                    setDoc(doc(db, "itemList", currentUser.user.uid), { "profile": profile, "item": [], "showColor": showColor  })
+                    dispatch({type:'LOGIN', payload: currentUser.user.uid});
+                    setDoc(doc(db, "itemList", currentUser.user.uid), { "profile": profile, "item": [], "showColor": showColor  });
                 })
                 .catch((error) => {
                     switch(error.code){

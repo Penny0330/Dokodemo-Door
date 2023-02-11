@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { auth, db, storage } from "../utils/firebase.config";
 import { doc, updateDoc } from "firebase/firestore";
@@ -11,50 +11,61 @@ export const useEditBox = () => {
     const [newImgUrl, setNewImgUrl] = useState("");
     const [imgFile, setImgFile] = useState("");
     const [popup, setPopup] = useState(false);
+    const [isEdit, setIsEdit] = useState("");
 
-    const edit = (e, box) => {
-        e.stopPropagation()
-        setNewValue(box.title)
-        setNewLinkUrl(box.url)
-        setNewImgUrl(box.imgUrl)
+    useEffect(() => {
+        document.addEventListener('click', (e)=>{setIsEdit("")});
+
+        return () => {
+            document.removeEventListener('click', (e)=>{setIsEdit("")});
+        }
+    }, [])
+
+    const handleEdit = (e, box, index) => {
+        e.stopPropagation();
+        setNewValue(box.title);
+        setNewLinkUrl(box.url);
+        setNewImgUrl(box.imgUrl);
+        setIsEdit((prev) => {
+            return prev === index ? "" : index;
+        })
     }
 
-    const storageEdit = async (box, value) => {
-        box.title = newValue
-        box.title ? box.display = true : box.display = false
-        const _items = [...value]
+    const handleStorageEdit = async (box, value) => {
+        box.title = newValue;
+        box.title ? box.display = true : box.display = false;
+        const _items = [...value];
 
-        await updateDoc(doc(db, "itemList", auth.currentUser.uid), { "item": _items })
-        setNewValue("")
-        
+        await updateDoc(doc(db, "itemList", auth.currentUser.uid), { "item": _items });
+        setNewValue("");
+        setIsEdit("");
     }
 
-    const storageLinkEdit = async (box, value) => {
-        box.title = newValue
-        box.url = newLinkUrl
-        box.title && box.url ? box.display = true : box.display = false
-        const _items = [...value]
+    const handleStorageLinkEdit  = async (box, value) => {
+        box.title = newValue;
+        box.url = newLinkUrl;
+        box.title && box.url ? box.display = true : box.display = false;
+        const _items = [...value];
 
-        await updateDoc(doc(db, "itemList", auth.currentUser.uid), { "item": _items })
-        setNewValue("")
-        setNewLinkUrl("")
-        
+        await updateDoc(doc(db, "itemList", auth.currentUser.uid), { "item": _items });
+        setNewValue("");
+        setNewLinkUrl("");
+        setIsEdit("");
     }
-
     
-    const uploadImgEdit = (e) => {
-        const file = e.target.files[0]
-        const imageURL = URL.createObjectURL(file)
-        setImgFile(file)
-        setNewImgUrl(imageURL) 
+    const handleUploadImgEdit = (e) => {
+        const file = e.target.files[0];
+        const imageURL = URL.createObjectURL(file);
+        setImgFile(file);
+        setNewImgUrl(imageURL);
     }
 
-    const storageImgEdit = async(box, value) => {
-
+    const handleStorageImgEdit = async(box, value) => {
         // imgFile 為空就停止動作
         if (!imgFile) return;
         if(imgFile.size > 1000000){
-            setPopup(true)
+            setPopup(true);
+            setImgFile("");
             return
         }
 
@@ -68,29 +79,35 @@ export const useEditBox = () => {
         uploadTask.on("state_changed",
             () => {
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                    box.imgUrl = downloadURL
-                    box.file = name
-                    box.imgUrl ? box.display = true : box.display = false
-                    const _items = [...value]
-                    updateDoc(doc(db, "itemList", auth.currentUser.uid), { "item": _items })
+                    box.imgUrl = downloadURL;
+                    box.file = name;
+                    box.imgUrl ? box.display = true : box.display = false;
+                    const _items = [...value];
+                    updateDoc(doc(db, "itemList", auth.currentUser.uid), { "item": _items });
+                    setIsEdit("");
                 })
             }
         )
     }
 
+    const cancelEdit = () => {
+        setIsEdit("");
+        setNewValue("");
+        setNewLinkUrl("");
+        setNewImgUrl("");
+        setImgFile("");
+    }
+
     const displayToggle = async (box, value) => {
-        if (box.type === "text" && box.title === "") {
-            return
-        }
 
-        if (box.type === "link" && box.title === "" || box.url === "") {
-            return
-        }
+        if(box.type === "text" && box.title === "") return;
+        if(box.type === "link" && box.title === "" || box.url === "") return;
+        if (box.type === "pic" && box.imgUrl === "" ) return;
 
-        box.display ? box.display = false : box.display = true
-        const _items = [...value]
+        box.display ? box.display = false : box.display = true;
+        const _items = [...value];
 
-        await updateDoc(doc(db, "itemList", auth.currentUser.uid), { "item": _items })
+        await updateDoc(doc(db, "itemList", auth.currentUser.uid), { "item": _items });
     }
 
     const deleteButton = async (box, index, value) => {
@@ -99,14 +116,15 @@ export const useEditBox = () => {
 
             deleteObject(desertRef).then(() => {
               }).catch((error) => {
-                console.log(error)
+                console.log(error);
               });
         }
 
         const _items = [...value]
-        _items.splice(index, 1)
-        await updateDoc(doc(db, "itemList", auth.currentUser.uid), { "item": _items })
+        _items.splice(index, 1);
+
+        await updateDoc(doc(db, "itemList", auth.currentUser.uid), { "item": _items });
     }
 
-    return {edit, newValue, setNewValue,  newLinkUrl, setNewLinkUrl, newImgUrl, setNewImgUrl, storageEdit, storageLinkEdit, uploadImgEdit, storageImgEdit, storageImgEdit, displayToggle, deleteButton, popup, setPopup}
+    return {handleEdit, newValue, setNewValue,  newLinkUrl, setNewLinkUrl, newImgUrl, setNewImgUrl, handleStorageEdit, handleStorageLinkEdit, handleUploadImgEdit, handleStorageImgEdit, displayToggle, deleteButton, popup, setPopup, isEdit, setIsEdit, cancelEdit }
 }

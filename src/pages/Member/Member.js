@@ -1,16 +1,18 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 //Component
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
-import loading from "../../images/loading.gif"
+import loading from "../../images/loading.gif";
+
+// hooks
+import { useMember } from "../../hooks/useMember";
 
 // Style
 import styles from "./Member.module.css";
 
-import { useMember } from "../../hooks/useMember";
-
+// firebase
 import { auth, db } from "../../utils/firebase.config";
 import { doc, onSnapshot } from "firebase/firestore";
 
@@ -20,14 +22,14 @@ function Member () {
     const [ newAccount, setNewAccount] = useState("");
     const [ newIntro, setNewIntro] = useState("");
 
-    const noPhotoText = newAccount.slice(0, 1).toUpperCase()
+    const noPhotoText = newAccount.slice(0, 1).toUpperCase();
 
     useEffect(() => {
         const ref = doc(db, "itemList", auth.currentUser.uid)
         const unsub = onSnapshot((ref), (doc) => {
-                setNewImgUrl(doc.data().profile.photo)
-                setNewAccount(doc.data().profile.account)
-                setNewIntro(doc.data().profile.introduction)
+                setNewImgUrl(doc.data().profile.photo);
+                setNewAccount(doc.data().profile.account);
+                setNewIntro(doc.data().profile.introduction);
         })
         
         return () => {
@@ -35,13 +37,12 @@ function Member () {
         }
     }, [])
 
-
     const handleUploadPhoto = (e) => {
-        uploadPhoto(e)
+        uploadPhoto(e);
     }
 
     const handleStore = (newAccount, newIntro) => {
-        storageProfile(newAccount, newIntro)
+        storageProfile(newAccount, newIntro);
     }
 
     return(

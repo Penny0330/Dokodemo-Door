@@ -1,57 +1,15 @@
 // Style
 import styles from "./Show.module.css";
 
-import { updateDoc, doc } from "firebase/firestore";
-import { db, auth } from "../../utils/firebase.config";
+// components
 import loading from "../../images/admin-loading.gif";
 
+// hooks
+import { useChangeColor } from "../../hooks/useChangeColor";
 
 function Show({profile, noPhotoText, value, color, pending}) {
 
-    const changeColorPri = async(e) => {
-        const showColor = {
-            titleColor: "#333333",
-            linkTextColor: "#333333",
-            linkColor: "rgba(255, 255, 255, 0.645)",
-            logeColor: "#333333",
-        }
-
-        await updateDoc(doc(db, "itemList", auth.currentUser.uid), {"showColor": showColor})
-    }
-
-    const changeColorGreen = async(e) => {
-        const showColor = {
-            titleColor: "#333333",
-            linkTextColor: "white",
-            linkColor: "#395347",
-            logeColor: "#395347",
-        }
-
-        await updateDoc(doc(db, "itemList", auth.currentUser.uid), {"showColor": showColor})
-    }
-
-    const changeColorBlue = async(e) => {
-        const showColor = {
-            titleColor: "#333333",
-            linkTextColor: "#ECE9DF",
-            linkColor: "rgb(28 56 111)",
-            logeColor: "rgb(28 56 111)",
-
-        }
-
-        await updateDoc(doc(db, "itemList", auth.currentUser.uid), {"showColor": showColor})
-    }
-
-    const changeColorBlack = async(e) => {
-        const showColor = {
-            titleColor: "#333333",
-            linkTextColor: "#ECE9DF",
-            linkColor: "#333333",
-            logeColor: "#333333",
-        }
-
-        await updateDoc(doc(db, "itemList", auth.currentUser.uid), {"showColor": showColor})
-    }
+    const { changeColorPri, changeColorGreen, changeColorBlue, changeColorBlack, active } = useChangeColor(color);
 
     return(
 
@@ -133,10 +91,10 @@ function Show({profile, noPhotoText, value, color, pending}) {
             }
 
             <div className={styles.color}>
-                <div className={styles.colorPri} onClick={(e) => changeColorPri(e)}></div>
-                <div className={styles.colorGreen} onClick={(e) => changeColorGreen(e)}></div>
-                <div className={styles.colorBlue} onClick={(e) => changeColorBlue(e)}></div>
-                <div className={styles.colorBlack} onClick={(e) => changeColorBlack(e)}></div>
+                <div className={`${styles.colorPri} ${active === "pri" ? styles.active : ""}`} onClick={changeColorPri}></div>
+                <div className={`${styles.colorGreen} ${active === "green" ? styles.active : ""}`} onClick={changeColorGreen}></div>
+                <div className={`${styles.colorBlue} ${active === "blue" ? styles.active : ""}`} onClick={changeColorBlue}></div>
+                <div className={`${styles.colorBlack} ${active === "black" ? styles.active : ""}`} onClick={changeColorBlack}></div>
             </div>
             
         </div>

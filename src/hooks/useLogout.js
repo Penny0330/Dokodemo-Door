@@ -11,10 +11,10 @@ export const useLogout = () => {
         serError(null);
         signOut(auth)
         .then((res) => {
-            dispatch({type: "LOGOUT"})
+            dispatch({type: "LOGOUT"});
         })
         .catch((error) => {
-            serError(error.message)
+            serError(error.message);
         })
     }
 

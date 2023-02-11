@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 //Component
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
+import demo from "../../images/demo.png";
 
 // Style
 // import "./Home.scss";
@@ -28,7 +29,9 @@ function Home() {
                     </div>
                 </div>
                 <div>
-                    <div className={styles.iphone}></div>
+                    <div className={styles.iphone}>
+                        <img src={demo} alt="demo" className={styles.demo} />
+                    </div>
                 </div>
             </main>
 

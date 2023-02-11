@@ -3,7 +3,7 @@ import styles from "./Popup.module.css";
 function Popup ({setPopup}){
 
     const closePopup = () => {
-        setPopup(false)
+        setPopup(false);
     }
 
 

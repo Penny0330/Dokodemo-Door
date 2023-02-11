@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-//Component
+// Component
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
-import Text from "../../components/Text/Text";
+import Box from "../../components/Box/Box";
 import Show from "../../components/Show/Show";
 import ShowMobile from "../../components/ShowMobile/ShowMobile";
 import smartphone from "../../images/smartphone.png";
@@ -13,7 +13,9 @@ import leaf from "../../images/leaf.png"
 // Style
 import styles from "./Admin.module.css";
 
+// hooks
 import { useGetBox } from "../../hooks/useGetBox";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 // redux
 // import { useSelector } from "react-redux"
@@ -22,9 +24,8 @@ import { handleAddTextBox, handleAddLinkBox, handleAddImgBox, handleAddLineBox }
 
 
 function Admin() {
-    const {profile, noPhotoText, value, setValue, color, pending } = useGetBox();
-
-                          
+    const { user } = useAuthContext();
+    const {profile, noPhotoText, value, setValue, color, pending } = useGetBox(user);       
     const [openShow, setOpenShow] = useState(false);
 
     // redux
@@ -32,7 +33,7 @@ function Admin() {
 
     // max-width: 700 : click showing
     const handleOpenShow = () => {
-        setOpenShow(!openShow)
+        setOpenShow(!openShow);
     }
 
     return (
@@ -64,7 +65,7 @@ function Admin() {
                             }
                             {
                                 !pending && (
-                                    <Text value={value} setValue={setValue} color={color}/>
+                                    <Box value={value} setValue={setValue} color={color}/>
                                 )
                             }
                             

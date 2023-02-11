@@ -55,11 +55,16 @@
     justify-self: center;
 }
 
-.iphone{
+/* .iphone{
     width: 230px;
     height: 350px;
     background-color: natural;
     border-radius: 15px;  
+} */
+
+.demo{
+    border-radius: 32px;
+    border: 2px solid rgb(87 72 72 / 58%);
 }
 
 @media (max-width: 700px) {

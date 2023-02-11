@@ -53,17 +53,18 @@
     width: 30px;
     height: 30px;
     background-color: rgba(255, 255, 255, 0.645);
-    border-radius: 50%;
+    border-radius: 3px;
     border: 2px solid white;
     cursor: pointer;
     position: relative;
+    transition: all 0.1s ease-in;
 }
 
 .colorGreen{
     width: 30px;
     height: 30px;
     background-color: #4a7b64;
-    border-radius: 50%;
+    border-radius: 3px;
     border: 2px solid white;
     cursor: pointer;
     position: relative;
@@ -73,7 +74,7 @@
     width: 30px;
     height: 30px;
     background-color: rgb(52 105 208);
-    border-radius: 50%;
+    border-radius:  3px;
     border: 2px solid white;
     cursor: pointer;
     position: relative;
@@ -83,25 +84,18 @@
     width: 30px;
     height: 30px;
     background-color: #333333;
-    border-radius: 50%;
+    border-radius: 3px;
     border: 2px solid white;
     cursor: pointer;
     position: relative;
 }
 
-.colorPri::after, .colorBlue::after, .colorGreen::after, .colorBlack::after {
-    position: absolute;
-    bottom: -5px;
-    content: '';
-    left: -5px;
-    width: 32px;
-    height: 32px;
-    border: 2px solid rgb(218, 216, 216);
-    border-radius: 50%;
+.colorPri:hover, .colorGreen:hover, .colorBlue:hover, .colorBlack:hover{
+    outline: 2px solid rgb(154, 153, 153);
 }
 
-.colorPri:hover::after, .colorBlue:hover::after, .colorGreen:hover::after, .colorBlack:hover::after{
-    border: 2px solid rgb(154, 153, 153);
+.active{
+    outline: 2px solid rgb(154, 153, 153);
 }
 
 .close_phone{
@@ -123,7 +117,7 @@
     text-align: center;
 
     display: grid;
-    align-content: space-between;
+    grid-auto-rows: 1fr 2fr auto 1fr;
 }
 
 .box::-webkit-scrollbar {
@@ -141,7 +135,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
+    max-width: 20px 0;
     width: 90%;
 
     justify-self: center;

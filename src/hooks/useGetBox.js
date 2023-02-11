@@ -1,36 +1,45 @@
 import { useEffect, useState } from "react";
 
-import { auth, db } from "../utils/firebase.config";
+import { db } from "../utils/firebase.config";
 import { doc, onSnapshot } from "firebase/firestore";
 
-export const useGetBox = () => {
-    
+export const useGetBox = (user) => {
+
     const [profile, setProfile] = useState("");
     const [noPhotoText, setNoPhotoText] = useState("");
     const [value, setValue] = useState([]);
     const [color, setColor] = useState({});
+    const [error, setError] = useState(false);
     const [ pending, setPending ] = useState(false);
 
     useEffect(() => {
         setPending(true);
-        const ref = doc(db, "itemList", auth.currentUser.uid)
+        const ref = doc(db, "itemList", user)
         const unsub = onSnapshot((ref), (doc) => {
-                let itemArr = [];
-                doc.data().item.map((item) => {
-                    itemArr.push(item)
-                })
-                setValue(itemArr)
-                setColor(doc.data().showColor)
-                setProfile(doc.data().profile)
-                setPending(false);
-                setNoPhotoText(doc.data().profile.account.slice(0, 1).toUpperCase())
+
+                if(doc.data() === undefined){
+                    setError(true);
+                    setPending(false);
+                    return
+                }else{
+
+                    let itemArr = [];
+                    doc.data().item.map((item) => {
+                        itemArr.push(item);
+                    })
+                    setValue(itemArr);
+                    setColor(doc.data().showColor);
+                    setProfile(doc.data().profile);
+                    setNoPhotoText(doc.data().profile.account.slice(0, 1).toUpperCase());
+                    setPending(false);
+                }
                 
         })
-        
+
         return () => {
-            unsub()
+            unsub();
         }
     }, [])
 
-    return {value, setValue, color, profile, noPhotoText, pending}
+    return {value, setValue, color, profile, noPhotoText, error, pending};
 }

@@ -11,7 +11,6 @@ import close from "../../images/close.png";
 
 // Style
 import styles from "./Navbar.module.css";
-import { async } from "@firebase/util";
 
 function Navbar() {
     const { logout } = useLogout();
@@ -22,41 +21,31 @@ function Navbar() {
 
 
     const toggleTrueFalse = () => setToggled(!toggled);
+
     let path = window.location.href.split("admin")[0];
 
     if(window.location.href.includes("member")){
-        path = window.location.href.split("member")[0]
+        path = window.location.href.split("member")[0];
     }
 
     const openDoorNav = (e) => {
-        e.stopPropagation()
-        setOpen(!open)
+        e.stopPropagation();
+        setOpen(!open);
     }
 
     document.addEventListener("click", ()=>{
-        setOpen(false)
+        setOpen(false);
     })
 
     const copy = () => {
-        navigator.clipboard.writeText(path + user)
-        setToggled(false)
-        setPopupCopy(true)
+        navigator.clipboard.writeText(path + user);
+        setPopupCopy(true);
         
         setTimeout(()=>{
-            setPopupCopy(false)
-        }, 3000)
+            setPopupCopy(false);
+        }, 1500)
     }
 
-    // const copyIOS = () => {
-    //     const text = new ClipboardItem({
-    //         "text/plain": fetch("123")
-    //           .then(response => response.text())
-    //           .then(text => new Blob([text], { type: "text/plain" }))
-    //       })
-    //       navigator.clipboard.write([text])
-    //       setToggled(false)
-    //       setPopupCopy(true)
-    // }
 
 
     return(
@@ -158,7 +147,7 @@ function Navbar() {
                                         </div>
                                     )
                                 }
-                                {/* <a href={path + user} target="_blank">任意門</a> */}
+
                                 {
                                     open &&(
                                         <>

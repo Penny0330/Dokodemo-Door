@@ -66,10 +66,6 @@ function Signup() {
                         </button> :
                         <button className={styles.signupButton}><img className={styles.loading} src={loading} alt="" /></button>
                     }
-                    {/* <button className={styles.signupButton}>
-                        <p>註冊</p>
-                    </button>
-                    <button className={styles.signupButton}><img className={styles.loading} src={loading} alt="" /></button> */}
 
                     <div className={styles.error}> {error} </div>
                     <div className={styles.toLogin}>
