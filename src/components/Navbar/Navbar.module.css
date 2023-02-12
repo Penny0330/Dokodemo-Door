@@ -1,15 +1,10 @@
-@value light-green: #728d81;
-@value deep-green: #587367;
-@value natural: #ECE9DF;
-@value translucent-black: rgba(0, 0, 0, 0.5);
-
 nav{
     display: grid;
     grid-template-columns: 2fr 1.8fr;
     margin: auto;
     padding: 10px 3vw;
-    border-bottom: 5px solid natural;
-    background-color: light-green;
+    border-bottom: 5px solid #ECE9DF;
+    background-color: #728d81;
     position: sticky;
     top: 0;
     z-index: 5;
@@ -25,7 +20,11 @@ nav{
     font-weight: bold;
     font-family: 'Kaushan Script', cursive;
     letter-spacing: 5px;
-    color: natural;
+    color: #ECE9DF;
+}
+
+.title a:hover{
+    color: #ece9df95;
 }
 
 .loginComputer{
@@ -45,54 +44,54 @@ nav{
 .login a{
     padding: 5px 12px 5px 15px;
     text-decoration: none;
-    color: natural;
+    color: #ECE9DF;
 }
 
 .login:hover{
     border-radius: 5px;
-    border: 2px solid natural;
+    border: 2px solid #ECE9DF;
 }
 
 .signup{
-    border: 2px solid deep-green;
-    background-color: natural;
+    border: 2px solid #587367;
+    background-color: #ECE9DF;
     padding: 5px 0;
     border-radius: 5px;
 }
 
 .signup a{
     text-decoration: none;
-    color: deep-green;
+    color: #587367;
     padding: 8px 15px;
 }
 
 .signup:hover{
-    border: 2px solid natural;
-    background-color: deep-green;
+    border: 2px solid #ECE9DF;
+    background-color: #587367;
 }
 
 .signup a:hover{
-    color: natural;
+    color: #ECE9DF;
 }
 
 .member a{
     text-decoration: none;
-    color: natural;
+    color: #ECE9DF;
 }
 
 .member a:hover{
     padding-bottom: 10px;
-    border-bottom: 5px solid deep-green;
+    border-bottom: 5px solid #587367;
 } 
 
 .openDoor{
-    color: natural;
+    color: #ECE9DF;
     cursor: pointer;
 }
 
 .openDoor a:hover{
     padding-bottom: 10px;
-    border-bottom: 5px solid deep-green;
+    border-bottom: 5px solid #587367;
 }
 
 .copy{
@@ -146,15 +145,15 @@ nav{
 
 .logout{
     padding: 5px 12px;
-    color: natural;
+    color: #ECE9DF;
     border-radius: 5px;
-    border: 2px solid natural;
+    border: 2px solid #ECE9DF;
     cursor: pointer;
 }
 
 .logout:hover{
-    background-color: natural;
-    color: light-green;
+    background-color: #ECE9DF;
+    color: #728d81;
 }
 
 .loginMobile{
@@ -179,9 +178,9 @@ nav{
     left: 0;
     z-index: 2;
     height: 100%;
-    color: natural;
+    color: #ECE9DF;
     font-size: 18px;
-    background-color: light-green;
+    background-color: #728d81;
     animation: open .3s ease-in-out;
 
     display: none;
@@ -215,7 +214,7 @@ nav{
 
 .loginSide a{
     padding:15px 0 15px 28px;
-    color: natural;
+    color: #ECE9DF;
     text-decoration: none;
 }
 
@@ -226,7 +225,7 @@ nav{
 
 .signupSide a{
     padding:15px 0 15px 28px;
-    color: natural;
+    color: #ECE9DF;
     text-decoration: none;
 }
 
@@ -237,7 +236,7 @@ nav{
 
 .memberSide a{
     padding:15px 0 15px 28px;
-    color: natural;
+    color: #ECE9DF;
     text-decoration: none;
     border-bottom: 1px solid #ece9df6f;
 }
@@ -306,7 +305,6 @@ nav{
     animation: appear 0.2s ease-in;
     z-index: 10;
 }
-
 
 @media (max-width: 700px) {
     nav{
