@@ -10,11 +10,11 @@ import "./index.css";
 const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(
-    <React.StrictMode>
+    // <React.StrictMode>
         <AuthContextProvider>
             <BrowserRouter>
                 <App />
             </BrowserRouter>
         </AuthContextProvider>
-    </React.StrictMode>
+    // {/* </React.StrictMode> */}
 )
