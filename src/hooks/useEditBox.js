@@ -6,12 +6,14 @@ import { ref, getDownloadURL, uploadBytesResumable, deleteObject } from "firebas
 
 export const useEditBox = () => {
 
-    const [newValue, setNewValue] = useState("");
-    const [newLinkUrl, setNewLinkUrl] = useState("");
-    const [newImgUrl, setNewImgUrl] = useState("");
-    const [imgFile, setImgFile] = useState("");
-    const [popup, setPopup] = useState(false);
-    const [isEdit, setIsEdit] = useState("");
+    const [ newValue, setNewValue ] = useState("");
+    const [ newLinkUrl, setNewLinkUrl ] = useState("");
+    const [ newImgUrl, setNewImgUrl ] = useState([]);
+    const [ imgFile, setImgFile ] = useState("");
+    const [ popup, setPopup ] = useState(false);
+    const [ isEdit, setIsEdit ] = useState("");
+    const [ deletePopup, setDeletePopup] = useState(false);
+    const [ deleteData, setDeleteData ] = useState();
 
     useEffect(() => {
         document.addEventListener('click', (e)=>{setIsEdit("")});
@@ -68,26 +70,26 @@ export const useEditBox = () => {
             setImgFile("");
             return
         }
+        // 刪除原有的圖片檔案
+        if(box.file){
+            const desertRef = ref(storage, box.file);
+            await deleteObject(desertRef);
+        }
 
         // 第1個參數 storage service，第2個參數 檔案儲存資料夾名稱 / 檔案名稱
         const randomNum = Math.random().toString(36).substring(7)
         const name = `post.images/${auth.currentUser.uid},${randomNum}`
         const storageRef = ref(storage, name);
         // uploadBytesResumable 上傳檔案至 cloud storage 
-        const uploadTask = uploadBytesResumable(storageRef, imgFile);
-        // on() 可監控整個上傳過程: 速度、失敗訊息、取得成功後檔案url
-        uploadTask.on("state_changed",
-            () => {
-                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                    box.imgUrl = downloadURL;
-                    box.file = name;
-                    box.imgUrl ? box.display = true : box.display = false;
-                    const _items = [...value];
-                    updateDoc(doc(db, "itemList", auth.currentUser.uid), { "item": _items });
-                    setIsEdit("");
-                })
-            }
-        )
+        await uploadBytesResumable(storageRef, imgFile);
+        // getDownloadURL 取得網址
+        const imgUrl = await getDownloadURL(storageRef);
+        box.imgUrl = imgUrl;
+        box.file = name;
+        box.imgUrl ? box.display = true : box.display = false;
+        const _items = [...value];
+        await updateDoc(doc(db, "itemList", auth.currentUser.uid), { "item": _items });
+        setIsEdit("");
     }
 
     const cancelEdit = () => {
@@ -110,9 +112,14 @@ export const useEditBox = () => {
         await updateDoc(doc(db, "itemList", auth.currentUser.uid), { "item": _items });
     }
 
-    const deleteButton = async (box, index, value) => {
-        if(box.type === "pic" && box.file){
-            const desertRef = ref(storage, box.file);
+    const deleteCheck = (box, index) => {
+        setDeletePopup(true)
+        setDeleteData([box, index])
+    }
+
+    const deleteButton = async (value) => {
+        if(deleteData[0].type === "pic" && deleteData[0].file){
+            const desertRef = ref(storage, deleteData[0].file);
 
             deleteObject(desertRef).then(() => {
               }).catch((error) => {
@@ -121,10 +128,30 @@ export const useEditBox = () => {
         }
 
         const _items = [...value]
-        _items.splice(index, 1);
+        _items.splice(deleteData[1], 1);
 
         await updateDoc(doc(db, "itemList", auth.currentUser.uid), { "item": _items });
+
+        setDeletePopup(false)
     }
 
-    return {handleEdit, newValue, setNewValue,  newLinkUrl, setNewLinkUrl, newImgUrl, setNewImgUrl, handleStorageEdit, handleStorageLinkEdit, handleUploadImgEdit, handleStorageImgEdit, displayToggle, deleteButton, popup, setPopup, isEdit, setIsEdit, cancelEdit }
+    
+    const onDragEnd = async(result, value) => {
+        // source 被拖曳的物件 ； destination 拖曳後的位置
+        const { source, destination } = result
+        if (!destination) {
+            return;
+        }
+        let _items = [...value];  
+        // 從 source.index 剪下被拖曳的元素
+        const [remove] = _items.splice(source.index, 1);
+        //在 destination.index 位置貼上被拖曳的元素
+        _items.splice(destination.index, 0, remove);
+
+        // 設定新的 value
+        // setValue(newValue)
+        await updateDoc(doc(db, "itemList", auth.currentUser.uid), {"item": _items});
+      }
+
+    return {handleEdit, newValue, setNewValue,  newLinkUrl, setNewLinkUrl, newImgUrl, setNewImgUrl, handleStorageEdit, handleStorageLinkEdit, handleUploadImgEdit, handleStorageImgEdit, displayToggle, deleteCheck, deletePopup, setDeletePopup, deleteButton, popup, setPopup, isEdit, setIsEdit, cancelEdit, onDragEnd }
 }

@@ -1,21 +1,27 @@
 .main{
-    margin: auto;
-    padding: 60px 0;
-    margin-bottom: 25px;
     background-color: #ECE9DF;
     color: #333333;
+    display: grid;
+    grid-template-rows: minmax(600px, auto);
+    margin: auto;
+    background-color: #ECE9DF;
 }
 
 .container{
-    width: 40vw;
-    background-color: white;
-    display: flex;
+    width: 90vw;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
     flex-direction: column;
     margin: auto;
     border-radius: 10px;
-    gap: 20px;
+    justify-content: space-between;
+}
+
+.left{
+    width: 45vw;
+    background-color: white;
     padding: 20px;
-    box-shadow: 0px 4px 10px #aaaaaa;
+    margin: 50px auto;
 }
 
 .storeAndGoHomeButton{
@@ -167,9 +173,37 @@ form{
     letter-spacing: 1px;
 }
 
+.right{
+    margin: 95px 71px;
+}
+
+.preview{
+    background-color: #ECE9DF;
+    padding: 12px;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0px 2px 4px #AAAAAA;
+
+    position: fixed;
+    bottom: 30px;
+    right: 43vw;
+
+    display: none;
+}
+
+.smartphone{
+    width: 34px;
+    vertical-align: middle;
+}
+
 @media (max-width: 700px) {
     .container{
-        width: 93vw;
+        width: 100%;
+        grid-template-columns: 1fr;
+    }
+
+    .left{
+        width: 80vw;
     }
 
     .photo {
@@ -180,7 +214,24 @@ form{
     form{
         width: 50vw;
     }
+    
+    .loading{
+        width: 9vw;
+        border-radius: 50%;
+        margin-top: 50px;
+    }
+
+    .right{
+        display: none;
+    }
+
+    .preview{
+        display: block;
+    }
+    
 }
+
+
 
 
 

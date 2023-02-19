@@ -6,8 +6,15 @@ import trash from "../../images/trash.svg";
 import pen from "../../images/pen.png";
 import drag from "../../images/drag.png";
 
+import imageIcon from "../../images/image.png";
+import imageWhite from "../../images/image_white.png";
+import check from "../../images/check.png";
+import closeWhite from "../../images/close_edit.png";
+
 //hooks
 import { useEditBox } from "../../hooks/useEditBox";
+import { useGetBox } from "../../hooks/useGetBox";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 // Style
 import styles from "./Box.module.css";
@@ -19,30 +26,28 @@ import { db, auth } from "../../utils/firebase.config";
 // DnD
 import { Draggable, DragDropContext, Droppable } from "react-beautiful-dnd";
 
-function Box ({ value, setValue, color }){
 
-    const { handleEdit, newValue, setNewValue,  newLinkUrl, setNewLinkUrl, newImgUrl, handleStorageEdit, handleStorageLinkEdit, handleUploadImgEdit, handleStorageImgEdit, displayToggle, deleteButton, popup, setPopup, isEdit, cancelEdit } = useEditBox();
+function Box (){
 
-    const onDragEnd = async(result) => {
-        // source 被拖曳的物件 ； destination 拖曳後的位置
-        const { source, destination } = result
-     
-        if (!destination) {
-            return;
-        }
+    const { user } = useAuthContext();
+    const { value, setValue, color } = useGetBox(user);
+    const { handleEdit, newValue, setNewValue,  newLinkUrl, setNewLinkUrl, newImgUrl, handleStorageEdit, handleStorageLinkEdit, handleUploadImgEdit, handleStorageImgEdit, displayToggle, deleteButton, deletePopup, setDeletePopup, popup, setPopup, isEdit, cancelEdit, deleteCheck, onDragEnd } = useEditBox();
 
-        let newValue = [...value];  
-    
-        // 從 source.index 剪下被拖曳的元素
-        const [remove] = newValue.splice(source.index, 1);
-
-        //在 destination.index 位置貼上被拖曳的元素
-        newValue.splice(destination.index, 0, remove);
-    
-        // 設定新的 value
-        setValue(newValue)
-        await updateDoc(doc(db, "itemList", auth.currentUser.uid), {"item": newValue});
-      }
+    // const onDragEnd = async(result) => {
+    //     // source 被拖曳的物件 ； destination 拖曳後的位置
+    //     const { source, destination } = result
+    //     if (!destination) {
+    //         return;
+    //     }
+    //     let newValue = [...value];  
+    //     // 從 source.index 剪下被拖曳的元素
+    //     const [remove] = newValue.splice(source.index, 1);
+    //     //在 destination.index 位置貼上被拖曳的元素
+    //     newValue.splice(destination.index, 0, remove);
+    //     // 設定新的 value
+    //     setValue(newValue)
+    //     await updateDoc(doc(db, "itemList", auth.currentUser.uid), {"item": newValue});
+    //   }
     
     return(
         
@@ -52,9 +57,22 @@ function Box ({ value, setValue, color }){
                 popup && (
                     < Popup setPopup={setPopup} />
                 )
-            }  
+            }
 
-            <DragDropContext onDragEnd={(e) => onDragEnd(e)}>
+            {
+                deletePopup && (
+                    <div className={styles.popup}>
+                        <div className={styles.popupBox}>
+                            <p className={styles.alter}>注意</p>
+                            <p className={styles.popupTitle}>確認刪除區塊？</p>
+                            <button className={styles.cancelDeleteButton} onClick={() => setDeletePopup(!deletePopup)}>取消</button>
+                            <button className={styles.deleteButton} onClick={() => deleteButton(value)}>確認</button>
+                        </div>
+                    </div>
+                )
+            }
+
+            <DragDropContext onDragEnd={(e) => onDragEnd(e, value)}>
                 <Droppable droppableId="drop-id">
                     {(provided) => (
                         <div ref={provided.innerRef} {...provided.droppableProps}>
@@ -67,14 +85,14 @@ function Box ({ value, setValue, color }){
 
                                                     <div 
                                                         {...provided.draggableProps}
-                                                        {...provided.dragHandleProps}
+                                                        
                                                         ref={provided.innerRef} >
-
                                                         {
                                                             box.type === "text" && (
 
                                                                 <div className={`${styles.textBox}`}> 
-                                                                    <img className={styles.drag} src={drag} alt="drag"/>
+
+                                                                    <img className={styles.drag} src={drag} alt="drag" {...provided.dragHandleProps}/>
 
                                                                     <div className={styles.textValueAndEditPen} 
                                                                             onClick={(e) => handleEdit(e, box, index)} 
@@ -90,9 +108,13 @@ function Box ({ value, setValue, color }){
                                                                     <div className={styles.edit} style={{display: isEdit === index ? "flex" : "none"}} onClick={(e) => e.stopPropagation()}>
                                                                         <input className={styles.textInput} type="text" value={newValue} onChange={e => setNewValue(e.target.value)}/> 
                                                                         <div className={styles.editButton}>
-                                                                            <div className={styles.saveButton}  onClick={() => handleStorageEdit(box, value)}>儲存</div>
-                                                                            <div className={styles.cancelButton}  onClick={() => cancelEdit(box)}>
-                                                                                取消
+                                                                            <div className={styles.TextSaveButton}  onClick={() => handleStorageEdit(box, value)}>
+                                                                                {/* 儲存 */}
+                                                                                <img src={check} alt="" className={styles.checkIcon} />
+                                                                            </div>
+                                                                            <div className={styles.TextCancelButton}  onClick={() => cancelEdit(box)}>
+                                                                                {/* 取消 */}
+                                                                                <img src={closeWhite} alt="" className={styles.cancelIcon} />
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -109,7 +131,7 @@ function Box ({ value, setValue, color }){
                                                                             )
                                                                         }
                                                                         
-                                                                        <img className={styles.trashButton} src={trash} alt="trash" onClick={() => deleteButton(box, index, value)} />
+                                                                        <img className={styles.trashButton} src={trash} alt="trash" onClick={() => deleteCheck(box, index)} />
                                                                     </div>
 
                                                                 </div>
@@ -119,7 +141,7 @@ function Box ({ value, setValue, color }){
                                                         {
                                                             box.type === "link" && (
                                                                 <div className={styles.linkBox}>
-                                                                    <img className={styles.drag} src={drag} alt="drag"/>
+                                                                    <img className={styles.drag} src={drag} alt="drag"  {...provided.dragHandleProps}/>
                                                         
                                                                     <div className={styles.textValueAndEditPen} 
                                                                         onClick={(e) => handleEdit(e, box, index)} 
@@ -136,11 +158,15 @@ function Box ({ value, setValue, color }){
                                                         
                                                                             <input className={styles.titleInput} type="text" placeholder="按鈕文字" value={newValue} onChange={e => setNewValue(e.target.value)} />
                                                                             <input className={styles.linkInput} type="text" placeholder="連結網址" value={newLinkUrl} onChange={e => setNewLinkUrl(e.target.value)} />
-                                                        
+
                                                                         <div className={styles.editButton}>
-                                                                            <div className={styles.saveButton}  onClick={() => handleStorageLinkEdit(box, value)}>儲存</div>
-                                                                            <div className={styles.cancelButton}  onClick={() => cancelEdit(box)}>
-                                                                                取消
+                                                                            <div className={styles.TextSaveButton}  onClick={() => handleStorageLinkEdit(box, value)}>
+                                                                                {/* 儲存 */}
+                                                                                <img src={check} alt="" className={styles.checkIcon} />
+                                                                            </div>
+                                                                            <div className={styles.TextCancelButton}  onClick={() => cancelEdit(box)}>
+                                                                                {/* 取消 */}
+                                                                                <img src={closeWhite} alt="" className={styles.cancelIcon} />
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -157,7 +183,7 @@ function Box ({ value, setValue, color }){
                                                                             )
                                                                         }
                                                                         
-                                                                        <img className={styles.trashButton} src={trash} alt="trash" onClick={() => deleteButton(box, index, value)} />
+                                                                        <img className={styles.trashButton} src={trash} alt="trash" onClick={() => deleteCheck(box, index)} />
                                                                     </div>     
                                                                 </div>
                                                             )
@@ -166,22 +192,28 @@ function Box ({ value, setValue, color }){
                                                         {
                                                             box.type === "pic" && (
                                                                 <div className={styles.picBox}>
-                                                                    <img className={styles.drag} src={drag} alt="drag" />
-                                                        
+                                                                    <img className={styles.drag} src={drag} alt="drag"  {...provided.dragHandleProps} />                                                        
                                                                     <div className={styles.imgValueAndEditPen} 
                                                                         onClick={(e) => handleEdit(e, box ,index)} 
-                                                                        style={{display: isEdit === index ? "none" : "flex"}}>
-                                                                        { box.imgUrl == "" ?
-                                                                            <div className={styles.imgNoValue}>上傳圖片</div>:
+                                                                        style={{display: isEdit === index ? "none" : "flex"}}
+                                                                        >
+                                                                        { box.imgUrl === "" ?
+                                                                            <div className={styles.imgNoValue}>
+                                                                                <img src={imageIcon} alt="" />
+                                                                                上傳圖片
+                                                                            </div>:
                                                                             <div className={styles.imgValue}>
                                                                                 <img className={styles.img} src={box.imgUrl} alt="" />
                                                                             </div>
+                                                                            
                                                                         }
+                                                                        <img className={styles.editPen} src={pen} alt="pen" />
+                                                                    </div> 
                                                         
-                                                                        <img className={styles.editPen} src={pen} alt="pen"/>
-                                                                    </div>
-                                                        
-                                                                    <div className={styles.picEdit} style={{display: isEdit === index ? "flex" : "none"}} onClick={(e) => e.stopPropagation()}>
+                                                                    <div className={styles.picEdit} 
+                                                                        style={{display: isEdit === index ? "flex" : "none"}}
+                                                                        onClick={(e) => e.stopPropagation()} >
+                                                                            
                                                                             
                                                                         {
                                                                             newImgUrl && (
@@ -194,7 +226,9 @@ function Box ({ value, setValue, color }){
                                                                         {
                                                                             !newImgUrl && (
                                                                                 <div className={styles.noImgValueEdit}>
-                                                                                    <div className={styles.noImage}>上傳圖片</div>
+                                                                                    <div className={styles.noImage}>
+                                                                                        {/* 上傳圖片 */}
+                                                                                    </div>
                                                                                 </div>
                                                                             )
                                                                         }
@@ -206,18 +240,26 @@ function Box ({ value, setValue, color }){
                                                                                         accept="image/*"
                                                                                         className={styles.fileInput} onChange={(e) => handleUploadImgEdit(e)}
                                                                                     />
-                                                                                    <label className={styles.fileLabel} htmlFor="file-input">
-                                                                                        <span>上傳</span>
-                                                                                    </label>
+                                                                                <label className={styles.fileLabel} htmlFor="file-input">
+                                                                                    <span>
+                                                                                        <img src={imageWhite} alt="" className={styles.addImage} />
+                                                                                        {/* 上傳 */}
+                                                                                    </span>
+                                                                                </label>
                                                                             </div>
                                                                             
-                                                                            <div className={styles.saveButton}  onClick={() => handleStorageImgEdit(box, value)}>儲存</div>
+                                                                            <div className={styles.saveButton}  onClick={() => handleStorageImgEdit(box, value)}>
+                                                                                {/* 儲存 */}
+                                                                                <img src={check} alt="" className={styles.checkIcon} />
+                                                                            </div>
                                                                             <div className={styles.cancelButton}  onClick={() => cancelEdit(box)}>
-                                                                                取消
+                                                                                {/* 取消 */}
+                                                                                <img src={closeWhite} alt="" className={styles.cancelIcon} />
                                                                             </div>
                                                         
                                                                         </div>
                                                                     </div>
+
                                                         
                                                                     <div className={styles.displayToggleAndTrash}>
                                                                         {
@@ -231,7 +273,7 @@ function Box ({ value, setValue, color }){
                                                                             )
                                                                         }
                                                                         
-                                                                        <img className={styles.trashButton} src={trash} alt="trash" onClick={() => deleteButton(box, index, value)} />
+                                                                        <img className={styles.trashButton} src={trash} alt="trash" onClick={() => deleteCheck(box, index)} />
                                                                     </div>
                                                         
                                                                     <div className={styles.picInfo}>
@@ -246,7 +288,7 @@ function Box ({ value, setValue, color }){
                                                         {
                                                             box.type === "line" && (
                                                                 <div className={`${styles.lineBox}`}> 
-                                                                    <img className={styles.drag} src={drag} alt="drag"/>
+                                                                    <img className={styles.drag} src={drag} alt="drag"  {...provided.dragHandleProps} />
 
                                                                     <div className={styles.lineBoxInner}>
                                                                         <div className={styles.line} style={{color: color.logeColor}}></div>
@@ -264,7 +306,7 @@ function Box ({ value, setValue, color }){
                                                                             )
                                                                         }
                                                                         
-                                                                        <img className={styles.trashButton} src={trash} alt="trash" onClick={() => deleteButton(box, index, value)} />
+                                                                        <img className={styles.trashButton} src={trash} alt="trash" onClick={() => deleteCheck(box, index)} />
                                                                     </div>
                                                                 </div>
                                                             )

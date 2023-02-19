@@ -19,7 +19,29 @@
     grid-template-rows: auto auto minmax(400px, auto) auto;
 }
 
-.addButton{
+.imgLeaf{
+    animation: leaf infinite linear 3s;
+}
+
+@keyframes leaf{
+    0%{
+        transform: rotate(0deg);
+    }
+    25%{
+        transform: rotate(15deg);
+    }
+    50%{
+        transform: rotate(0deg);
+    }
+    75%{
+        transform: rotate(-15deg);
+    }
+    100%{
+        transform: rotate(0deg);
+    }
+}
+
+/* .addButton{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -36,7 +58,6 @@
     border: none;
     background-color: #587367;
     color: #ECE9DF;
-    cursor: pointer;
 }
 
 .allButton{
@@ -66,10 +87,11 @@
 
 .addTextButton:hover{
     transform: translateY(3px);
-}
+} */
 
 .right{
     margin: 95px 80px;
+    margin: 95px 71px;
 }
 
 .preview{
@@ -102,7 +124,7 @@
         grid-template-columns: 1fr;
     }
 
-    .addButton{
+    /* .addButton{
         width: 80vw;
     }
 
@@ -117,7 +139,7 @@
     .addTextButton{
         width: 30vw;
         font-size: 16px;
-    }
+    } */
     
     .edit{
         margin-left: 5px;

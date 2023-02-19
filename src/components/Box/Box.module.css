@@ -4,7 +4,7 @@
     align-items: center;
     width: 90%;
     width: 100%;
-    margin-top: 30px;
+    /* margin-top: 30px; */
 }
 
 .noData{
@@ -30,6 +30,7 @@
     align-items: center;
     margin-top: 30px;
     margin-bottom: 15px;
+    transition: all .3s linear;
 }
 
 
@@ -72,14 +73,15 @@
 
 .editPen{
     width: 30px;
-    margin-left: 20px;
+    /* margin-left: 20px; */
     padding-right: 5px;
+    cursor: pointer;
 }
 
 .edit{
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    /* align-items: center; */
     width: 80%;
     background-color: #ECE9DF;
     position: relative;
@@ -100,29 +102,74 @@
 }
 
 .editButton{
-    position: absolute;
-    right: 0;
+    /* position: absolute;
+    right: 0; */
+    align-self: end;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+
+    border-radius: 10px 0 0 10px;
+    border: 1px solid #587367;
+    background-color: #587367;
+    width: 45px;
+    text-align: center;
+
+
+    animation: dude .5s 1 forwards;
+}
+
+@keyframes dude {
+    0% {
+        transform: translateX(10px);
+    }
+    100% {
+        transform: translateX(0px);
+    }
+}
+
+.TextSaveButton{
+    padding: 4px 5px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #587367;
+    color: white;
+    border-radius: 10px 0 0 0;
+    /* width: 50%; */
+    height: 50%;
+}
+
+.TextCancelButton{
+    padding: 4px 5px;
+    cursor: pointer;
+    color: white;
+    border-radius: 0 0 0 10px;
+    height: 50%;
+}
+
+.TextSaveButton:hover, .TextCancelButton:hover{
+    background-color: #395347;
 }
 
 .saveButton{
-    padding: 5px 8px;
+    padding: 5px 0;
     font-weight: bold;
     cursor: pointer;
     background-color: #587367;
     color: white;
 }
 
-.saveButton:hover{
-    background-color: #395347;
-}
-
 .cancelButton{
-    padding: 5px 8px;
+    padding: 5px 0;
     cursor: pointer;
     color: white;
-    background-color: #8080808f;
+    /* background-color: #8080808f; */
+}
+
+.saveButton:hover, .cancelButton:hover{
+    background-color: #395347;
 }
 
 .displayToggleAndTrash{
@@ -165,6 +212,7 @@
     margin-bottom: 15px;
 
     animation: appear .4s ease-in-out;
+    transition: all .3s linear;
 }
 
 .linkValueAndEditPen{
@@ -191,6 +239,7 @@
     position: relative;
     padding-left: 10px;
     height: 66px;
+    flex-wrap: wrap;
 }
 
 .titleInput{
@@ -222,7 +271,6 @@
     width: 47vw;
     height: auto;
     padding: 20px 0;
-    padding: 20px 0 7px;;
     background-color: white;
     box-shadow: 0px 4px 10px #AAAAAA;
     border-radius: 10px;
@@ -231,6 +279,7 @@
     align-items: center;
     margin-bottom: 15px;
     flex-wrap: wrap;
+    transition: all .3s linear;
 }
 
 .imgValueAndEditPen:hover{
@@ -238,10 +287,11 @@
 }
 
 .imgValueAndEditPen{
+    display: flex;
     align-items: center;
     justify-content: space-between;
     width: 80%;
-    padding: 0px 10px;
+    /* padding: 0px 10px; */
     font-size: 18px;
     letter-spacing: 1px;
     border-radius: 5px;
@@ -250,13 +300,20 @@
 
 .imgValue{
     height: 20vw;
+    /* height: 22vw; */
+    /* height: 16vw; */
+    padding-left: 10px;
+    cursor: auto;
 }
 
 .imgNoValue{
     height: 20vw;
+    width: 100%;
     color: gray;
     display: flex;
     align-items: center;
+    /* border: 4px dashed #8080805e; */
+    justify-content: center;
 }
 
 .img{
@@ -289,11 +346,17 @@
 .noImage{
     color: gray;
     font-size: 18px;
+    width: 85%;
+    height: 85%;
+    border: 4px dashed gray;
+    margin-left: 10px;
 }
 
 .imgEdit{
     width: 100%;
     height: 20vw;
+    /* width: 26vw;
+    height: 18vw; */
     aspect-ratio: 4/3;
     padding: 10px 0;
 }
@@ -301,10 +364,58 @@
 .picEditButton{
     display: flex;
     flex-direction: column;
-    width: 65px;
+    /* width: 65px; */
+    /* width: 13%; */
+    width: 45px;
     align-items: flex-end;
     justify-content: center;
+
+    border-radius: 10px 0 0 10px;
+    border: 1px solid #587367;
+    background-color: #587367;
+    text-align: center;
+
+    animation: dude .5s 1 forwards;
 }
+
+@keyframes dude {
+    0% {
+        transform: translateX(10px);
+      }
+    100% {
+        transform: translateX(0px);
+    }
+}
+
+
+.imageIcon{
+    width: 2.5vw;
+    vertical-align: middle;
+}
+
+.addImage{
+    width: 50%;
+    vertical-align: middle;
+}
+
+.checkIcon{
+    width: 50%;
+    vertical-align: middle;
+}
+
+.cancelIcon{
+    width: 50%;
+    vertical-align: middle;
+}
+
+/* .imgHaveValue{
+    height: 20vw;
+    width: 100%;
+    color: gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} */
 
 .uploadButton{
     font-weight: bold;
@@ -325,19 +436,20 @@
     overflow: hidden;
     position: absolute;
     z-index: -1;
-  }
+}
   
 .fileLabel {
     cursor: pointer;
     display: inline-flex;
     align-items: center;
-    padding: 5px 8px;
+    padding: 5px 0;
 }
 
 .picInfo{
     color: gray;
     margin-top: 15px;
-    margin-top: 8px;
+    /* margin-top: 8px;
+    margin-top: 13px; */
 }
 
 .lineBox{
@@ -351,6 +463,7 @@
     align-items: center;
     margin-top: 30px;
     margin-bottom: 15px;
+    transition: all .3s linear;
 }
 
 .lineBoxInner{
@@ -363,6 +476,101 @@
     width: 75%;
     border: 1px solid;
 }
+
+/* delete Check box */
+
+.popup{
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 100%;
+    z-index: 5;
+    background-color: #80808066;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popupBox{
+    background-color: white;
+    padding: 35px 60px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.popupTitle{
+    font-weight: bold;
+    color: #665d5d;
+    margin-bottom: 30px;
+}
+
+.alter{
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.cancelDeleteButton{
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #665d5d;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.cancelDeleteButton:hover{
+    background-color: #c6bbbb;
+}
+
+.deleteButton{
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #665d5d;
+    font-weight: bold;
+    background-color: rgb(177 51 51);
+    background-color: rgb(212 100 100);
+    color: white;
+    margin-left: 10px;
+}
+
+.deleteButton:hover{
+    background-color: rgb(123 35 35);
+    background-color: rgb(177 51 51);
+}
+
+
+/* .testImgEdit{
+    background-color: white;
+    width: 63%;
+    width: 665px;
+    height: 80%;
+    height: 530px;
+    min-height: 80%;
+    margin-right: 20px;
+    border-radius: 7px;
+    box-shadow: 0px 1px 6px 2px #605c5c;
+
+    animation: dude .5s 1 forwards;
+}
+
+@keyframes dude {
+    0% {
+        transform: translateX(500px);
+      }
+    50%{
+        transform: translateX(-50px);
+    }
+    100% {
+        transform: translateX(0px);
+    }
+  } */
+
+
 
 @media (max-width: 700px) {
     .allText{
@@ -382,4 +590,5 @@
         height: 40vw;
         width: 90%;
     }
+    
 }

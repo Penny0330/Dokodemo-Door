@@ -6,7 +6,6 @@ function Popup ({setPopup}){
         setPopup(false);
     }
 
-
     return(
         <div className={styles.popup}>
             <div className={styles.popupBox}>
