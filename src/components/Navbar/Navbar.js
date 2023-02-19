@@ -16,7 +16,6 @@ function Navbar() {
     const { logout } = useLogout();
     const { user } = useAuthContext();
     const [ toggled, setToggled ] = useState(false);
-    const [ open, setOpen ] = useState(false);
     const [ popupCopy, setPopupCopy ] = useState(false);
 
 
@@ -28,15 +27,6 @@ function Navbar() {
         path = window.location.href.split("member")[0];
     }
 
-    const openDoorNav = (e) => {
-        e.stopPropagation();
-        setOpen(!open);
-    }
-
-    document.addEventListener("click", ()=>{
-        setOpen(false);
-    })
-
     const copy = () => {
         navigator.clipboard.writeText(path + user);
         setPopupCopy(true);
@@ -45,8 +35,6 @@ function Navbar() {
             setPopupCopy(false);
         }, 1500)
     }
-
-
 
     return(
     
@@ -89,22 +77,21 @@ function Navbar() {
                     <div className={styles.member}>
                         <NavLink to={"/member"}>會員中心</NavLink> 
                     </div>
-                    <div className={styles.openDoor} onClick={(e) => openDoorNav(e)}>
+                    <div className={styles.openDoor}>
 
-                        <a>任意門</a>
-                        {
-                            open && (
-                                <div className={styles.copy} >
-                                    <a className={styles.goToDoor} href={path + user} target="_blank">⇀  前往任意門</a>
-                                    <button className={styles.copyButton} onClick={copy}>⇀  Copy網址</button>
-                                </div>
-                            )
-                        }
+                        <a>任意門▾</a>
+
+                        <div className={styles.copy} >
+                            <a className={styles.goToDoor} href={path + user} target="_blank">⇀  前往任意門</a>
+                            <button className={styles.copyButton} onClick={copy}>⇀  Copy網址</button>
+                        </div>
 
                     </div>
                     <div className={styles.logout} onClick={logout}>登出</div>
                 </div>
             )}
+
+
 
             <div className={styles.loginMobile} onClick={toggleTrueFalse} >
                 { !toggled ?

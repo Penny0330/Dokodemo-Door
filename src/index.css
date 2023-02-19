@@ -15,8 +15,3 @@ body{
 .wrapper{
     margin: auto;
 }
-
-.active{
-    padding-bottom: 10px;
-    border-bottom: 5px solid #587367;
-}
