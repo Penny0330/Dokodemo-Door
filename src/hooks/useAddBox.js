@@ -1,9 +1,28 @@
+import { useState, useEffect } from "react";
 import { auth, db } from "../utils/firebase.config";
 import { doc, updateDoc } from "firebase/firestore";
 
-export const useAddBox = () => {
+export const useAddBox = (value) => {
+    const [open, setOpen] = useState(false);
 
-    const addTextBox = async (value) => {
+    useEffect(() => {
+        document.addEventListener('click', (e)=>{setOpen(false)});
+        return () => {
+            document.removeEventListener('click', (e)=>{setOpen(false)});
+        }
+    }, [])
+
+    const handleClick = (e) => {
+        e.preventDefault();
+        setOpen(!open);
+
+    };
+
+    const handleChange = (e) => {
+        setOpen(e.target.checked);
+    };
+
+    const addTextBox = async () => {
         const newText = [{
             type: "text",
             title: "",
@@ -11,10 +30,11 @@ export const useAddBox = () => {
         }];
         const _value = newText.concat(value);
         await updateDoc(doc(db, "itemList", auth.currentUser.uid), { "item": _value });
+        setOpen(!open);
 
     };
 
-    const addLinkBox = async (value) => {
+    const addLinkBox = async () => {
         const newLink = [{
             type: "link",
             title: "",
@@ -23,9 +43,10 @@ export const useAddBox = () => {
         }];
         const _value = newLink.concat(value);
         await updateDoc(doc(db, "itemList", auth.currentUser.uid), { "item": _value });
+        setOpen(!open);
     };
 
-    const addImgBox = async (value) => {
+    const addImgBox = async () => {
         const newPic = [{
             type: "pic",
             imgUrl: "",
@@ -34,7 +55,18 @@ export const useAddBox = () => {
         }];
         const _value = newPic.concat(value);
         await updateDoc(doc(db, "itemList", auth.currentUser.uid), { "item": _value });
+        setOpen(!open);
     }
 
-    return {addTextBox, addLinkBox, addImgBox};
+    const addLineBox = async () => {
+        const newLine = [{
+            type: "line",
+            display: true
+        }]
+        const _value = newLine.concat(value);
+        updateDoc(doc(db, "itemList", auth.currentUser.uid), { "item":  _value });
+        setOpen(!open);
+    }
+
+    return { open, handleClick, handleChange, addTextBox, addLinkBox, addImgBox, addLineBox};
 }

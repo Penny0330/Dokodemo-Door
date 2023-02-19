@@ -1,0 +1,93 @@
+.addButton{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.clickTitle{
+    width: 45vw;
+    padding: 25px 30px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 10px;
+    border: none;
+    background-color: #587367;
+    color: #ECE9DF;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0px 4px 10px #808080;
+    cursor: pointer;
+    transition: all .3s linear;
+}
+
+.clickTitle:hover{
+    background-color: #6a8c7d;
+}
+
+#menu{
+    display: none;
+}
+
+.buttons{
+    width: 45vw;
+    height: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    border-radius: 0 0 50px 50px;
+    background-color: white;
+    box-shadow: 0px 4px 10px #aaaaaa;
+    transition: all .3s linear;
+}
+
+.addTextButton, .addLinkButton, .addImgButton, .addLineButton{
+    width: 90%;
+    padding: 10px 15px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 5px;
+    background-color: white;
+    color: #333333;
+    display: flex;
+    gap: 10px;
+    transition: all .3s linear;
+}
+
+.addTextButton:hover , .addLinkButton:hover, .addImgButton:hover, .addLineButton:hover{
+    background-color: #ece9df;
+}
+
+.icon{
+    width: 30px;
+    vertical-align: middle;
+}
+
+@media (max-width: 700px) {
+    .addButton{
+        width: 80vw;
+    }
+
+    .clickTitle{
+        width: 80vw;
+    }
+
+    /* .buttons{
+        width: 80vw;
+    } */
+
+    /* .addTextButton, .addLinkButton, .addImgButton, .addLineButton{
+        width: 30vw;
+        font-size: 16px;
+    } */
+
+    .buttons{
+        width: 80vw;
+    }
+}
