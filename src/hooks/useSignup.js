@@ -4,7 +4,7 @@ import { useAuthContext } from "./useAuthContext";
 // firebase
 import { auth, db } from "../utils/firebase.config";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { doc, onSnapshot, setDoc, collection, query, where } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 
 export const useSignup = () => {
     const [error, setError] = useState(null);
@@ -15,53 +15,54 @@ export const useSignup = () => {
         setError(null);
         setPending(true);
 
-        const ref = collection(db, "itemList");
-        const q = query(ref, where("account", "==", account));
-        
-        const unsub = onSnapshot(q, (querySnapshot) => {
-            let accountArr = [];
-            querySnapshot.forEach((doc) => {
-                accountArr.push({ ...doc.data()});
-            });
-            if(accountArr[0]){
-                setError("此帳號已註冊");
-            }else{
-                const showColor = {
-                    titleColor: "#333333",
-                    linkTextColor: "#333333",
-                    linkColor: "rgba(255, 255, 255, 0.645)",
-                    logeColor: "#333333",
-                };
+        const showColor = {
+            titleColor: "#333333",
+            linkTextColor: "#333333",
+            linkColor: "rgba(255, 255, 255, 0.645)",
+            logeColor: "#333333",
+        };
 
-                const profile = {
-                    account: account,
-                    photo: "",
-                    introduction: ""
-                };
+        const profile = {
+            account: account,
+            photo: "",
+            introduction: ""
+        };
 
-                createUserWithEmailAndPassword(auth, email, password)
-                .then((currentUser) => {
-                    dispatch({type:'LOGIN', payload: currentUser.user.uid});
-                    setDoc(doc(db, "itemList", currentUser.user.uid), { "profile": profile, "item": [], "showColor": showColor  });
-                })
-                .catch((error) => {
-                    switch(error.code){
-                        case ("auth/email-already-in-use"):
-                            setError("Email is already in use");
-                            break;
-                        case("auth/invalid-email"):
-                            setError("Email is invalid");
-                            break;
-                        case("auth/weak-password"):
-                            setError("Password should be at least 6 characters");
-                            break;
-                        default:
-                    }
-                    setPending(false);
-                }) 
-            }
+        const iconLink = [
+            {
+                iconIndex: 0,
+                link: ""
+            },
+            {
+                iconIndex: 1,
+                link: ""
+            },
+            {
+                iconIndex: 2,
+                link: ""
+            },
+        ]
+
+        createUserWithEmailAndPassword(auth, email, password)
+        .then((currentUser) => {
+            dispatch({type:'LOGIN', payload: currentUser.user.uid});
+            setDoc(doc(db, "itemList", currentUser.user.uid), { "profile": profile, "item": [], "showColor": showColor, "iconLink": iconLink });
         })
-        
+        .catch((error) => {
+            switch(error.code){
+                case ("auth/email-already-in-use"):
+                    setError("此信箱已被註冊!");
+                    break;
+                case("auth/invalid-email"):
+                    setError("信箱格式有誤!");
+                    break;
+                case("auth/weak-password"):
+                    setError("密碼須至少6個字元!");
+                    break;
+                default:
+            }
+            setPending(false);
+        }) 
     } 
     return { error, signup, pending }
 } 

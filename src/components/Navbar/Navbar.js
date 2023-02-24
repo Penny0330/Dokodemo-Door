@@ -16,6 +16,7 @@ function Navbar() {
     const { logout } = useLogout();
     const { user } = useAuthContext();
     const [ toggled, setToggled ] = useState(false);
+    const [ open, setOpen ] = useState(false);
     const [ popupCopy, setPopupCopy ] = useState(false);
 
 
@@ -25,6 +26,11 @@ function Navbar() {
 
     if(window.location.href.includes("member")){
         path = window.location.href.split("member")[0];
+    }
+
+    const openDoorNav = (e) => {
+        e.stopPropagation()
+        setOpen(!open)
     }
 
     const copy = () => {

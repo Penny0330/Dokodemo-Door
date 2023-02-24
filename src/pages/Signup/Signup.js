@@ -32,7 +32,10 @@ function Signup() {
                     <div className={styles.title}>加入我們 !</div>
                     <div className={styles.signup}>
                         <label>
-                            <p>帳號：至少 4 個字元</p>
+                            <div className={styles.account}>帳號
+                                <p className={styles.remark}>( 至少 4 個字元 )</p>
+                            </div>
+                            
                             <input 
                                 type="text" 
                                 placeholder="Account"
@@ -50,7 +53,10 @@ function Signup() {
                                 required  />
                         </label>
                         <label>
-                            <p>密碼：至少 6 個字元</p>
+                            <div className={styles.password}>密碼
+                                <p className={styles.remark}>( 至少 6 個字元 )</p>
+                            </div>
+
                             <input 
                                 type="password" 
                                 placeholder="Password" 

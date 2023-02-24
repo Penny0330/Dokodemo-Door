@@ -18,10 +18,10 @@
     overflow:auto;
     height: 94%;
     margin-top: 10px;
+    padding: 0 13px;
     text-align: center;
     display: grid;
     justify-content: center;
-
     align-items: center;
 }
 
@@ -44,6 +44,7 @@
     justify-self: center;
     border-bottom: 2px dotted gray;
     padding-bottom: 10px;
+    padding: 0 5px;
 }
 
 .noPic{
@@ -66,11 +67,33 @@
     font-size: 20px;
     color: #333333;
     font-weight: bold;
+    width: 90%;
+    overflow-wrap: anywhere;
 }
 
 .introduction{
     font-size: 14px;
-    margin-top: 5px;
+    margin: 5px 0;
+    width: 90%;
+    overflow-wrap: anywhere;
+}
+
+.iconLinks{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.iconLink{
+    margin: 0 4px;
+}
+
+.iconLink svg{
+    transition: all .3s linear;
+}
+
+.iconLink svg:hover{
+    transform: scale(1.2);
 }
 
 .text{
@@ -134,11 +157,8 @@
     outline: 2px solid rgb(218, 216, 216);
     cursor: pointer;
     position: relative;
+    transition: all .3s linear;
 }
-
-/* .colorPri:hover{
-    outline: 2px solid rgb(154, 153, 153);
-} */
 
 .colorGreen{
     width: 30px;
@@ -149,6 +169,7 @@
     outline: 2px solid rgb(218, 216, 216);
     cursor: pointer;
     position: relative;
+    transition: all .3s linear;
 }
 
 .colorBlue{
@@ -160,6 +181,7 @@
     outline: 2px solid rgb(218, 216, 216);
     cursor: pointer;
     position: relative;
+    transition: all .3s linear;
 }
 
 .colorBlack{
@@ -171,6 +193,7 @@
     outline: 2px solid rgb(218, 216, 216);
     cursor: pointer;
     position: relative;
+    transition: all .3s linear;
 }
 
 .colorPri:hover, .colorGreen:hover, .colorBlue:hover, .colorBlack:hover{
@@ -180,21 +203,6 @@
 .active{
     outline: 2px solid rgb(154, 153, 153);
 }
-
-/* .colorPri::after, .colorBlue::after, .colorGreen::after, .colorBlack::after {
-    position: absolute;
-    bottom: -5px;
-    content: '';
-    left: -5px;
-    width: 32px;
-    height: 32px;
-    border: 2px solid rgb(218, 216, 216);
-    border-radius: 50%;
-}
-
-.colorPri:hover::after, .colorBlue:hover::after, .colorGreen:hover::after, .colorBlack:hover::after{
-    border: 2px solid rgb(154, 153, 153);
-} */
 
 .img{
     width: 142px;

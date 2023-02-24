@@ -54,11 +54,9 @@ function Login() {
                         !pending ? <button className={styles.loginButton}><p>登入</p></button>:
                         <button className={styles.loginButton}><img className={styles.loading} src={loading} alt="" /></button>
                     }
-{/* 
-                    <button className={styles.loginButton}><p>登入</p></button> 
-                    <button className={styles.loginButton}><img className={styles.loading} src={loading} alt="" /></button> */}
                     
                     <div className={styles.error}> {error} </div>
+                    
                     <div className={styles.toSignup}>
                         <Link to="/signup">
                             還沒有帳號? 立即註冊!

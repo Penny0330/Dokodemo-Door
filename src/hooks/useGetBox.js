@@ -9,6 +9,7 @@ export const useGetBox = (user) => {
     const [noPhotoText, setNoPhotoText] = useState("");
     const [value, setValue] = useState([]);
     const [color, setColor] = useState({});
+    const [ iconLink, setIconLink ] = useState([]);
     const [error, setError] = useState(false);
     const [ pending, setPending ] = useState(false);
 
@@ -31,6 +32,7 @@ export const useGetBox = (user) => {
                     setColor(doc.data().showColor);
                     setProfile(doc.data().profile);
                     setNoPhotoText(doc.data().profile.account.slice(0, 1).toUpperCase());
+                    setIconLink(doc.data().iconLink);
                     setPending(false);
                 }
                 
@@ -41,5 +43,5 @@ export const useGetBox = (user) => {
         }
     }, [])
 
-    return {value, setValue, color, profile, noPhotoText, error, pending};
+    return {value, setValue, color, profile, noPhotoText, error, pending, iconLink};
 }

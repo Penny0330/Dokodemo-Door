@@ -22,14 +22,14 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 
 function Admin() {
     const { user } = useAuthContext();
-    const {profile, noPhotoText, value, setValue, color, pending } = useGetBox(user);       
+    const {profile, noPhotoText, value, setValue, color, pending, iconLink } = useGetBox(user);       
     const [openShow, setOpenShow] = useState(false);
 
     // max-width: 700 : click showing
     const handleOpenShow = () => {
         setOpenShow(!openShow);
     }
-
+    
     return (
         <div className="wrapper">
 
@@ -59,13 +59,13 @@ function Admin() {
 
                     <div className={styles.right}>
 
-                        <Show value={value} color={color} profile={profile} noPhotoText={noPhotoText} pending={pending}/>
+                        <Show value={value} color={color} profile={profile} noPhotoText={noPhotoText} pending={pending} iconLink={iconLink}/>
 
                     </div>
 
                     {
                         openShow ?
-                            <ShowMobile profile={profile} noPhotoText={noPhotoText} value={value} openShow={openShow} handleOpenShow={handleOpenShow} color={color} /> :
+                            <ShowMobile profile={profile} noPhotoText={noPhotoText} value={value} openShow={openShow} handleOpenShow={handleOpenShow} color={color} iconLink={iconLink} /> :
                             <div className={styles.preview} onClick={handleOpenShow}>
                                 <img className={styles.smartphone} src={smartphone} alt="smartphone" />
                             </div>

@@ -47,25 +47,38 @@ function AddButton() {
         onClick={(e) => e.stopPropagation()}
         style={{
           height: open ? "auto" : "0px",
-          padding: open ? "15px 0 15px" : "0px",
+          padding: open ? "15px 10px 25px" : "0px 10px",
           borderRadius: open ? "0 0 50px 50px" : "50px"
         }}
       >
         <button className={styles.addTextButton} onClick={addTextBox}>
           <img src={title} alt="" className={styles.icon} />
-          標題文字
+          <div className={styles.titleAndRemark}>
+            <div className={styles.title}>文字</div>
+            <div className={styles.remark}>文字標題/文字段落</div>
+          </div>
         </button>
         <button className={styles.addLinkButton} onClick={addLinkBox}>
           <img src={link} alt="" className={styles.icon} />
-          連結按鈕
+          <div className={styles.titleAndRemark}>
+            <div className={styles.title}>文字按鈕</div>
+            <div className={styles.remark}>純文字連結按鈕</div>
+          </div>
         </button>
         <button className={styles.addImgButton} onClick={addImgBox}>
           <img src={image} alt="" className={styles.icon} />
-          圖片看板
+          <div className={styles.titleAndRemark}>
+            <div className={styles.title}>圖片看板</div>
+            <div className={styles.remark}>支援: jpg/png/gif</div>
+          </div>
         </button>
         <button className={styles.addLineButton} onClick={addLineBox}>
           <img src={line} alt="" className={styles.icon} />
-          分隔線
+          <div className={styles.titleAndRemark}>
+            <div className={styles.title}>分隔線</div>
+            <div className={styles.remark}>可分隔不同區塊的線段</div>
+          </div>
+
         </button>
       </div>
     </div>

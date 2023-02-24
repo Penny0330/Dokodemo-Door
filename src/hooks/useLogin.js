@@ -2,8 +2,7 @@ import {useState} from "react";
 import { useAuthContext } from "./useAuthContext";
 
 // firebase
-import { auth, db  } from "../utils/firebase.config";
-import { onSnapshot,  doc} from "firebase/firestore";
+import { auth } from "../utils/firebase.config";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 export const useLogin = () => {
@@ -21,10 +20,10 @@ export const useLogin = () => {
             .catch((error) => {
                 switch(error.code){
                     case ("auth/user-not-found"):
-                        setError("User isn't found");
+                        setError("信箱或密碼有誤!");
                         break;
                     case("auth/wrong-password"):
-                        setError("Email or Password is wrong");
+                        setError("信箱或密碼有誤!");
                         break;
                     default:
                 }

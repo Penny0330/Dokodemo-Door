@@ -13,7 +13,7 @@ export const useEditBox = () => {
     const [ popup, setPopup ] = useState(false);
     const [ isEdit, setIsEdit ] = useState("");
     const [ deletePopup, setDeletePopup] = useState(false);
-    const [ deleteData, setDeleteData ] = useState();
+    const [ deleteData, setDeleteData ] = useState("");
 
     useEffect(() => {
         document.addEventListener('click', (e)=>{setIsEdit("")});

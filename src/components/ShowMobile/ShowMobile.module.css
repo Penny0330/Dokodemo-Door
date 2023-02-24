@@ -165,10 +165,34 @@
     color: #333333;
     font-size: 20px;
     font-weight: bold;
+    overflow-wrap: anywhere;
+    width: 90%;
 }
 
 .introduction{
     margin-top: 5px;
+    overflow-wrap: anywhere;
+    width: 90%;
+    margin-bottom: 10px;
+}
+
+.iconLinks{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.iconLink{
+    margin: 0 10px;
+    font-size: 30px;
+}
+
+.iconLink svg{
+    transition: all .3s linear;
+}
+
+.iconLink svg:hover{
+    transform: scale(1.2);
 }
 
 .text{

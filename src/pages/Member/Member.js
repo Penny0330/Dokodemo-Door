@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 
 //Component
 import Navbar from "../../components/Navbar/Navbar";
@@ -8,6 +7,10 @@ import loading from "../../images/loading.gif";
 import Show from "../../components/Show/Show";
 import ShowMobile from "../../components/ShowMobile/ShowMobile";
 import smartphone from "../../images/smartphone.png";
+import member from "../../images/member.png";
+import drag from "../../images/drag.png";
+import trash from "../../images/trash.svg";
+import pin from "../../images/pin.svg";
 
 // hooks
 import { useMember } from "../../hooks/useMember";
@@ -21,25 +24,31 @@ import styles from "./Member.module.css";
 import { auth, db } from "../../utils/firebase.config";
 import { doc, onSnapshot } from "firebase/firestore";
 
+// DnD
+import { Draggable, DragDropContext, Droppable } from "react-beautiful-dnd";
+
 function Member () {
 
     const { user } = useAuthContext();
-    const {profile, value, setValue, color } = useGetBox(user);       
-    const [openShow, setOpenShow] = useState(false);
-
-    const { uploadPhoto, newImgUrl, setNewImgUrl, storageProfile, pending } = useMember();
+    const { profile, value, color } = useGetBox(user);       
+    const [ openShow, setOpenShow ] = useState(false);
+    const [ account, setAccount] = useState("");
     const [ newAccount, setNewAccount] = useState("");
     const [ newIntro, setNewIntro] = useState("");
+    const [ iconLink, setIconLink ] = useState([]);
 
-    const noPhotoText = newAccount.slice(0, 1).toUpperCase();
+    const { uploadPhoto, newImgUrl, setNewImgUrl, storageProfile, pending, allIcons, addIcon, updateData, deleteCheck, deleteButton, onDragEnd, deletePopup, setDeletePopup, openIconList, setOpenIconList } = useMember(iconLink);
 
+    const noPhotoText = account.slice(0, 1).toUpperCase();
 
     useEffect(() => {
         const ref = doc(db, "itemList", auth.currentUser.uid)
         const unsub = onSnapshot((ref), (doc) => {
                 setNewImgUrl(doc.data().profile.photo);
                 setNewAccount(doc.data().profile.account);
+                setAccount(doc.data().profile.account);
                 setNewIntro(doc.data().profile.introduction);
+                setIconLink(doc.data().iconLink);
         })
         
         return () => {
@@ -47,47 +56,34 @@ function Member () {
         }
     }, [])
 
-        // max-width: 700 : click showing
-        const handleOpenShow = () => {
-            setOpenShow(!openShow);
-        }
-
-    // const handleUploadPhoto = (e) => {
-    //     uploadPhoto(e);
-    // }
-
-    // const handleStore = (newAccount, newIntro) => {
-    //     storageProfile(newAccount, newIntro);
-    // }
+    const handleOpenShow = () => {
+        setOpenShow(!openShow);
+    }
 
     return(
 
         <div className="wrapper">
             <Navbar />
 
+            {
+                deletePopup && (
+                    <div className={styles.popup}>
+                        <div className={styles.popupBox}>
+                            <p className={styles.alter}>注意</p>
+                            <p className={styles.popupTitle}>確認刪除區塊？</p>
+                            <button className={styles.cancelDeleteButton} onClick={() => setDeletePopup(!deletePopup)}>取消</button>
+                            <button className={styles.deleteButton} onClick={() => deleteButton()}>確認</button>
+                        </div>
+                    </div>
+                )
+            }
+
             <main className={styles.main}>
                 <div className={styles.container}>
                     <div className={styles.left}>
-                        <div className={styles.storeAndGoHomeButton}>
-                            <button className={styles.goHomeButton}>
-                                <Link to={"/admin"}>返回主頁</Link>
-                            </button>
-
-                            {
-                                !pending && (
-                                    <button className={styles.storeButton} onClick={() => storageProfile(newAccount, newIntro)}>儲存</button>
-                            )
-                            }
-                            {
-                                pending && (
-                                    <button className={styles.loadingButton}>
-                                        <img src={loading} alt="" className={styles.loading} />
-                                    </button>
-                                )
-                            }
-
-                        </div>
                         <div className={styles.profile}>
+                            <img src={member} alt="member" className={styles.memberIcon} />
+                            <div className={styles.memberTitle}>個人簡介</div>
                             <div className={styles.profilePhoto}>
                                 
                                 {
@@ -121,18 +117,110 @@ function Member () {
                                 <label htmlFor="introduction" className={styles.memberLabel} >個人簡介</label>
                                 <textarea cols="30" rows="5" id="introduction" className={styles.introductionTextarea} value={newIntro} onChange={(e) => setNewIntro(e.target.value)}></textarea>
                             </form>
+
+                            <div className={styles.store}>
+                                {
+                                    !pending && (
+                                        <button className={styles.storeButton} onClick={() => storageProfile(newAccount, newIntro)}>儲存</button>
+                                    )
+                                }
+                                {
+                                    pending && (
+                                        <button className={styles.loadingButton}>
+                                            <img src={loading} alt="" className={styles.loading} />
+                                        </button>
+                                    )
+                                }
+                            </div>
+                        </div>
+
+                        <div className={styles.socialIcons}>
+                            <img src={pin} alt="pin" className={styles.memberIcon} />
+                            <div className={styles.socialIconsTitle}>社群連結</div>
+
+                            <DragDropContext onDragEnd={(e) => onDragEnd(e, value)}>
+                                <Droppable droppableId="drop-id">
+                                    {
+                                        ((provided) =>(
+                                            <div ref={provided.innerRef} {...provided.droppableProps}>
+                                                <div className={styles.iconLinkList}>
+                                                    {
+                                                        iconLink.map((icon, index) => {
+                                                            return(
+                                                                <Draggable draggableId={index.toString()} index={index} key={index}>
+                                                                    {
+                                                                        ((provided) => (
+                                                                            <div {...provided.draggableProps} ref={provided.innerRef}>
+                                                                    
+                                                                    
+                                                                                <div className={styles.iconLinks}>
+                                                                                    <div className={styles.dragAndTrash}>
+                                                                                        <img src={drag} alt="drag" className={styles.drag} {...provided.dragHandleProps} />
+                                                                                        <button className={styles.deleteCheckButton}>
+                                                                                            <img src={trash} alt="trash" className={styles.deleteButtonIcon} onClick={() => deleteCheck(index)} />
+                                                                                        </button>
+                                                                                    </div>
+
+                                                                                    <div className={styles.iconAndLink}>
+                                                                                        {allIcons[icon.iconIndex]}
+                                                                                        <input type="text" placeholder="請輸入信箱/網址" value={iconLink[index].link} onChange={(e) => updateData(e, icon.iconIndex, index)}/>
+                                                                                    </div>
+                                                                                    
+                                                                                </div>
+                                                                            </div>
+                                                                        ))
+                                                                    }
+                                                                </Draggable>
+                                                            ) 
+                                                        })
+                                                    }
+                                                </div>
+                                                {provided.placeholder}
+                                            </div>
+                                        ))
+                                    }
+                                </Droppable>
+                            </DragDropContext>
+                            {
+                                !openIconList && (
+                                    <div className={styles.addIcons}  onClick={() => setOpenIconList(!openIconList)}>+</div>
+                                )
+                            }
+                            {
+                                openIconList && (
+                                    <>
+                                        <div className={styles.selectIcons}>
+                                            <ul>
+                                                {
+                                                    allIcons.map((icon, index) => {
+                                                        return(
+                                                            <li key={index} onClick={() => addIcon(index)}>
+                                                                <button className={styles.iconButton}>
+                                                                    {icon}
+                                                                </button>
+                                                            </li>
+                                                        )
+                                                    })
+                                                }
+                                                
+                                            </ul>
+                                        </div>
+                                        <div className={styles.addIcons_open}  onClick={() => setOpenIconList(!openIconList)}>×</div>
+                                    </>
+                                )
+                            }
                         </div>
                     </div>
 
                     <div className={styles.right}>
 
-                        <Show value={value} color={color} profile={profile} noPhotoText={noPhotoText} pending={pending}/>
+                        <Show value={value} color={color} profile={profile} noPhotoText={noPhotoText} pending={pending} iconLink={iconLink}/>
 
                     </div>
 
                     {
                     openShow ?
-                        <ShowMobile profile={profile} noPhotoText={noPhotoText} value={value} openShow={openShow} handleOpenShow={handleOpenShow} color={color} /> :
+                        <ShowMobile profile={profile} noPhotoText={noPhotoText} value={value} openShow={openShow} handleOpenShow={handleOpenShow} color={color} iconLink={iconLink} /> :
                         <div className={styles.preview} onClick={handleOpenShow}>
                             <img className={styles.smartphone} src={smartphone} alt="smartphone" />
                         </div>

@@ -40,6 +40,9 @@ nav{
 
 .login{
     padding: 5px 0;
+    margin-bottom: 15px;
+    border: 2px solid #728d81;
+    transition: all .3s linear;
 }
 
 .login a{
@@ -58,6 +61,8 @@ nav{
     background-color: #ECE9DF;
     padding: 5px 0;
     border-radius: 5px;
+    margin-bottom: 15px;
+    transition: all .3s linear;
 }
 
 .signup a{
@@ -101,15 +106,16 @@ nav{
 
 .copy{
     position: absolute;
-    background-color: #587367;
+    background: linear-gradient(0deg, #395347, #728d81);
     top: 76px;
-    width: 150px;
-    height: 90px;
+    width: 152px;
+    height: 106px;
     right: 3vw;
     overflow: hidden;
-    padding: 10px 10px 10px 15px;
-    border-radius: 0 0 10px 10px;
-    animation: appear 0.2s ease-in;
+    padding: 20px 0px 20px 15px;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0px 4px 10px #808080;
+    animation: appear .5s ease-in;
 
     display: none;
 }
@@ -156,6 +162,7 @@ nav{
     border: 2px solid #ECE9DF;
     cursor: pointer;
     margin-bottom: 20px;
+    transition: all .3s linear;
 }
 
 .logout:hover{
@@ -168,6 +175,7 @@ nav{
     justify-content: flex-end;
     align-items: center;
     cursor: pointer;
+    margin-right: 3vw;
     display: none;
 }
 

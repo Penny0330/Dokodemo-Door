@@ -4,11 +4,11 @@
     display: grid;
     grid-template-rows: minmax(600px, auto);
     margin: auto;
-    background-color: #ECE9DF;
 }
 
 .container{
     width: 90vw;
+    max-width: 1000px;
     display: grid;
     grid-template-columns: 2fr 1fr;
     flex-direction: column;
@@ -19,37 +19,19 @@
 
 .left{
     width: 45vw;
-    background-color: white;
-    padding: 20px;
+    max-width: 500px;
     margin: 50px auto;
 }
 
-.storeAndGoHomeButton{
-    display: flex;
-    justify-content: space-between;
+.memberIcon{
+    transform: rotate(-20deg);
+    width: 36px;
+    height: 36px;
 }
 
-.goHomeButton{
-    border-radius: 5px;
-    border: none;
-}
-
-.goHomeButton a{
-    padding: 5px 8px;
-    font-size: 18px;
+.memberTitle{
+    font-size: 20px;
     font-weight: bold;
-    color: #b2a7a7;
-    background: none;
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.goHomeButton:hover{
-    background-color: #D9D9D9;
-}
-
-.goHomeButton a:hover{
-    color: white;
 }
 
 .storeButton{
@@ -61,6 +43,7 @@
     background-color: #728D81;
     color: #ECE9DF;
     cursor: pointer;
+    transition: all .3s linear;
 }
 
 .storeButton:hover{
@@ -86,8 +69,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 50px;
+    gap: 25px;
     margin-bottom: 50px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px #aaaaaa;
 }
 
 .profilePhoto{
@@ -120,10 +107,15 @@
 .photoEditButton{
     font-size: 15px;
     padding: 5px 10px;
-    border: none;
     background-color: #ECE9DF;
+    border: 1px solid #ECE9DF;
     border-radius: 5px;
     cursor: pointer;
+    transition: all .3s linear;
+}
+
+.photoEditButton:hover{
+    border: 1px solid gray;
 }
 
 .fileInput {
@@ -147,30 +139,213 @@ form{
     flex-direction: column;
     gap: 10px; 
     width: 25vw;
+    max-width: 400px;
 }
 
 .memberLabel{
     font-weight: bold;
     color: gray;
+    padding-left: 5px;
 }
 
 .accountInput{
-    outline: none;
-    border: none;
-    border-bottom: 1px solid gray;
-    padding: 0 0 5px 0px;
+    border: 1px solid #ece9df7a;
+    background-color: #ece9df7a;
+    padding: 10px 10px 10px 15px;
     margin-bottom: 15px;
     font-size: 16px;
     letter-spacing: 1px;
+    border-radius: 20px;
+    transition: all .3s linear;
+    outline: none;
+}
+
+.accountInput:hover{
+    border: 1px solid gray;
+}
+
+.accountInput:focus{
+    border: 1px solid #ece9df7a;
+    box-shadow: 0px 0px 0px 1px gray;
 }
 
 .introductionTextarea{
-    outline: none;
     max-width: 100%;
-    border: 1px solid gray;
-    padding: 5px;
+    border: 1px solid #ece9df7a;
+    padding: 10px;
     font-size: 16px;
     letter-spacing: 1px;
+    background-color: #ece9df7a;
+    border-radius: 10px;
+    transition: all .3s linear;
+    outline: none;
+}
+
+.introductionTextarea:hover{
+    border: 1px solid gray;
+}
+
+.introductionTextarea:focus{
+    border: 1px solid #ece9df7a;
+    box-shadow: 0px 0px 0px 1px gray;
+}
+
+.socialIcons{
+    display: grid;
+    gap: 15px;
+    justify-items: center;
+    background-color: white;
+    padding: 50px 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px #aaaaaa;
+}
+
+.socialIconsTitle{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.iconLinkList{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.iconLinks{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid rgb(218 216 216);
+    box-shadow: 0px 2px 10px rgb(248 247 245);
+    padding: 4px 11px 11px;
+    border-radius: 10px;
+    gap: 4px;
+}
+
+.iconLinks svg{
+    fill: #728d81;
+}
+
+.dragAndTrash{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 3px;
+    align-items: center;
+}
+
+.drag{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.deleteCheckButton{
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    border-radius: 50%;
+    padding: 3px 2px 2px 2px;
+    transition: all .3s linear;
+}
+
+.deleteCheckButton:hover{
+    background-color: #ece9df;
+}
+
+.deleteButtonIcon{
+    width: 25px;
+}
+
+.iconAndLink{
+    font-size: 26px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.iconAndLink input{
+    border: 1px solid #ece9df7a;
+    background-color: #ece9df7a;
+    padding: 8px;
+    border-radius: 16px;
+    width: 20vw;
+    max-width: 400px;
+    letter-spacing: 1px;
+    outline: none;
+    transition: all .3s linear;
+}
+
+.iconAndLink input:hover{
+    border: 1px solid gray;
+}
+
+.iconAndLink input:focus{
+    border: 1px solid #ece9df7a;
+    box-shadow: 0px 0px 0px 1px gray;
+}
+
+.addIcons{
+    width: 25vw;
+    max-width: 400px;
+    height: 45px;
+    font-size: 30px;
+    border-radius: 20px;
+    text-align: center;
+    color: #587367;
+    border: 1px solid #ffffff;
+    cursor: pointer;
+    transition: all.3s linear;
+}
+
+.addIcons:hover{
+    background-color: #afd9c645;
+    border: 1px solid #587367;
+}
+
+.addIcons_open{
+    width: 25vw;
+    max-width: 400px;
+    height: 45px;
+    font-size: 30px;
+    border-radius: 20px;
+    text-align: center;
+    color: #587367;
+    background-color: #afd9c645;
+    border: 1px solid #587367;
+    cursor: pointer;
+}
+
+.selectIcons{
+    width: 25vw;
+    max-width: 400px;
+}
+
+.selectIcons ul{
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.iconButton{
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+    background: white;
+    display: flex;
+    padding: 6px;
+    border-radius: 10px;
+    transition: all.3s linear;
+}
+
+.iconButton:hover{
+    background: rgb(218 216 216);
+}
+
+.iconButton svg:hover{
+    fill: black
 }
 
 .right{
@@ -196,6 +371,70 @@ form{
     vertical-align: middle;
 }
 
+.popup{
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 100%;
+    z-index: 5;
+    background-color: #80808066;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popupBox{
+    background-color: white;
+    padding: 35px 60px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.popupTitle{
+    font-weight: bold;
+    color: #665d5d;
+    margin-bottom: 30px;
+}
+
+.alter{
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.cancelDeleteButton{
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #665d5d;
+    font-weight: bold;
+    margin-right: 10px;
+    transition: all .3s linear;
+}
+
+.cancelDeleteButton:hover{
+    background-color: #c6bbbb;
+}
+
+.deleteButton{
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #665d5d;
+    font-weight: bold;
+    background-color: rgb(212 100 100);
+    color: white;
+    margin-left: 10px;
+    transition: all .3s linear;
+}
+
+.deleteButton:hover{
+    background-color: rgb(177 51 51);
+}
+
 @media (max-width: 700px) {
     .container{
         width: 100%;
@@ -214,12 +453,6 @@ form{
     form{
         width: 50vw;
     }
-    
-    .loading{
-        width: 9vw;
-        border-radius: 50%;
-        margin-top: 50px;
-    }
 
     .right{
         display: none;
@@ -227,6 +460,14 @@ form{
 
     .preview{
         display: block;
+    }
+    
+    .addIcons, .addIcons_open, .selectIcons{
+        width: 50vw;
+    }
+
+    .iconAndLink input{
+        width: 40vw;
     }
     
 }

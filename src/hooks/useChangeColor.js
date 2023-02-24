@@ -5,7 +5,9 @@ import { db, auth } from "../utils/firebase.config";
 
 export const useChangeColor = (color) => {
 
-    let init = "";  
+    const [active, setActive] = useState(init);
+
+    let init = color.linkColor;  
     if(color.linkColor === "rgba(255, 255, 255, 0.645)"){
         init = "pri";
     }else if(color.linkColor === "#395347"){
@@ -15,8 +17,6 @@ export const useChangeColor = (color) => {
     }else if(color.linkColor === "#333333"){
         init = "black";
     }
-
-    const [active, setActive] = useState(init);
 
     const changeColorPri = async() => {
         const showColor = {

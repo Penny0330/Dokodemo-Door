@@ -116,12 +116,35 @@
     font-size: 24px;
     color: #333333;
     font-weight: bold;
+    width: 90%;
+    overflow-wrap: anywhere;
 }
 
 .introduction{
     margin-top: 5px;
+    width: 90%;
+    overflow-wrap: anywhere;
 }
 
+.iconLinks{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.iconLink{
+    margin: 0 4px;
+}
+
+.iconLink svg{
+    font-size: 30px;
+    transition: all .3s linear;
+}
+
+.iconLink svg:hover{
+    transform: scale(1.2);
+}
 
 .allList{
     width: 25vw;
