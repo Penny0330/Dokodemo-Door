@@ -11,6 +11,7 @@ import title from "../../images/add_title.svg";
 import link from "../../images/add_link.svg";
 import image from "../../images/add_image.svg";
 import line from "../../images/add_line.svg";
+import leaf from "../../images/leaf.png";
 
 function AddButton() {
   const { user } = useAuthContext();
@@ -27,6 +28,7 @@ function AddButton() {
 
   return (
     <div className={styles.addButton} onClick={(e) => e.stopPropagation()}>
+      <img src={leaf} alt="leaf" className={styles.imgLeaf} />
       <input
         type="checkbox"
         id={styles.menu}

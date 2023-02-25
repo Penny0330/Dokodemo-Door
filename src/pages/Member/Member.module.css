@@ -327,6 +327,9 @@ form{
     flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
+    padding-top: 10px;
+    border-top: 3px dashed #c6bbbb;
+    margin-top: 15px;
 }
 
 .iconButton{

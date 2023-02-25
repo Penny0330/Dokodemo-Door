@@ -40,7 +40,6 @@ function Admin() {
                 <div className={styles.container}>
 
                     <div className={styles.left}>
-                        <img src={leaf} alt="leaf" className={styles.imgLeaf} />
 
                         <AddButton />
 
