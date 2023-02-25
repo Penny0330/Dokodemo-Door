@@ -23,7 +23,6 @@ function App(){
                     <Route path="/signup" element={ !user ? <Signup /> : <Navigate to="/admin" replace /> } />
                     <Route path="/admin" element={ user ? <Admin /> : <Navigate to="/" replace /> } />
                     <Route path="/member" element={ user ? <Member /> : <Navigate to="/" replace /> } />
-                    
                     <Route path="/:user" element={ <Publish /> } />
                 </Routes>
             )}
