@@ -1,8 +1,6 @@
-@value natural: #ECE9DF;
-
 .footer{
     display: grid;
     justify-content: center;
     margin: 20px 0;
-    color: natural;
+    color: #ECE9DF;
 }

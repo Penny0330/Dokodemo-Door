@@ -3,7 +3,6 @@
     height: 400px;
     background-color: #ECE9DF;
     border-radius: 30px;
-    border: 8px solid rgba(0, 0, 0, 0.58);
     border: 8px solid rgb(99 101 101);
     position: sticky;
     top: 150px;
@@ -43,7 +42,6 @@
     width: 100%;
     justify-self: center;
     border-bottom: 2px dotted gray;
-    padding-bottom: 10px;
     padding: 0 5px;
 }
 
@@ -100,13 +98,11 @@
     text-align: center;
     border-radius: 5px;
     word-wrap:break-word;
-
     margin: 30px auto 12px;
     width: 20vh;
     font-weight: bold;
     padding: 0 5px;
     font-size: 15px;
-    font-weight: bold;
 }
 
 .link{
@@ -115,9 +111,7 @@
     word-wrap:break-word;
     text-overflow: ellipsis;
     box-shadow: 0px 2px 6px #AAAAAA;
-
     overflow: hidden;
-
     margin: 12px auto;
     width: 9rem;
     background-color: rgb(248, 247, 245);
@@ -142,7 +136,6 @@
     position: absolute;
     top: 0;
     right: -55px;
-
     display: flex;
     flex-direction: column;
     gap: 10px;

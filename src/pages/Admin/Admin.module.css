@@ -20,7 +20,6 @@
 }
 
 .right{
-    margin: 95px 80px;
     margin: 95px 71px;
 }
 
@@ -59,10 +58,8 @@
     }
 
     .left{
-        grid-template-rows: 280px auto;
         margin-left: 0px;
         margin-bottom: 150px;
-
         grid-template-rows: auto auto;
     }
 

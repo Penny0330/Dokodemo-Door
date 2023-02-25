@@ -2,9 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 90%;
     width: 100%;
-    /* margin-top: 30px; */
 }
 
 .noData{
@@ -18,7 +16,6 @@
 }
 
 .textBox{
-    width: 80%;
     width: 47vw;
     height: 102px;
     padding: 20px 0;
@@ -170,7 +167,6 @@
     height: 20px;
     cursor: pointer;
     color: green;
-
     transition: all .5s ease-in;
 }
 
@@ -196,7 +192,6 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 15px;
-
     animation: appear .4s ease-in-out;
     transition: all .3s linear;
 }
@@ -355,7 +350,6 @@
     background-color: #587367;
     text-align: center;
     box-shadow: 0px 1px 6px rgb(140 138 138);
-
     animation: dude .5s 1 forwards;
 }
 
@@ -373,17 +367,7 @@
     vertical-align: middle;
 }
 
-.addImage{
-    width: 50%;
-    vertical-align: middle;
-}
-
-.checkIcon{
-    width: 50%;
-    vertical-align: middle;
-}
-
-.cancelIcon{
+.addImage, .checkIcon, .cancelIcon{
     width: 50%;
     vertical-align: middle;
 }
