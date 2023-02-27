@@ -121,7 +121,7 @@
 }
 
 .introduction{
-    margin-top: 5px;
+    margin-top: 10px;
     width: 90%;
     overflow-wrap: anywhere;
 }
@@ -130,7 +130,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 .iconLink{

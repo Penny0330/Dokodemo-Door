@@ -6,9 +6,9 @@ export const useAddBox = (value) => {
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
-        document.addEventListener('click', (e)=>{setOpen(false)});
+        document.addEventListener('click', ()=>{setOpen(false)});
         return () => {
-            document.removeEventListener('click', (e)=>{setOpen(false)});
+            document.removeEventListener('click', ()=>{setOpen(false)});
         }
     }, [])
 

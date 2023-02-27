@@ -19,10 +19,6 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 // Style
 import styles from "./Box.module.css";
 
-// firebase
-import { updateDoc, doc } from "firebase/firestore";
-import { db, auth } from "../../utils/firebase.config";
-
 // DnD
 import { Draggable, DragDropContext, Droppable } from "react-beautiful-dnd";
 
@@ -30,24 +26,8 @@ import { Draggable, DragDropContext, Droppable } from "react-beautiful-dnd";
 function Box (){
 
     const { user } = useAuthContext();
-    const { value, setValue, color } = useGetBox(user);
+    const { value, color } = useGetBox(user);
     const { handleEdit, newValue, setNewValue,  newLinkUrl, setNewLinkUrl, newImgUrl, handleStorageEdit, handleStorageLinkEdit, handleUploadImgEdit, handleStorageImgEdit, displayToggle, deleteButton, deletePopup, setDeletePopup, popup, setPopup, isEdit, cancelEdit, deleteCheck, onDragEnd } = useEditBox();
-
-    // const onDragEnd = async(result) => {
-    //     // source 被拖曳的物件 ； destination 拖曳後的位置
-    //     const { source, destination } = result
-    //     if (!destination) {
-    //         return;
-    //     }
-    //     let newValue = [...value];  
-    //     // 從 source.index 剪下被拖曳的元素
-    //     const [remove] = newValue.splice(source.index, 1);
-    //     //在 destination.index 位置貼上被拖曳的元素
-    //     newValue.splice(destination.index, 0, remove);
-    //     // 設定新的 value
-    //     setValue(newValue)
-    //     await updateDoc(doc(db, "itemList", auth.currentUser.uid), {"item": newValue});
-    //   }
     
     return(
         
@@ -122,12 +102,12 @@ function Box (){
                                                                     <div className={styles.displayToggleAndTrash}>
                                                                         {
                                                                             box.display && (
-                                                                                <img className={styles.displayToggleButton} src={toggleOpen} alt="toggle" onClick={(e) => displayToggle(box, value)} />
+                                                                                <img className={styles.displayToggleButton} src={toggleOpen} alt="toggle" onClick={() => displayToggle(box, value)} />
                                                                             )
                                                                         }
                                                                         {
                                                                             !box.display && (
-                                                                                <img className={styles.displayToggleButton} src={toggleClose} alt="toggle" onClick={(e) => displayToggle(box, value)} />
+                                                                                <img className={styles.displayToggleButton} src={toggleClose} alt="toggle" onClick={() => displayToggle(box, value)} />
                                                                             )
                                                                         }
                                                                         
@@ -174,12 +154,12 @@ function Box (){
                                                                     <div className={styles.displayToggleAndTrash}>
                                                                         {
                                                                             box.display && (
-                                                                                <img className={styles.displayToggleButton} src={toggleOpen} alt="toggle" onClick={(e) => displayToggle(box, value)} />
+                                                                                <img className={styles.displayToggleButton} src={toggleOpen} alt="toggle" onClick={() => displayToggle(box, value)} />
                                                                             )
                                                                         }
                                                                         {
                                                                             !box.display && (
-                                                                                <img className={styles.displayToggleButton} src={toggleClose} alt="toggle" onClick={(e) => displayToggle(box, value)} />
+                                                                                <img className={styles.displayToggleButton} src={toggleClose} alt="toggle" onClick={() => displayToggle(box, value)} />
                                                                             )
                                                                         }
                                                                         
@@ -264,12 +244,12 @@ function Box (){
                                                                     <div className={styles.displayToggleAndTrash}>
                                                                         {
                                                                             box.display && (
-                                                                                <img className={styles.displayToggleButton} src={toggleOpen} alt="toggle" onClick={(e) => displayToggle(box, value)} />
+                                                                                <img className={styles.displayToggleButton} src={toggleOpen} alt="toggle" onClick={() => displayToggle(box, value)} />
                                                                             )
                                                                         }
                                                                         {
                                                                             !box.display && (
-                                                                                <img className={styles.displayToggleButton} src={toggleClose} alt="toggle" onClick={(e) => displayToggle(box, value)} />
+                                                                                <img className={styles.displayToggleButton} src={toggleClose} alt="toggle" onClick={() => displayToggle(box, value)} />
                                                                             )
                                                                         }
                                                                         
@@ -297,12 +277,12 @@ function Box (){
                                                                     <div className={styles.displayToggleAndTrash}>
                                                                         {
                                                                             box.display && (
-                                                                                <img className={styles.displayToggleButton} src={toggleOpen} alt="toggle" onClick={(e) => displayToggle(box, value)} />
+                                                                                <img className={styles.displayToggleButton} src={toggleOpen} alt="toggle" onClick={() => displayToggle(box, value)} />
                                                                             )
                                                                         }
                                                                         {
                                                                             !box.display && (
-                                                                                <img className={styles.displayToggleButton} src={toggleClose} alt="toggle" onClick={(e) => displayToggle(box, value)} />
+                                                                                <img className={styles.displayToggleButton} src={toggleClose} alt="toggle" onClick={() => displayToggle(box, value)} />
                                                                             )
                                                                         }
                                                                         

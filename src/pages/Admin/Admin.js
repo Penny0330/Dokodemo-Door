@@ -8,8 +8,6 @@ import Show from "../../components/Show/Show";
 import ShowMobile from "../../components/ShowMobile/ShowMobile";
 import smartphone from "../../images/smartphone.png";
 import loading from "../../images/admin-loading.gif";
-import leaf from "../../images/leaf.png";
-
 import AddButton from "../../components/AddButton/AddButton";
 
 // Style

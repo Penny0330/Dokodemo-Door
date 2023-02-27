@@ -16,10 +16,10 @@ export const useEditBox = () => {
     const [ deleteData, setDeleteData ] = useState("");
 
     useEffect(() => {
-        document.addEventListener('click', (e)=>{setIsEdit("")});
+        document.addEventListener('click', ()=>{setIsEdit("")});
 
         return () => {
-            document.removeEventListener('click', (e)=>{setIsEdit("")});
+            document.removeEventListener('click', ()=>{setIsEdit("")});
         }
     }, [])
 

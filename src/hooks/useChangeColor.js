@@ -37,7 +37,7 @@ export const useChangeColor = (color) => {
             logeColor: "#395347",
         };
         await updateDoc(doc(db, "itemList", auth.currentUser.uid), {"showColor": showColor});
-        setActive("green")
+        setActive("green");
     }
 
     const changeColorBlue = async() => {
@@ -49,7 +49,7 @@ export const useChangeColor = (color) => {
 
         };
         await updateDoc(doc(db, "itemList", auth.currentUser.uid), {"showColor": showColor});
-        setActive("blue")
+        setActive("blue");
     }
 
     const changeColorBlack = async() => {
@@ -60,7 +60,7 @@ export const useChangeColor = (color) => {
             logeColor: "#333333",
         };
         await updateDoc(doc(db, "itemList", auth.currentUser.uid), {"showColor": showColor});
-        setActive("black")
+        setActive("black");
     }
 
     return { changeColorPri, changeColorGreen, changeColorBlue, changeColorBlack, active };

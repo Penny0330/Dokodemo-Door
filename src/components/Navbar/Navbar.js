@@ -19,7 +19,6 @@ function Navbar() {
     const [ open, setOpen ] = useState(false);
     const [ popupCopy, setPopupCopy ] = useState(false);
 
-
     const toggleTrueFalse = () => setToggled(!toggled);
 
     let path = window.location.href.split("admin")[0];
@@ -29,8 +28,8 @@ function Navbar() {
     }
 
     const openDoorNav = (e) => {
-        e.stopPropagation()
-        setOpen(!open)
+        e.stopPropagation();
+        setOpen(!open);
     }
 
     const copy = () => {
@@ -39,7 +38,7 @@ function Navbar() {
         
         setTimeout(()=>{
             setPopupCopy(false);
-        }, 1500)
+        }, 1500);
     }
 
     return(
@@ -52,7 +51,6 @@ function Navbar() {
                     </div>
                 )
             }
-
 
             <div className={styles.title}>
                 <Link to="/" >
@@ -88,7 +86,7 @@ function Navbar() {
                         <a>任意門▾</a>
 
                         <div className={styles.copy} >
-                            <a className={styles.goToDoor} href={path + user} target="_blank">⇀  前往任意門</a>
+                            <a className={styles.goToDoor} href={path + user} target="_blank" rel="noreferrer">⇀  前往任意門</a>
                             <button className={styles.copyButton} onClick={copy}>⇀  Copy網址</button>
                         </div>
 
@@ -96,8 +94,6 @@ function Navbar() {
                     <div className={styles.logout} onClick={logout}>登出</div>
                 </div>
             )}
-
-
 
             <div className={styles.loginMobile} onClick={toggleTrueFalse} >
                 { !toggled ?
@@ -147,7 +143,7 @@ function Navbar() {
                                             <a>任意門</a>
                                             <img className={styles.closeDoor} src={close}  alt="close" />
                                             <div className={styles.doorMobile} >
-                                                <a className={styles.goToDoorMobile} href={path + user} target="_blank"  onClick={() => setToggled(false)}>⇀  前往任意門</a>
+                                                <a className={styles.goToDoorMobile} href={path + user} target="_blank" rel="noreferrer"  onClick={() => setToggled(false)}>⇀  前往任意門</a>
                                                 <button className={styles.copyButtonMobile} onPointerUp={copy}>⇀  Copy網址</button>
                                             </div>
                                         </>
@@ -160,7 +156,6 @@ function Navbar() {
                 </div>)
             }
         </nav>
-        
     )
 }
 
