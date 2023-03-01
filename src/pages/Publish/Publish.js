@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 // component
 import loading from '../../images/admin-loading.gif';
 import close from '../../images/close_phone.png';
+import loge from '../../images/loge.svg';
 
 // hooks
 import { useGetBox } from '../../hooks/useGetBox';
@@ -103,14 +104,6 @@ function Publish() {
                                         value={window.location.href}
                                         level={'L'}
                                         className={styles.QRCode}
-                                        imageSettings={{
-                                            src: 'https://dokodemo-door.web.app/src/images/loge.svg',
-                                            x: undefined,
-                                            y: undefined,
-                                            height: 16,
-                                            width: 16,
-                                            excavate: true
-                                        }}
                                     />
                                     <a
                                         className={styles.QRCodeUrl}
