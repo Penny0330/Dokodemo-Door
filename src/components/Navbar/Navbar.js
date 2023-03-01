@@ -72,7 +72,10 @@ function Navbar() {
                         <NavLink to={'/member'}>會員中心</NavLink>
                     </div>
                     <div className={styles.openDoor}>
-                        <a>任意門▾</a>
+                        <a className={styles.openDoorLink}>
+                            任意門
+                            <p>▾</p>
+                        </a>
 
                         <div className={styles.copy}>
                             <a

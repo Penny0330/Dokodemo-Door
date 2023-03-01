@@ -100,13 +100,26 @@ nav{
     padding-bottom: 20px;
 }
 
+.openDoorLink{
+    display: flex;
+}
+
+.openDoorLink p{
+    transform: rotate(-90deg);
+    transition: all .2s linear;
+}
+
 .openDoor:hover .copy{
     display: block;
 }
 
+.openDoor:hover .openDoorLink p{
+    transform: rotate(0deg);
+}
+
 .copy{
     position: absolute;
-    background: linear-gradient(0deg, #395347, #728d81);
+    background-color: #587367;
     top: 76px;
     width: 152px;
     height: 106px;
