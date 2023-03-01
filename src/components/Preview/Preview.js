@@ -1,5 +1,5 @@
 // Style
-import styles from './Show.module.css';
+import styles from './Preview.module.css';
 
 // components
 import loading from '../../images/admin-loading.gif';
@@ -7,7 +7,7 @@ import loading from '../../images/admin-loading.gif';
 // hooks
 import { useChangeColor } from '../../hooks/useChangeColor';
 
-function Show({ profile, noPhotoText, value, color, pending, iconLink }) {
+function Preview({ profile, noPhotoText, value, color, pending, iconLink }) {
     const { changeColorPri, changeColorGreen, changeColorBlue, changeColorBlack, active } = useChangeColor(color);
 
     const allIcons = [
@@ -139,4 +139,4 @@ function Show({ profile, noPhotoText, value, color, pending, iconLink }) {
     );
 }
 
-export default Show;
+export default Preview;

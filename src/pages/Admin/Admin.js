@@ -4,8 +4,8 @@ import { useState } from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
 import Box from '../../components/Box/Box';
-import Show from '../../components/Show/Show';
-import ShowMobile from '../../components/ShowMobile/ShowMobile';
+import Preview from '../../components/Preview/Preview';
+import PreviewMobile from '../../components/PreviewMobile/PreviewMobile';
 import smartphone from '../../images/smartphone.png';
 import loading from '../../images/admin-loading.gif';
 import AddButton from '../../components/AddButton/AddButton';
@@ -41,7 +41,7 @@ function Admin() {
                     </div>
 
                     <div className={styles.right}>
-                        <Show
+                        <Preview
                             value={value}
                             color={color}
                             profile={profile}
@@ -52,7 +52,7 @@ function Admin() {
                     </div>
 
                     {openShow ? (
-                        <ShowMobile
+                        <PreviewMobile
                             profile={profile}
                             noPhotoText={noPhotoText}
                             value={value}

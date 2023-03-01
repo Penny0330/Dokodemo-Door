@@ -7,9 +7,9 @@ import close_phone from '../../images/close_phone.png';
 import { useChangeColor } from '../../hooks/useChangeColor';
 
 // Style
-import styles from './ShowMobile.module.css';
+import styles from './PreviewMobile.module.css';
 
-function ShowMobile({ profile, noPhotoText, value, color, openShow, handleOpenShow, iconLink }) {
+function PreviewMobile({ profile, noPhotoText, value, color, openShow, handleOpenShow, iconLink }) {
     const { changeColorPri, changeColorGreen, changeColorBlue, changeColorBlack, active } = useChangeColor(color);
 
     const allIcons = [
@@ -162,4 +162,4 @@ function ShowMobile({ profile, noPhotoText, value, color, openShow, handleOpenSh
     );
 }
 
-export default ShowMobile;
+export default PreviewMobile;

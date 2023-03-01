@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
 import loading from '../../images/loading.gif';
-import Show from '../../components/Show/Show';
-import ShowMobile from '../../components/ShowMobile/ShowMobile';
+import Preview from '../../components/Preview/Preview';
+import PreviewMobile from '../../components/PreviewMobile/PreviewMobile';
 import smartphone from '../../images/smartphone.png';
 import member from '../../images/member.png';
 import drag from '../../images/drag.png';
@@ -243,7 +243,7 @@ function Member() {
 
             <div className={styles.right}>
 
-                <Show 
+                <Preview
                     value={value}
                     color={color}
                     profile={profile}
@@ -253,7 +253,7 @@ function Member() {
             </div>
 
             {openShow ? (   
-                <ShowMobile profile={profile} noPhotoText={noPhotoText} value={value} openShow={openShow} handleOpenShow={handleOpenShow} color={color} iconLink={iconLink} /> ) :
+                <PreviewMobile profile={profile} noPhotoText={noPhotoText} value={value} openShow={openShow} handleOpenShow={handleOpenShow} color={color} iconLink={iconLink} /> ) :
                 <div className={styles.preview} onClick={handleOpenShow}>
                     <img className={styles.smartphone} src={smartphone} alt="smartphone" />
                 </div>
