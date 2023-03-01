@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 // component
 import loading from '../../images/admin-loading.gif';
+import close from '../../images/close_phone.png';
 
 // hooks
 import { useGetBox } from '../../hooks/useGetBox';
@@ -9,9 +11,13 @@ import { useGetBox } from '../../hooks/useGetBox';
 // style
 import styles from './Publish.module.css';
 
+// QRcode
+import { QRCodeSVG } from 'qrcode.react';
+
 function Publish() {
     const params = useParams();
     const { profile, noPhotoText, value, color, error, pending, iconLink } = useGetBox(params.user);
+    const [openQR, setOpenQR] = useState(false);
 
     const allIcons = [
         <svg stroke='gray' fill={color.logeColor} strokeWidth='0' viewBox='0 0 512 512' focusable='false' aria-hidden='true' height='1em' width="1em" xmlns="http://www.w3.org/2000/svg" key="0"><path d="M424 80H88a56.06 56.06 0 00-56 56v240a56.06 56.06 0 0056 56h336a56.06 56.06 0 0056-56V136a56.06 56.06 0 00-56-56zm-14.18 92.63l-144 112a16 16 0 01-19.64 0l-144-112a16 16 0 1119.64-25.26L256 251.73l134.18-104.36a16 16 0 0119.64 25.26z"></path></svg>,
@@ -32,6 +38,10 @@ function Publish() {
 
         <svg stroke="gray" fill={color.logeColor} strokeWidth="0" role="img" viewBox="0 0 24 24" focusable="false" aria-hidden="true" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"  key="8"><title></title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>
     ];
+
+    const handleQR = () => {
+        setOpenQR(!openQR);
+    };
 
     return (
         <div className={styles.wrapper}>
@@ -66,6 +76,53 @@ function Publish() {
             {!error && !pending && (
                 <div className={styles.main}>
                     <div className={styles.userInfo}>
+                        <button className={styles.QRCodeButton} onClick={handleQR}>
+                            <svg
+                                stroke="black"
+                                fill={color.logeColor}
+                                strokeWidth="0"
+                                viewBox="0 0 24 24"
+                                focusable="false"
+                                height="1.5em"
+                                width="1.5em">
+                                <path fill="none" d="M0 0h24v24H0z"></path>
+                                <path d="M3 11h8V3H3v8zm2-6h4v4H5V5zM3 21h8v-8H3v8zm2-6h4v4H5v-4zM13 3v8h8V3h-8zm6 6h-4V5h4v4zM19 19h2v2h-2zM13 13h2v2h-2zM15 15h2v2h-2zM13 17h2v2h-2zM15 19h2v2h-2zM17 17h2v2h-2zM17 13h2v2h-2zM19 15h2v2h-2z"></path>
+                            </svg>
+                        </button>
+                        {openQR && (
+                            <div className={styles.QRCodeLayout}>
+                                <div className={styles.QRCodeBox}>
+                                    <img
+                                        src={close}
+                                        alt="close"
+                                        className={styles.closeQR}
+                                        onClick={handleQR}
+                                    />
+                                    <div className={styles.QRuserName}>{`@${profile.account}`}</div>
+                                    <QRCodeSVG
+                                        value={window.location.href}
+                                        level={'L'}
+                                        className={styles.QRCode}
+                                        imageSettings={{
+                                            src: 'https://dokodemo-door.web.app/src/images/loge.svg',
+                                            x: undefined,
+                                            y: undefined,
+                                            height: 16,
+                                            width: 16,
+                                            excavate: true
+                                        }}
+                                    />
+                                    <a
+                                        className={styles.QRCodeUrl}
+                                        href={window.location.href}
+                                        target="_blank"
+                                        rel="noreferrer">
+                                        {window.location.href}
+                                    </a>
+                                </div>
+                            </div>
+                        )}
+
                         {!profile.photo && <div className={styles.noPic}>{noPhotoText}</div>}
                         {profile.photo && (
                             <img src={profile.photo} alt="profile-photo" className={styles.pic} />
@@ -76,7 +133,7 @@ function Publish() {
                         <div className={styles.iconLinks}>
                             {iconLink.map((icon, index) => {
                                 return (
-                                    <div key={index}>
+                                    <div key={index} className={styles.iconBox}>
                                         {icon.iconIndex === 0 && icon.link && (
                                             <a
                                                 href={`mailto:${icon.link}`}

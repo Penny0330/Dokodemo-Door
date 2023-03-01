@@ -85,6 +85,85 @@
     border-bottom: 4px dotted gray;
 }
 
+.QRCodeButton{
+    border: none;
+    background-color: #ece9df;
+    cursor: pointer;
+    align-self: end;
+}
+
+.QRCodeLayout{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(49 48 48 / 48%);
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+    transition: all .5s linear;
+}
+
+.QRCodeBox{
+    align-self: baseline;
+    position: relative;
+    background-color: white;
+    width: 25vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 0;
+    gap: 30px;
+    border-radius: 10px;
+    animation: popup .3s linear;
+}
+
+@keyframes popup{
+    0%{
+        top: -500px;
+    }
+    100%{
+        top: 0;
+    }
+}
+
+.closeQR{
+    width: 30px;
+    padding: 5px;
+    border-radius: 50%;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+    transition: all .3s linear;
+}
+
+.closeQR:hover{
+    background-color: rgb(218 216 216);
+}
+
+.QRuserName{
+    font-size: 24px;
+    color: #333333;
+    font-weight: bold;
+    width: 90%;
+    overflow-wrap: anywhere;
+    font-style: italic;
+}
+
+.QRCodeUrl{
+    font-size: 16px;
+    color: #817f7f;
+    font-weight: bold;
+    width: 60%;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+}
+
+.QRCodeUrl:hover{
+    text-decoration: underline;
+}
+
 .pic{
     display: flex;
     justify-content: center;
@@ -133,8 +212,8 @@
     margin-top: 15px;
 }
 
-.iconLink{
-    margin: 0 4px;
+.iconBox{
+    margin: 5px 10px;
 }
 
 .iconLink svg{
@@ -225,7 +304,7 @@
 }
 
 @media (max-width: 700px) {
-    .userInfo, .allList, .img{
+    .userInfo, .allList, .img, .QRCodeBox{
         width: 80vw;
     }
 }
