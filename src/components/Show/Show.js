@@ -1,14 +1,13 @@
 // Style
-import styles from "./Show.module.css";
+import styles from './Show.module.css';
 
 // components
-import loading from "../../images/admin-loading.gif";
+import loading from '../../images/admin-loading.gif';
 
 // hooks
-import { useChangeColor } from "../../hooks/useChangeColor";
+import { useChangeColor } from '../../hooks/useChangeColor';
 
-function Show({profile, noPhotoText, value, color, pending, iconLink}) {
-
+function Show({ profile, noPhotoText, value, color, pending, iconLink }) {
     const { changeColorPri, changeColorGreen, changeColorBlue, changeColorBlack, active } = useChangeColor(color);
 
     const allIcons = [
@@ -29,119 +28,115 @@ function Show({profile, noPhotoText, value, color, pending, iconLink}) {
         <svg stroke="gray" fill={color.logeColor} strokeWidth="0" viewBox="0 0 1024 1024" focusable="false" aria-hidden="true" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"  key="7"><path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0 1 38.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"></path></svg>,
 
         <svg stroke="gray" fill={color.logeColor} strokeWidth="0" role="img" viewBox="0 0 24 24" focusable="false" aria-hidden="true" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"  key="8"><title></title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>
-    ]
+    ];
 
-    return(
-
+    return (
         <div className={styles.showing}>
-
-            {
-                !pending && (
-                    <div className={styles.box}>
+            {!pending && (
+                <div className={styles.box}>
                     <div className={styles.userInfo}>
-    
-                        {
-                            !profile.photo && (
-                                <div className={styles.noPic}>{noPhotoText}</div>
-                            )
-                        }
-                        {
-                            profile.photo &&(
-                                <img src={profile.photo} alt="profile-photo" className={styles.pic} />
-                            )
-                        }
-                        <div className={styles.username} style={{color: color.titleColor}}>{`@${profile.account}`}</div>
+                        {!profile.photo && <div className={styles.noPic}>{noPhotoText}</div>}
+                        {profile.photo && (
+                            <img src={profile.photo} alt="profile-photo" className={styles.pic} />
+                        )}
+                        <div
+                            className={styles.username}
+                            style={{ color: color.titleColor }}>{`@${profile.account}`}</div>
                         <div className={styles.introduction}>{profile.introduction}</div>
                         <div className={styles.iconLinks}>
-                            {
-                                iconLink.map((icon, index)=>{
-                                    return(
-                                        <div key={index}>
-                                            {
-                                                icon.iconIndex === 0 && icon.link && (
-                                                    <a href={`mailto:${icon.link}`} className={styles.iconLink}>{allIcons[icon.iconIndex]}</a>
-                                                )
-                                            }
-                                            {
-                                                icon.iconIndex !== 0 && icon.link && (
-                                                    <a href={icon.link} target={"_blank"} rel="noreferrer" className={styles.iconLink}>{allIcons[icon.iconIndex]}</a>
-                                                ) 
-                                            }
-
-                                        </div>
-                                        
-                                    )
-                                })
-                            }
+                            {iconLink.map((icon, index) => {
+                                return (
+                                    <div key={index}>
+                                        {icon.iconIndex === 0 && icon.link && (
+                                            <a
+                                                href={`mailto:${icon.link}`}
+                                                className={styles.iconLink}>
+                                                {allIcons[icon.iconIndex]}
+                                            </a>
+                                        )}
+                                        {icon.iconIndex !== 0 && icon.link && (
+                                            <a
+                                                href={icon.link}
+                                                target="_blank"
+                                                rel="noreferrer"
+                                                className={styles.iconLink}>
+                                                {allIcons[icon.iconIndex]}
+                                            </a>
+                                        )}
+                                    </div>
+                                );
+                            })}
                         </div>
                     </div>
-    
-    
                     <div className={styles.textBox}>
-                        {
-                            value.map((box, index) => {
-                                return( 
-        
-                                    <div key={index}>
-                                        {
-                                            box.type === "text" && (
-                                                box.title !== "" && box.display && (
-                                                    <div className={styles.text} style={{color: color.titleColor}} >{box.title}</div>
-                                                )
-                                            )
-                                        }
-                                        {
-                                            box.type === "link" && (
-                                                box.title !== "" && box.url !== "" && box.display && (
-                                                    <div className={styles.link} style={{backgroundColor: color.linkColor}}><a href={box.url} target="_blank" rel="noreferrer" style={{color: color.linkTextColor}}>{box.title}</a></div>
-                                                ) 
-                                            )
-                                        }
-                                        {
-                                            box.type === "pic" && (
-                                                box.imgUrl !== "" && box.display && (
-                                                    <img className={styles.img} src={box.imgUrl} alt="img" />
-                                                ) 
-                                            )
-                                        }
-                                        {
-                                            box.type === "line" && (
-                                                box.display && (
-                                                    <div className={styles.lineBoxInner}>
-                                                        <div className={styles.line} style={{color: color.logeColor}}></div>
-                                                    </div>
-                                                )
-                                            )
-                                        }
-                                    </div>  
-                                )
-                                
-                            })
-                        }
+                        {value.map((box, index) => {
+                            return (
+                                <div key={index}>
+                                    {box.type === 'text' && box.title !== '' && box.display && (
+                                        <div
+                                            className={styles.text}
+                                            style={{ color: color.titleColor }}>
+                                            {box.title}
+                                        </div>
+                                    )}
+                                    {box.type === 'link' &&
+                                        box.title !== '' &&
+                                        box.url !== '' &&
+                                        box.display && (
+                                            <div
+                                                className={styles.link}
+                                                style={{ backgroundColor: color.linkColor }}>
+                                                <a
+                                                    href={box.url}
+                                                    target="_blank"
+                                                    rel="noreferrer"
+                                                    style={{ color: color.linkTextColor }}>
+                                                    {box.title}
+                                                </a>
+                                            </div>
+                                        )}
+                                    {box.type === 'pic' && box.imgUrl !== '' && box.display && (
+                                        <img className={styles.img} src={box.imgUrl} alt="img" />
+                                    )}
+                                    {box.type === 'line' && box.display && (
+                                        <div className={styles.lineBoxInner}>
+                                            <div
+                                                className={styles.line}
+                                                style={{ color: color.logeColor }}></div>
+                                        </div>
+                                    )}
+                                </div>
+                            );
+                        })}
                     </div>
-    
-                    <div className={styles.footer} style={{color: color.logeColor}}>Dokodemo Door</div>
-                
+                    <div className={styles.footer} style={{ color: color.logeColor }}>
+                        Dokodemo Door
+                    </div>
                 </div>
-                )
-            }
+            )}
 
-            {
-                pending && (
-                    <img src={loading} alt="loading" className={styles.loading} />
-                )
-            }
+            {pending && <img src={loading} alt="loading" className={styles.loading} />}
 
             <div className={styles.color}>
-                <div className={`${styles.colorPri} ${active === "pri" ? styles.active : ""}`} onClick={changeColorPri}></div>
-                <div className={`${styles.colorGreen} ${active === "green" ? styles.active : ""}`} onClick={changeColorGreen}></div>
-                <div className={`${styles.colorBlue} ${active === "blue" ? styles.active : ""}`} onClick={changeColorBlue}></div>
-                <div className={`${styles.colorBlack} ${active === "black" ? styles.active : ""}`} onClick={changeColorBlack}></div>
+                <div
+                    className={`${styles.colorPri}
+                    ${active === 'pri' ? styles.active : ''}`}
+                    onClick={changeColorPri}></div>
+                <div
+                    className={`${styles.colorGreen}
+                    ${active === 'green' ? styles.active : ''}`}
+                    onClick={changeColorGreen}></div>
+                <div
+                    className={`${styles.colorBlue}
+                    ${active === 'blue' ? styles.active : ''}`}
+                    onClick={changeColorBlue}></div>
+                <div
+                    className={`${styles.colorBlack}
+                    ${active === 'black" ? styles.active : '}`}
+                    onClick={changeColorBlack}></div>
             </div>
-            
         </div>
-        
-    )
+    );
 }
 
-export default Show
+export default Show;

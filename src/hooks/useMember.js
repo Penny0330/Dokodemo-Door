@@ -1,72 +1,69 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import { auth, db, storage } from "../utils/firebase.config";
-import { doc, updateDoc } from "firebase/firestore";
-import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import { auth, db, storage } from '../utils/firebase.config';
+import { doc, updateDoc } from 'firebase/firestore';
+import { ref, getDownloadURL, uploadBytesResumable } from 'firebase/storage';
 
 export const useMember = (iconLink) => {
-
-    const [imgFile, setImgFile] = useState("");
-    const [newImgUrl, setNewImgUrl] = useState("");
+    const [imgFile, setImgFile] = useState('');
+    const [newImgUrl, setNewImgUrl] = useState('');
     const [pending, setPending] = useState(false);
-    const [ deleteData, setDeleteData ] = useState("");
-    const [ deletePopup, setDeletePopup] = useState(false);
-    const [ openIconList, setOpenIconList] = useState(false);
+    const [deleteData, setDeleteData] = useState('');
+    const [deletePopup, setDeletePopup] = useState(false);
+    const [openIconList, setOpenIconList] = useState(false);
 
     const uploadPhoto = (e) => {
         const file = e.target.files[0];
-        if(file){
+        if (file) {
             const imageURL = URL.createObjectURL(file);
             setImgFile(file);
             setNewImgUrl(imageURL);
         }
-    }
+    };
 
-    const storageProfile = async ( newAccount, newIntro ) => {
-
-        try{
+    const storageProfile = async (newAccount, newIntro) => {
+        try {
             setPending(true);
 
-            if(!newAccount){
-                return
+            if (!newAccount) {
+                return;
             }
 
-            if (!imgFile){
+            if (!imgFile) {
                 const newProfile = {
                     account: newAccount,
                     photo: newImgUrl,
                     introduction: newIntro
-                }
-                await updateDoc(doc(db, "itemList", auth.currentUser.uid), { "profile": newProfile });
+                };
+                await updateDoc(doc(db, 'itemList', auth.currentUser.uid), { 'profile': newProfile });
 
                 setTimeout(() => {
                     setPending(false);
                 }, 1000);
 
-                return
+                return;
             }
 
             // 第1個參數 storage service，第2個參數 檔案儲存資料夾名稱 / 檔案名稱
             const name = `post.images/${auth.currentUser.uid}`;
             const storageRef = ref(storage, name);
-            // uploadBytesResumable 上傳檔案至 cloud storage 
+            // uploadBytesResumable 上傳檔案至 cloud storage
             await uploadBytesResumable(storageRef, imgFile);
             const imgUrl = await getDownloadURL(storageRef);
             const newProfile = {
-                                account: newAccount,
-                                photo: imgUrl,
-                                introduction: newIntro
-                            }
-            await updateDoc(doc(db, "itemList", auth.currentUser.uid), { "profile": newProfile });
+                account: newAccount,
+                photo: imgUrl,
+                introduction: newIntro
+            };
+            await updateDoc(doc(db, 'itemList', auth.currentUser.uid), { 'profile': newProfile });
             setTimeout(() => {
                 setPending(false);
-                setImgFile("");
+                setImgFile('');
             }, 1000);
-        }
-        catch(error){
+        } catch (error) {
             console.log(error);
         }
-    }
+    };
 
     const allIcons = [
         <svg stroke="gray" fill="gray" strokeWidth="0" viewBox="0 0 512 512" focusable="false" aria-hidden="true" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" key="0"><path d="M424 80H88a56.06 56.06 0 00-56 56v240a56.06 56.06 0 0056 56h336a56.06 56.06 0 0056-56V136a56.06 56.06 0 00-56-56zm-14.18 92.63l-144 112a16 16 0 01-19.64 0l-144-112a16 16 0 1119.64-25.26L256 251.73l134.18-104.36a16 16 0 0119.64 25.26z"></path></svg>,
@@ -86,51 +83,65 @@ export const useMember = (iconLink) => {
         <svg stroke="gray" fill="gray" strokeWidth="0" viewBox="0 0 1024 1024" focusable="false" aria-hidden="true" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" key="7"><path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0 1 38.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"></path></svg>,
 
         <svg stroke="gray" fill="gray" strokeWidth="0" role="img" viewBox="0 0 24 24" focusable="false" aria-hidden="true" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" key="8"><title></title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>
-    ]
+    ];
 
-    const addIcon = async(index) => {
+    const addIcon = async (index) => {
         const _iconLink = [...iconLink];
-        _iconLink.push(
-            {
-                iconIndex: index, 
-                link: ""
-            }
-        )
-        await updateDoc(doc(db, "itemList", auth.currentUser.uid), { "iconLink": _iconLink });
-    }
+        _iconLink.push({
+            iconIndex: index,
+            link: ''
+        });
+        await updateDoc(doc(db, 'itemList', auth.currentUser.uid), { 'iconLink': _iconLink });
+    };
 
-    const updateData = async(e, iconIndex, index)=>{
+    const updateData = async (e, iconIndex, index) => {
         const _iconLink = [...iconLink];
         _iconLink.splice(index, 1, {
             iconIndex: iconIndex,
             link: e.target.value
         });
-        await updateDoc(doc(db, "itemList", auth.currentUser.uid), { "iconLink": _iconLink });
-    }
+        await updateDoc(doc(db, 'itemList', auth.currentUser.uid), { 'iconLink': _iconLink });
+    };
 
     const deleteCheck = (index) => {
         setDeletePopup(true);
         setDeleteData(index);
-    }
+    };
 
     const deleteButton = async () => {
         const _iconLink = [...iconLink];
         _iconLink.splice(deleteData, 1);
-        await updateDoc(doc(db, "itemList", auth.currentUser.uid), { "iconLink": _iconLink });
+        await updateDoc(doc(db, 'itemList', auth.currentUser.uid), { 'iconLink': _iconLink });
         setDeletePopup(false);
-    }
+    };
 
-    const onDragEnd = async(result) => {
+    const onDragEnd = async (result) => {
         // source 被拖曳的物件 ； destination 拖曳後的位置
         const { source, destination } = result;
         if (!destination) {
             return;
         }
-        let _iconLink = [...iconLink];  
+        let _iconLink = [...iconLink];
         const [remove] = _iconLink.splice(source.index, 1);
         _iconLink.splice(destination.index, 0, remove);
-        await updateDoc(doc(db, "itemList", auth.currentUser.uid), { "iconLink": _iconLink });
-    }
+        await updateDoc(doc(db, 'itemList', auth.currentUser.uid), { 'iconLink': _iconLink });
+    };
 
-    return { uploadPhoto, newImgUrl, setNewImgUrl, storageProfile, pending, allIcons, addIcon, updateData, deleteCheck, deleteButton, onDragEnd, deletePopup, setDeletePopup, openIconList, setOpenIconList }
-}
+    return {
+        uploadPhoto,
+        newImgUrl,
+        setNewImgUrl,
+        storageProfile,
+        pending,
+        allIcons,
+        addIcon,
+        updateData,
+        deleteCheck,
+        deleteButton,
+        onDragEnd,
+        deletePopup,
+        setDeletePopup,
+        openIconList,
+        setOpenIconList
+    };
+};

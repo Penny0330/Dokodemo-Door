@@ -6,11 +6,13 @@
     "start": "webpack-dev-server --mode development --hot --open",
     "build": "webpack --mode production",
     "eslintInit": "eslint --init",
-    "lint": "eslint src/*.js"
+    "lint:check": "eslint --ext=js src/",
+    "lint": "eslint --fix --ext=js src/"
   },
   "license": "ISC",
   "dependencies": {
     "firebase": "^9.15.0",
+    "prettier": "^2.8.4",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",
     "react-css-modules": "^4.7.11",
@@ -24,6 +26,8 @@
     "babel-loader": "^9.1.2",
     "css-loader": "^6.7.3",
     "eslint": "^8.35.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",

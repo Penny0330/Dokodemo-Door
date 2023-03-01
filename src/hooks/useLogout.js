@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { useAuthContext } from "./useAuthContext";
-import { auth } from "../utils/firebase.config";
-import { signOut } from "firebase/auth";
+import { useState } from 'react';
+import { useAuthContext } from './useAuthContext';
+import { auth } from '../utils/firebase.config';
+import { signOut } from 'firebase/auth';
 
 export const useLogout = () => {
     const [error, serError] = useState(null);
@@ -10,13 +10,13 @@ export const useLogout = () => {
     const logout = () => {
         serError(null);
         signOut(auth)
-        .then(() => {
-            dispatch({type: "LOGOUT"});
-        })
-        .catch((error) => {
-            serError(error.message);
-        })
-    }
+            .then(() => {
+                dispatch({ type: 'LOGOUT' });
+            })
+            .catch((error) => {
+                serError(error.message);
+            });
+    };
 
-    return { logout, error }
-}
+    return { logout, error };
+};
