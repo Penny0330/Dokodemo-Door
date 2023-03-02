@@ -212,7 +212,8 @@
     margin-top: 15px;
 }
 
-.iconBox{
+.iconLink{
+    display: inline-block;
     margin: 5px 10px;
 }
 
