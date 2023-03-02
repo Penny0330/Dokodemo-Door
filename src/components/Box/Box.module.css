@@ -283,7 +283,7 @@
 .imgValue{
     height: 20vw;
     padding-left: 10px;
-    cursor: auto;
+    cursor: pointer;
 }
 
 .imgNoValue{
@@ -300,6 +300,7 @@
     height: 20vw;
     aspect-ratio: 4/3;
     padding: 10px 0;
+    object-fit: contain;
 }
 
 .picEdit{
@@ -337,6 +338,7 @@
     height: 20vw;
     aspect-ratio: 4/3;
     padding: 10px 0;
+    object-fit: contain;
 }
 
 .picEditButton{
