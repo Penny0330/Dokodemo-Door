@@ -1,24 +1,30 @@
 .main{
-    max-width: 900px;
-    margin: 70px auto 100px;
     display: grid;
-    grid-template-columns: 3fr 2fr;
+}
+
+.first{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 45px;
     align-items: center;
-    gap: 45px;   
+    padding: 50px 0;
+    margin: 80px auto;
 }
 
 .left{
-    margin-left: 65px;
     display: grid;
     gap: 15px;
+    margin-left: 50px;
+    max-width: 300px;
 }
 
 .slogan{
     color: #ECE9DF;
-    font-size: 37px;
+    font-size: 26px;
     font-weight: bold;
-    line-height: 75px;
+    line-height: 50px;
     letter-spacing: 3px;
+    text-shadow: 2px 3px 0px #587367;
 }
 
 .button{
@@ -27,7 +33,6 @@
     padding: 5px 0;
     font-size: 26px;
     text-align: center;
-    background-color: #587367;
     background-color: #ECE9DF;
     cursor: pointer;
     border-radius: 20px;
@@ -38,7 +43,6 @@
 
 .button a{
     text-decoration: none;
-    color: #ECE9DF;
     color: #587367;
     font-weight: bold;
 }
@@ -49,16 +53,200 @@
 }
 
 .right{
+    margin-right: 50px;
     justify-self: center;
 }
 
+.demoAdmin{
+    width: 56vw;
+    max-width: 600px;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: #ece9df87 9px 9px 33px;
+}
+
+.second{
+    background-color: rgb(248 247 245);
+    padding: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 70px 0 0;
+}
+
+.secondContainer{
+    display: grid;
+    grid-template-columns: 3fr 1.5fr;
+    align-items: center;
+    max-width: 1070px;
+    gap: 15px;
+}
+
+.secondLeft{
+    display: grid;
+    gap: 15px;
+    margin-left: 50px;
+    max-width: 300px;
+    align-self: baseline;
+}
+
+.demoLink{
+    box-shadow: #c6bbbb 9px 6px 20px;
+    border: 1px solid #c6bbbb;
+    border-radius: 10px;
+    width: 350px;
+    position: relative;
+    left: 110px;
+    margin-bottom: 10px;
+}
+
+.demoImage{
+    box-shadow: #c6bbbb 9px 6px 20px;
+    border: 1px solid #c6bbbb;
+    border-radius: 10px;
+    width: 350px
+}
+
+.demoIconLink{
+    box-shadow: #c6bbbb 9px 6px 20px;
+    border: 1px solid #c6bbbb;
+    border-radius: 10px;
+    position: relative;
+    left: 105px;
+}
+
+.secondRight{
+    padding-top: 60px;
+    margin-right: 50px;
+    justify-self: center;
+}
+
+.secondTitle{
+    font-size: 30px;
+    font-weight: bold;
+    color: #395347;
+    margin-bottom: 15px;
+    text-shadow: 2px 3px 0px #c6bbbb;
+}
+
+.secondText{
+    font-size: 20px;
+    color: rgb(140 138 138);
+    font-weight: bold;
+}
+
+.third{
+    padding: 50px;
+    background-color: #ece9df;
+    display: flex;
+    justify-content: space-around;
+}
+
+.thirdContainer{
+    display: grid;
+    grid-template-columns: 1.5fr 3fr;
+    align-items: center;
+    max-width: 1070px;
+}
+
+.thirdLeft{
+    margin-left: 15px;
+    justify-self: center;
+}
+
+.thirdRight{
+    margin-right: 15px;
+    justify-self: flex-end;
+}
+
+.demo_profile{
+    border-radius: 10px;
+    box-shadow: #aaaaaa 30px 30px 48px;
+    border: 1px solid #c6bbbb;
+    width: 90%;
+}
+
+.fourth{
+    background-color: rgb(248 247 245);
+    padding: 50px 0;
+}
+
+.fourthContainer{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.fourthLeft{
+    display: grid;
+    padding: 50px 0;
+    gap: 30px;
+}
+
+.fourthTitle{
+    font-size: 36px;
+    font-weight: bold;
+    color: #395347;
+    text-shadow: 2px 3px 0px #c6bbbb;
+}
+
+.fourthTitle::after{
+    content: "→";
+    position: relative;
+    font-size: 54px;
+    animation: toRight 2s ease-in infinite;
+}
+
+@keyframes toRight{
+    0%{
+        left: 60px;
+    }
+    50%{
+        left: 30px;
+    }
+    100%{
+        left: 60px;
+    }
+}
+
 .demo{
+    height: 400px;
+    margin: 25px 0;
     border-radius: 32px;
-    border: 2px solid rgb(87 72 72 / 58%);
+    border: 5px solid rgb(87 72 72 / 58%);
+    width: 230px;
+    box-shadow: #c6bbbb 8px 8px 30px;
+    width: 165px;
+}
+
+:global(.slick-list){
+    width: 250px;
+}
+
+:global(.slick-slide){
+    width: 250px !important;
+    display: flex !important;
+    justify-content: center !important;
+}
+
+:global(.slick-prev::before){
+    color: #395347 !important;
+}
+
+:global(.slick-next:before){
+    color: #395347 !important;
+}
+
+:global(.slick-dots li.slick-active button:before){
+    color: #395347 !important;
+}
+
+:global(.slick-dots li button:before){
+    color: #395347 !important;
 }
 
 @media (max-width: 700px) {
-    .main{
+    .first{
         grid-template-columns: 1fr;
         justify-items: center;
     }
@@ -67,9 +255,99 @@
         justify-items: center;
         margin: 0 15px;
         text-align: center;
+        max-width: none;
+        justify-self: auto;
     }
 
     .slogan{
         font-size: 30px;
+    }
+
+    .right{
+        align-self: auto;
+        margin-right: 0px; 
+    }
+    
+    .demoAdmin{
+        width: 80vw;
+    }
+
+    .secondContainer{
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 2.5fr;
+        gap: 83px;
+    }
+
+    .secondLeft{
+        grid-row: 2/3;
+        margin: 0;
+    }
+
+    .secondRight{
+        grid-row: 1/2;
+        margin: 0;
+        text-align: center;
+    }
+
+    .demoLink{
+        width: 65vw;
+        left: 8vw;
+        max-width: 370px;
+    }
+    
+    .demoImage{
+        position: relative;
+        right: 4vw;
+        width: 65vw;
+        margin-bottom: 10px;
+        max-width: 370px;
+    }
+    
+    .demoIconLink{
+        width: 65vw;
+        left: 8vw;
+        max-width: 370px;
+    }
+
+    .thirdContainer{
+        padding: 50px 0;
+        grid-template-columns: 1fr;
+        gap: 83px;
+    }
+    
+    .thirdLeft{
+        margin-left: 0px;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    
+    .thirdRight{
+        margin-right: 10px;
+    }
+
+    .demo_profile{
+        width: 65vw;
+    }
+
+    .fourthContainer{
+        flex-direction: column;
+        padding-bottom: 50px;
+    }
+
+    .fourthTitle::after{
+        content: "↓";
+        right: -20px;
+    }
+
+    @keyframes toRight{
+        0%{
+            top: 0px;
+        }
+        50%{
+            top: 30px;
+        }
+        100%{
+            top: 0px;
+        }
     }
 }
