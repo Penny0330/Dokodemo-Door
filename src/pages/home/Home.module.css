@@ -168,13 +168,16 @@
 
 .fourth{
     background-color: rgb(248 247 245);
-    padding: 50px 0;
+    padding: 70px 50px 90px;
+    display: flex;
+    justify-content: space-around;
 }
 
 .fourthContainer{
-    display: flex;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: 3fr 1.5fr;
     align-items: center;
+    max-width: 1070px;
 }
 
 .fourthLeft{
@@ -330,8 +333,12 @@
     }
 
     .fourthContainer{
-        flex-direction: column;
+        grid-template-columns: 1fr;
         padding-bottom: 50px;
+    }
+
+    .fourthLeft{
+        justify-items: center;
     }
 
     .fourthTitle::after{
@@ -349,5 +356,11 @@
         100%{
             top: 0px;
         }
+    }
+}
+
+@media (max-width: 360px) {
+    .fourth{
+        padding: 70px 0px 90px;
     }
 }
