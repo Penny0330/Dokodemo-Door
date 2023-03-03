@@ -2,11 +2,13 @@ nav{
     display: grid;
     grid-template-columns: 2fr 1.8fr;
     margin: auto;
-    border-bottom: 5px solid #ECE9DF;
-    background-color: #728d81;
+    /* border-bottom: 5px solid #ECE9DF; */
+    /* background-color: #728d81; */
+    background: linear-gradient(45deg, #395347, #728d81);
     position: sticky;
     top: 0;
     z-index: 5;
+    box-shadow: #ece9df 2PX 4PX 14PX;
 }
 
 .title{
@@ -39,10 +41,16 @@ nav{
 }
 
 .login{
+    /* padding: 5px 0;
+    margin-bottom: 15px;
+    border: 2px solid #728d81;
+    transition: all .3s linear; */
+
     padding: 5px 0;
     margin-bottom: 15px;
     border: 2px solid #728d81;
     transition: all .3s linear;
+    border-radius: 10px;
 }
 
 .login a{
@@ -69,6 +77,7 @@ nav{
     text-decoration: none;
     color: #587367;
     padding: 8px 15px;
+    transition: all .3s linear;
 }
 
 .signup:hover{
@@ -91,7 +100,7 @@ nav{
 
 .member a:hover{
     padding-bottom: 15px;
-    border-bottom: 5px solid #587367;
+    border-bottom: 5px solid rgb(248 247 245);
 }
 
 .openDoor{
@@ -216,7 +225,7 @@ nav{
 
 :global(.active){
     padding-bottom: 15px;
-    border-bottom: 5px solid #587367;
+    border-bottom: 5px solid rgb(248 247 245);
 }
 
 @keyframes open {
