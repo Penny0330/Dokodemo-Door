@@ -2,8 +2,6 @@ nav{
     display: grid;
     grid-template-columns: 2fr 1.8fr;
     margin: auto;
-    /* border-bottom: 5px solid #ECE9DF; */
-    /* background-color: #728d81; */
     background: linear-gradient(45deg, #395347, #728d81);
     position: sticky;
     top: 0;
@@ -41,14 +39,9 @@ nav{
 }
 
 .login{
-    /* padding: 5px 0;
-    margin-bottom: 15px;
-    border: 2px solid #728d81;
-    transition: all .3s linear; */
-
     padding: 5px 0;
     margin-bottom: 15px;
-    border: 2px solid #728d81;
+    border: 2px solid #ffffff00;
     transition: all .3s linear;
     border-radius: 10px;
 }
