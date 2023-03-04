@@ -82,13 +82,17 @@ nav{
     color: #ECE9DF;
 }
 
-.member{
+/* .member{
     padding-bottom: 20px;
-}
+} */
 
 .member a{
     text-decoration: none;
     color: #ECE9DF;
+    display: inline-block;
+    padding-bottom: 15px;
+    transition: all .5s linear;
+    border-bottom: 5px solid rgb(248 247 245 / 0%);
 }
 
 .member a:hover{
@@ -211,14 +215,14 @@ nav{
     color: #ECE9DF;
     font-size: 18px;
     background-color: #728d81;
+    box-shadow: #ece9df 2PX 4PX 14PX;
     animation: open .3s ease-in-out;
 
     display: none;
 }
 
 :global(.active){
-    padding-bottom: 15px;
-    border-bottom: 5px solid rgb(248 247 245);
+    border-bottom: 5px solid rgb(248 247 245) !important;
 }
 
 @keyframes open {
