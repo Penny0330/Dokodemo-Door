@@ -54,7 +54,7 @@ Sharing everything you create from your Instagram, Twitter, YouTube and other so
 
 ## Component Planning
 
-The component planning is divided into four major sections according to pages. In addition, Header and Footer is a shared component.
+The component planning is divided into four major sections according to pages. In addition, Header and Footer are shared components.
 
 ![Components plan](https://user-images.githubusercontent.com/110281590/222951641-5a32d3d1-0f81-4f13-be5e-2b4de414845b.png)
 
