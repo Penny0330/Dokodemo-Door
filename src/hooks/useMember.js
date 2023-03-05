@@ -44,10 +44,8 @@ export const useMember = (iconLink) => {
                 return;
             }
 
-            // 第1個參數 storage service，第2個參數 檔案儲存資料夾名稱 / 檔案名稱
             const name = `post.images/${auth.currentUser.uid}`;
             const storageRef = ref(storage, name);
-            // uploadBytesResumable 上傳檔案至 cloud storage
             await uploadBytesResumable(storageRef, imgFile);
             const imgUrl = await getDownloadURL(storageRef);
             const newProfile = {

@@ -65,21 +65,18 @@ export const useEditBox = () => {
     };
 
     const handleStorageImgEdit = async (box, value) => {
-        // imgFile 為空就停止動作
         if (!imgFile) return;
-        // 刪除原有的圖片檔案
         if (box.file) {
             const desertRef = ref(storage, box.file);
             await deleteObject(desertRef);
         }
 
-        // 第1個參數 storage service，第2個參數 檔案儲存資料夾名稱 / 檔案名稱
         const randomNum = Math.random().toString(36).substring(7);
         const name = `post.images/${auth.currentUser.uid},${randomNum}`;
         const storageRef = ref(storage, name);
-        // uploadBytesResumable 上傳檔案至 cloud storage
+
         await uploadBytesResumable(storageRef, imgFile);
-        // getDownloadURL 取得網址
+
         const imgUrl = await getDownloadURL(storageRef);
         box.imgUrl = imgUrl;
         box.file = name;
@@ -139,13 +136,9 @@ export const useEditBox = () => {
             return;
         }
         let _items = [...value];
-        // 從 source.index 剪下被拖曳的元素
         const [remove] = _items.splice(source.index, 1);
-        //在 destination.index 位置貼上被拖曳的元素
         _items.splice(destination.index, 0, remove);
 
-        // 設定新的 value
-        // setValue(newValue)
         await updateDoc(doc(db, 'itemList', auth.currentUser.uid), { 'item': _items });
     };
 

@@ -9,12 +9,9 @@ const initState = {
     alreadyLogin: false
 };
 
-// create a global context object
 export const AuthContext = createContext();
 
-// create reducer function
 export const reducer = (state, action) => {
-    // create action
     switch (action.type) {
         case 'LOGIN':
             return { ...state, user: action.payload };
@@ -28,7 +25,6 @@ export const reducer = (state, action) => {
 };
 
 export const AuthContextProvider = ({ children }) => {
-    // useReducer for managing states
     const [state, dispatch] = useReducer(reducer, initState);
 
     useEffect(() => {
@@ -41,7 +37,6 @@ export const AuthContextProvider = ({ children }) => {
         });
     }, []);
 
-    // use value property from provider to share state and dispatch function
     return (
       <AuthContext.Provider value={{ ...state, dispatch }}>{children}</AuthContext.Provider>
     )

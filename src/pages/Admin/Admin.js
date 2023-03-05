@@ -22,7 +22,6 @@ function Admin() {
     const { profile, noPhotoText, value, setValue, color, pending, iconLink } = useGetBox(user);
     const [openShow, setOpenShow] = useState(false);
 
-    // max-width: 700 : click showing
     const handleOpenShow = () => {
         setOpenShow(!openShow);
     };
