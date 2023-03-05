@@ -2,7 +2,7 @@
 
 ### A link in bio tool created just for you
 Dokodemo Door is a website which can create your space on the web.
-One link that contains group of other links and content as contact form, text, video, images and many more.
+One link that contains group of other links and content as contact text, images and many more.
 Sharing everything you create from your Instagram, Twitter, YouTube and other social media profiles, whatever you want.
 
 ## Live Demo
