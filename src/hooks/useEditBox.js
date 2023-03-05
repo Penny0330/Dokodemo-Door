@@ -9,7 +9,6 @@ export const useEditBox = () => {
     const [newLinkUrl, setNewLinkUrl] = useState('');
     const [newImgUrl, setNewImgUrl] = useState([]);
     const [imgFile, setImgFile] = useState('');
-    const [popup, setPopup] = useState(false);
     const [isEdit, setIsEdit] = useState('');
     const [deletePopup, setDeletePopup] = useState(false);
     const [deleteData, setDeleteData] = useState('');
@@ -68,11 +67,6 @@ export const useEditBox = () => {
     const handleStorageImgEdit = async (box, value) => {
         // imgFile 為空就停止動作
         if (!imgFile) return;
-        if (imgFile.size > 1000000) {
-            setPopup(true);
-            setImgFile('');
-            return;
-        }
         // 刪除原有的圖片檔案
         if (box.file) {
             const desertRef = ref(storage, box.file);
@@ -172,8 +166,6 @@ export const useEditBox = () => {
         deletePopup,
         setDeletePopup,
         deleteButton,
-        popup,
-        setPopup,
         isEdit,
         setIsEdit,
         cancelEdit,

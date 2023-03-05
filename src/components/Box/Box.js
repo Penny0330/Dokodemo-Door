@@ -1,11 +1,9 @@
 //Component
-import Popup from '../Popup/Popup';
 import toggleOpen from '../../images/toggle-open.png';
 import toggleClose from '../../images/toggle-close.png';
 import trash from '../../images/trash.svg';
 import pen from '../../images/pen.png';
 import drag from '../../images/drag.png';
-
 import imageIcon from '../../images/image.png';
 import imageWhite from '../../images/image_white.png';
 import check from '../../images/check.png';
@@ -40,8 +38,6 @@ function Box() {
         deleteButton,
         deletePopup,
         setDeletePopup,
-        popup,
-        setPopup,
         isEdit,
         cancelEdit,
         deleteCheck,
@@ -49,8 +45,6 @@ function Box() {
     } = useEditBox();
     return (
         <div className={styles.allText}>
-            {popup && <Popup setPopup={setPopup} />}
-
             {deletePopup && (
                 <div className={styles.popup}>
                     <div className={styles.popupBox}>
@@ -265,11 +259,6 @@ function Box() {
                                                                     
                                                                     <img className={styles.trashButton} src={trash} alt="trash" onClick={() => deleteCheck(box, index)} />
                                                                 </div>
-                                                    
-                                                                <div className={styles.picInfo}>
-                                                                    <div>檔案須小於1MB</div>
-                                                                </div>
-                                                    
                                                             </div>
                                                             
                                                         )

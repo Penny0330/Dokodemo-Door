@@ -260,7 +260,6 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 15px;
-    flex-wrap: wrap;
     transition: all .3s linear;
 }
 
@@ -401,11 +400,6 @@
     display: inline-flex;
     align-items: center;
     padding: 5px 0;
-}
-
-.picInfo{
-    color: gray;
-    margin-top: 15px;
 }
 
 .lineBox{
