@@ -5,8 +5,6 @@ Dokodemo Door is a website which can create your space on the web.
 One link that contains group of other links and content as contact form, text, video, images and many more.
 Sharing everything you create from your Instagram, Twitter, YouTube and other social media profiles, whatever you want.
 
-![loge](https://user-images.githubusercontent.com/110281590/222951417-2f973895-eed9-4708-b2c2-9eb90cb26896.jpg)
-
 ## Live Demo
 -   Website URL： [Dokodemo-Door](https://dokodemo-door.web.app/)
 -   Test Account
@@ -18,6 +16,21 @@ Sharing everything you create from your Instagram, Twitter, YouTube and other so
 
     ![demo](https://user-images.githubusercontent.com/110281590/222951547-58283e36-f524-493c-8c14-033a8b974f65.gif)
 
+## Table of Content
+
+- [Skills Structure](https://github.com/Penny0330/Dokodemo-Door/edit/main/README.md#skills-structure)
+    - [Front-end Skills](https://github.com/Penny0330/Dokodemo-Door/edit/main/README.md#front-end-skills)
+    - [Back-end Skills](https://github.com/Penny0330/Dokodemo-Door/edit/main/README.md#back-end-skills)
+    - [Develop Tools](https://github.com/Penny0330/Dokodemo-Door/edit/main/README.md#develop-tools)
+- [Component Planning](https://github.com/Penny0330/Dokodemo-Door/edit/main/README.md#component-planning)
+- [Features](https://github.com/Penny0330/Dokodemo-Door/edit/main/README.md#features)
+    - [1. Add / Edit Your Own Link-List](https://github.com/Penny0330/Dokodemo-Door/edit/main/README.md#-add--edit-your-own-link-list)
+    - [2. Live Preview](https://github.com/Penny0330/Dokodemo-Door/edit/main/README.md#-live-preview)
+    - [3. Social Icon](https://github.com/Penny0330/Dokodemo-Door/edit/main/README.md#-social-icon)
+    - [4. Theme Color](https://github.com/Penny0330/Dokodemo-Door/edit/main/README.md#-live-preview)
+    - [5. QR Code](https://github.com/Penny0330/Dokodemo-Door/edit/main/README.md#-qr-code)
+- [Extra Optimization](https://github.com/Penny0330/Dokodemo-Door/edit/main/README.md#extra-optimization)
+- [Contact](https://github.com/Penny0330/Dokodemo-Door/edit/main/README.md#contact)
 
 ## Skills Structure
 
@@ -25,19 +38,19 @@ Sharing everything you create from your Instagram, Twitter, YouTube and other so
 
 ### Front-end Skills
 
--   Used React Hook and React-Router to implement Single Page Application（SPA）, making the user experience better.
--   Used React Context to pass user state through nested components tree.
--   Used JSX and Css-Modules to write HTML element and the same CSS class name in different files without worrying about naming clashes.
--   RDW ( CSS MEdia Queries, Flexbox and Grid Layout ).
--   Third-Party Modules : Used react-beautiful-dnd to build drag and drop functionality and qrcode.react to generate QR-Code
+-   Used `React Hook` and `React-Router` to implement Single Page Application（SPA）, making the user experience better.
+-   Used `React Context` to pass user state through nested components tree.
+-   Used `JSX` and `Css-Modules` to write HTML element and the same CSS class name in different files without worrying about naming clashes.
+-   `RDW` ( CSS MEdia Queries, Flexbox and Grid Layout ).
+-   `Third-Party Modules` : Used react-beautiful-dnd to build drag and drop functionality and qrcode.react to generate QR-Code
 
 ### Back-end Skills
 
--   Used Firebase back-end service platform to set up the website ( Hoisting ), membership system ( Auth ) operations, database ( Firestore ) and store images ( Storage ).
+-   Used `Firebase` back-end service platform to set up the website ( Hoisting ), membership system ( Auth ) operations, database ( Firestore ) and store images ( Storage ).
 
 ### Develop Tools
 
--   Used Webpack for JavaScript module packaging, Babel to solve browser compatibility issues, NPM for package management, ESLint & Prettier to check syntax and unified coding style, and GitHub to control the Git version.
+-   Used `Webpack` for JavaScript module packaging, `Babel` to solve browser compatibility issues, `NPM` for package management, `ESLint` & `Prettier` to check syntax and unified coding style, and `GitHub` to control the Git version.
 
 ## Component Planning
 
@@ -69,7 +82,7 @@ Quickly and easily share your unique website.
 
 ## Extra Optimization
 
--   SEO settings - OG tag : Make Website looks beautiful and attractive when shared on social media.
+-   SEO settings - `OG tag` : Make Website looks beautiful and attractive when shared on social media.
 
 ## Contact
 
