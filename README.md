@@ -34,7 +34,7 @@ Sharing everything you create from your Instagram, Twitter, YouTube and other so
 
 ## Skills Structure
 
-![Skills Structure](https://user-images.githubusercontent.com/110281590/222951637-725e11ed-ca6c-4acc-8907-fa53e0cd3351.png)
+![Skills Structure](https://user-images.githubusercontent.com/110281590/222961732-c4e38ec3-210a-432f-bfbb-d433758da074.png)
 
 ### Front-end Skills
 
