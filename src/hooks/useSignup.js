@@ -15,6 +15,24 @@ export const useSignup = () => {
         setError(null);
         setPending(true);
 
+        if (!account) {
+            setError('帳戶未填寫!');
+            setPending(false);
+            return;
+        }
+
+        if (!email) {
+            setError('信箱未填寫!');
+            setPending(false);
+            return;
+        }
+
+        if (!password) {
+            setError('密碼未填寫!');
+            setPending(false);
+            return;
+        }
+
         const showColor = {
             titleColor: '#333333',
             linkTextColor: '#333333',
