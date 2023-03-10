@@ -7,10 +7,7 @@
 </p>
 <p align="center">
     One link that contains group of other links and content as contact text, images and many more.
-</p>
-<p align="center">
-    Sharing everything you create from your Instagram, Twitter, YouTube and other social media profiles, whatever you want.
-</p>
+</p> 
 
 ## Live Demo
 -   Website URL： [Dokodemo-Door](https://dokodemo-door.web.app/)
@@ -49,7 +46,7 @@
 -   Used `React Context` to pass user state through nested components tree.
 -   Used `JSX` and `Css-Modules` to write HTML element and the same CSS class name in different files without worrying about naming clashes.
 -   `RDW` ( CSS MEdia Queries, Flexbox and Grid Layout ).
--   `Third-Party Modules` : Used react-beautiful-dnd to build drag and drop functionality and qrcode.react to generate QR-Code
+-   `Third-Party Modules` : Used react-beautiful-dnd to build drag and drop functionality and qrcode.react to generate QR-Code.
 
 ### Back-end Skills
 
@@ -81,7 +78,7 @@ User can add social accounts / platforms links to display as icons.
 
 ### 🔔 Theme Color
 
-Provide four color themes ( primary color, dark green, saturated blue and mysterious black ).
+Change the appearance and theme of your profile ( cornsilk, dark green, midnightBlue and black ).
 
 ### 🔔 QR Code
 
