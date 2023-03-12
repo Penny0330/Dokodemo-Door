@@ -30,8 +30,8 @@
 - [Features](https://github.com/Penny0330/Dokodemo-Door#features)
     - [1. Add / Edit Your Own Link-List](https://github.com/Penny0330/Dokodemo-Door#-add--edit-your-own-link-list)
     - [2. Live Preview](https://github.com/Penny0330/Dokodemo-Door#-live-preview)
-    - [3. Social Icon](https://github.com/Penny0330/Dokodemo-Door#-social-icon)
-    - [4. Theme Color](https://github.com/Penny0330/Dokodemo-Door#-live-preview)
+    - [3. Design ideal sequences](https://github.com/Penny0330/Dokodemo-Door/edit/main/README.md#-design-ideal-sequences)
+    - [4. Social Icon & Theme Color](https://github.com/Penny0330/Dokodemo-Door/edit/main/README.md#--social-icon--theme-color)
     - [5. QR Code](https://github.com/Penny0330/Dokodemo-Door#-qr-code)
 - [Extra Optimization](https://github.com/Penny0330/Dokodemo-Door#extra-optimization)
 - [Contact](https://github.com/Penny0330/Dokodemo-Door#contact)
@@ -66,19 +66,20 @@ The component planning is divided into four major sections according to pages. I
 
 ### 🔔 Add / Edit Your Own Link-List
 
-User can add Text, Link, Image, Divider-Line block, also can edit the content of the block, delete the block and drag-and-drop features.
+User can add Text, Link, Image, Divider-Line block, also can edit the content of the block, delete and display toggle the block features.
 
 ### 🔔 Live Preview
 
-Once the content is saved, the result can be previewed in real time.
+WYSIWYG: Once the content is saved, the result can be previewed in real time.
 
-### 🔔 Social Icon
+### 🔔 Design ideal sequences
 
-User can add social accounts / platforms links to display as icons.
+Drag and Drop, making your link more personal
 
-### 🔔 Theme Color
+### 🔔  Social Icon & Theme Color
 
-Change the appearance and theme of your profile ( cornsilk, dark green, midnightBlue and black ).
+User can add social accounts / platforms links to display as icons and 
+change the appearance and theme of your profile ( cornsilk, dark green, midnightBlue and black ).
 
 ### 🔔 QR Code
 
@@ -90,5 +91,5 @@ Quickly and easily share your unique website.
 
 ## Contact
 
--   Pei-Yi Lin
--   Mail: penny860330@gmail.com
+-   👧 Pei-Yi Lin
+-   📫 penny860330@gmail.com
