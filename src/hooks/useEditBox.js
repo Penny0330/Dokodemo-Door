@@ -40,7 +40,11 @@ export const useEditBox = () => {
         box.title ? (box.display = true) : (box.display = false);
         const _items = [...value];
 
-        await updateDoc(doc(db, 'itemList', auth.currentUser.uid), { 'item': _items });
+        try {
+            await updateDoc(doc(db, 'itemList', auth.currentUser.uid), { 'item': _items });
+        } catch (error) {
+            console.log('error message', error);
+        }
         setNewValue('');
         setIsEdit('');
     };
@@ -51,7 +55,11 @@ export const useEditBox = () => {
         box.title && box.url ? (box.display = true) : (box.display = false);
         const _items = [...value];
 
-        await updateDoc(doc(db, 'itemList', auth.currentUser.uid), { 'item': _items });
+        try {
+            await updateDoc(doc(db, 'itemList', auth.currentUser.uid), { 'item': _items });
+        } catch (error) {
+            console.log('error message', error);
+        }
         setNewValue('');
         setNewLinkUrl('');
         setIsEdit('');
@@ -82,7 +90,11 @@ export const useEditBox = () => {
         box.file = name;
         box.imgUrl ? (box.display = true) : (box.display = false);
         const _items = [...value];
-        await updateDoc(doc(db, 'itemList', auth.currentUser.uid), { 'item': _items });
+        try {
+            await updateDoc(doc(db, 'itemList', auth.currentUser.uid), { 'item': _items });
+        } catch (error) {
+            console.log('error message', error);
+        }
         setIsEdit('');
     };
 
@@ -102,7 +114,11 @@ export const useEditBox = () => {
         box.display ? (box.display = false) : (box.display = true);
         const _items = [...value];
 
-        await updateDoc(doc(db, 'itemList', auth.currentUser.uid), { 'item': _items });
+        try {
+            await updateDoc(doc(db, 'itemList', auth.currentUser.uid), { 'item': _items });
+        } catch (error) {
+            console.log('error message', error);
+        }
     };
 
     const deleteCheck = (box, index) => {
@@ -124,7 +140,11 @@ export const useEditBox = () => {
         const _items = [...value];
         _items.splice(deleteData[1], 1);
 
-        await updateDoc(doc(db, 'itemList', auth.currentUser.uid), { 'item': _items });
+        try {
+            await updateDoc(doc(db, 'itemList', auth.currentUser.uid), { 'item': _items });
+        } catch (error) {
+            console.log('error message', error);
+        }
 
         setDeletePopup(false);
     };
@@ -139,7 +159,11 @@ export const useEditBox = () => {
         const [remove] = _items.splice(source.index, 1);
         _items.splice(destination.index, 0, remove);
 
-        await updateDoc(doc(db, 'itemList', auth.currentUser.uid), { 'item': _items });
+        try {
+            await updateDoc(doc(db, 'itemList', auth.currentUser.uid), { 'item': _items });
+        } catch (error) {
+            console.log('error message', error);
+        }
     };
 
     return {

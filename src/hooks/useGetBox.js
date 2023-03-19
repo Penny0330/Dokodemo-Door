@@ -15,24 +15,31 @@ export const useGetBox = (user) => {
     useEffect(() => {
         setPending(true);
         const ref = doc(db, 'itemList', user);
-        const unsub = onSnapshot(ref, (doc) => {
-            if (doc.data() === undefined) {
-                setError(true);
+        const unsub = onSnapshot(
+            ref,
+            (doc) => {
+                if (doc.data() === undefined) {
+                    setError(true);
+                    setPending(false);
+                    return;
+                } else {
+                    let itemArr = [];
+                    doc.data().item.map((item) => {
+                        itemArr.push(item);
+                    });
+                    setValue(itemArr);
+                    setColor(doc.data().showColor);
+                    setProfile(doc.data().profile);
+                    setNoPhotoText(doc.data().profile.account.slice(0, 1).toUpperCase());
+                    setIconLink(doc.data().iconLink);
+                    setPending(false);
+                }
+            },
+            (error) => {
                 setPending(false);
-                return;
-            } else {
-                let itemArr = [];
-                doc.data().item.map((item) => {
-                    itemArr.push(item);
-                });
-                setValue(itemArr);
-                setColor(doc.data().showColor);
-                setProfile(doc.data().profile);
-                setNoPhotoText(doc.data().profile.account.slice(0, 1).toUpperCase());
-                setIconLink(doc.data().iconLink);
-                setPending(false);
+                console.log('error message', error);
             }
-        });
+        );
 
         return () => {
             unsub();

@@ -24,7 +24,12 @@ export const useChangeColor = (color) => {
             linkColor: 'rgba(255, 255, 255, 0.645)',
             logeColor: '#333333'
         };
-        await updateDoc(doc(db, 'itemList', auth.currentUser.uid), { 'showColor': showColor });
+        try {
+            await updateDoc(doc(db, 'itemList', auth.currentUser.uid), { 'showColor': showColor });
+        } catch (error) {
+            console.log('error message', error);
+        }
+
         setActive('pri');
     };
 
@@ -35,7 +40,11 @@ export const useChangeColor = (color) => {
             linkColor: '#395347',
             logeColor: '#395347'
         };
-        await updateDoc(doc(db, 'itemList', auth.currentUser.uid), { 'showColor': showColor });
+        try {
+            await updateDoc(doc(db, 'itemList', auth.currentUser.uid), { 'showColor': showColor });
+        } catch (error) {
+            console.log('error message', error);
+        }
         setActive('green');
     };
 
@@ -46,7 +55,11 @@ export const useChangeColor = (color) => {
             linkColor: 'rgb(28 56 111)',
             logeColor: 'rgb(28 56 111)'
         };
-        await updateDoc(doc(db, 'itemList', auth.currentUser.uid), { 'showColor': showColor });
+        try {
+            await updateDoc(doc(db, 'itemList', auth.currentUser.uid), { 'showColor': showColor });
+        } catch (error) {
+            console.log('error message', error);
+        }
         setActive('blue');
     };
 
@@ -57,7 +70,11 @@ export const useChangeColor = (color) => {
             linkColor: '#333333',
             logeColor: '#333333'
         };
-        await updateDoc(doc(db, 'itemList', auth.currentUser.uid), { 'showColor': showColor });
+        try {
+            await updateDoc(doc(db, 'itemList', auth.currentUser.uid), { 'showColor': showColor });
+        } catch (error) {
+            console.log('error message', error);
+        }
         setActive('black');
     };
 

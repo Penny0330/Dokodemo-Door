@@ -34,7 +34,12 @@ export const useAddBox = (value) => {
             }
         ];
         const _value = newText.concat(value);
-        await updateDoc(doc(db, 'itemList', auth.currentUser.uid), { 'item': _value });
+        try {
+            await updateDoc(doc(db, 'itemList', auth.currentUser.uid), { 'item': _value });
+        } catch (error) {
+            console.log('error message', error);
+        }
+
         setOpen(!open);
     };
 
@@ -48,7 +53,11 @@ export const useAddBox = (value) => {
             }
         ];
         const _value = newLink.concat(value);
-        await updateDoc(doc(db, 'itemList', auth.currentUser.uid), { 'item': _value });
+        try {
+            await updateDoc(doc(db, 'itemList', auth.currentUser.uid), { 'item': _value });
+        } catch (error) {
+            console.log('error message', error);
+        }
         setOpen(!open);
     };
 
@@ -62,7 +71,11 @@ export const useAddBox = (value) => {
             }
         ];
         const _value = newPic.concat(value);
-        await updateDoc(doc(db, 'itemList', auth.currentUser.uid), { 'item': _value });
+        try {
+            await updateDoc(doc(db, 'itemList', auth.currentUser.uid), { 'item': _value });
+        } catch (error) {
+            console.log('error message', error);
+        }
         setOpen(!open);
     };
 
@@ -74,7 +87,11 @@ export const useAddBox = (value) => {
             }
         ];
         const _value = newLine.concat(value);
-        updateDoc(doc(db, 'itemList', auth.currentUser.uid), { 'item':  _value });
+        try {
+            await updateDoc(doc(db, 'itemList', auth.currentUser.uid), { 'item': _value });
+        } catch (error) {
+            console.log('error message', error);
+        }
         setOpen(!open);
     };
 
