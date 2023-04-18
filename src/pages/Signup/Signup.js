@@ -34,7 +34,7 @@ function Signup() {
                         <label>
                             <div className={styles.account}>
                                 帳號
-                                <p className={styles.remark}>( 至少 4 個字元 )</p>
+                                {/* <p className={styles.remark}>( 至少 4 個字元 )</p> */}
                             </div>
                             <input
                                 type="text"

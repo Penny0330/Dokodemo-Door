@@ -19,6 +19,10 @@ export const useSignup = () => {
             setError('帳戶未填寫!');
             setPending(false);
             return;
+        } else if (account.length > 20) {
+            setError('帳戶名稱需小於20字元');
+            setPending(false);
+            return;
         }
 
         if (!email) {
